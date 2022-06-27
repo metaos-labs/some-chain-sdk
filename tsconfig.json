@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [ "interface/src/*" ],
+      "sophon-sdk": [ "./src/index.ts" ]
+    },
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "allowJs": true,
+    "importHelpers": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "noImplicitAny": false,
+    "types": ["node", "@intlify/vite-plugin-vue-i18n/client"]
+  },
+  "include": [
+    "interface/src/**/*.ts",
+    "interface/src/**/*.d.ts",
+    "interface/src/**/*.tsx",
+    "interface/src/**/*.vue",
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

@@ -16,7 +16,7 @@
     "build": "tsdx build --tsconfig ./tsconfig.build.json",
     "build:interface": "vue-tsc && vite build",
     "build:proto": "node scripts/build.sh",
-    "build: all": "yarn run lint:fix & yarn run build & yarn run doc",
+    "build:all": "yarn run lint:fix & yarn run build & yarn run doc",
     "serve:interface": "vite preview",
     "preview": "vite preview",
     "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",

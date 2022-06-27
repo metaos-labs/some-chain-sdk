@@ -21,8 +21,7 @@
     "preview": "vite preview",
     "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",
     "lint:fix": "yarn run lint --write",
-    "doc": "typedoc",
-    "publish": "shx publish.sh"
+    "doc": "typedoc"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",

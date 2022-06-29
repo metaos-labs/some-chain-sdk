@@ -3,10 +3,12 @@
   "description": "",
   "version": "0.1.4",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/some-chain-sdk.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist/**/*",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "dev": "vite",

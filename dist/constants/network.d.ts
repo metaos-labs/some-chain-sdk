@@ -1,0 +1,177 @@
+export declare const ETH = "eth";
+export declare const BSC = "bsc";
+export declare const OEC = "oec";
+export declare const HOO = "hoo";
+export declare const XDAI = "xdai";
+export declare const HECO = "heco";
+export declare const POLYGON = "polygon";
+export declare const FANTOM = "fantom";
+export declare const KCC = "kcc";
+export declare const AVALANCHE = "avalanche";
+export declare const SOPHON = "sop";
+export declare const ETH_CHAIN_NAME = "Ethereum";
+export declare const BSC_CHAIN_NAME = "Binance Smart Chain";
+export declare const OEC_CHAIN_NAME = "OKEx Chain";
+export declare const HOO_CHAIN_NAME = "Hoo Smart Chain";
+export declare const XDAI_CHAIN_NAME = "xDAI";
+export declare const HECO_CHAIN_NAME = "Huobi ECO Chain";
+export declare const POLYGON_CHAIN_NAME = "Polygon";
+export declare const FANTOM_CHAIN_NAME = "Fantom";
+export declare const KCC_CHAIN_NAME = "KCC";
+export declare const AVALANCHE_CHAIN_NAME = "Avalanche";
+export declare const SOPHON_TEST_CHAIN_NAME = "Sophon Dev";
+export declare const ETH_NETWORK_ID = "1";
+export declare const BSC_NETWORK_ID = "56";
+export declare const BSC_NETWORK_TEST_ID = "97";
+export declare const OEC_NETWORK_ID = "66";
+export declare const HOO_NETWORK_ID = "70";
+export declare const XDAI_NETWORK_ID = "100";
+export declare const HECO_NETWORK_ID = "128";
+export declare const POLYGON_NETWORK_ID = "137";
+export declare const FANTOM_NETWORK_ID = "250";
+export declare const KCC_NETWORK_ID = "321";
+export declare const AVALANCHE_NETWORK_ID = "43114";
+export declare const ETH_TEST_NETWORK_ID = "2117";
+export declare const SOPHON_TEST_NETWORK_ID = "118";
+export declare const ETH_CHAIN_ID = "0x1";
+export declare const BSC_CHAIN_ID = "0x38";
+export declare const BSC_CHAIN_ID_TEST = "0x61";
+export declare const OEC_CHAIN_ID = "0x42";
+export declare const HOO_CHAIN_ID = "0x46";
+export declare const XDAI_CHAIN_ID = "0x64";
+export declare const HECO_CHAIN_ID = "0x80";
+export declare const POLYGON_CHAIN_ID = "0x89";
+export declare const FANTOM_CHAIN_ID = "0xfa";
+export declare const KCC_CHAIN_ID = "0x141";
+export declare const AVALANCHE_CHAIN_ID = "0xa86a";
+export declare const SOPHON_TEST_CHAIN_ID = "sophond_9000-1";
+export declare const ETH_SYMBOL = "ETH";
+export declare const BNB_SYMBOL = "BNB";
+export declare const OKT_SYMBOL = "OKT";
+export declare const HOO_SYMBOL = "HOO";
+export declare const XDAI_SYMBOL = "XDAI";
+export declare const HT_SYMBOL = "HT";
+export declare const POLYGON_SYMBOL = "MATIC";
+export declare const FANTOM_SYMBOL = "FTM";
+export declare const KCC_SYMBOL = "KCS";
+export declare const AVALANCHE_SYMBOL = "AVAX";
+export declare const SOPHON_SYMBOL = "SOP";
+export declare const SUPPORTED_CHAIN_IDS: string[];
+export declare const NETWORK_MAP: {
+    1: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    56: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    97: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    66: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    70: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    100: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    128: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    137: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    250: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    321: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    43114: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+    118: {
+        networkId: string;
+        chainId: string;
+        chainName: string;
+        providerType: string;
+        ticker: string;
+    };
+};
+export declare const CONFIG_CHAIN_SOPHON: {
+    RPC_URL: string;
+    REST_URL: string;
+    EXPLORER_URL: string;
+    NETWORK_NAME: string;
+    NETWORK_TYPE: string;
+    CHAIN_ID: string;
+    CHAIN_NAME: string;
+    COIN_DENOM: string;
+    COIN_MINIMAL_DENOM: string;
+    COIN_DECIMALS: number;
+    PREFIX: string;
+    COIN_TYPE: number;
+    COINGECKO_ID: string;
+    DEFAULT_GAS: number;
+    GAS_PRICE_STEP_LOW: number;
+    GAS_PRICE_STEP_AVERAGE: number;
+    GAS_PRICE_STEP_HIGH: number;
+    FEATURES: string[];
+};
+export declare const CHAIN_ETH: {
+    chainId: string;
+    name: string;
+    logoURI: string;
+    symbol: string;
+};
+export declare const CHAIN_SOP: {
+    chainId: string;
+    name: string;
+    logoURI: string;
+    symbol: string;
+};

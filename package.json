@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsdx build --tsconfig ./tsconfig.build.json",
+    "prod": "tsdx build --tsconfig ./tsconfig.build.json",
     "build:interface": "vue-tsc && vite build",
     "build:proto": "node scripts/build.sh",
     "build:all": "yarn run lint:fix & yarn run build & yarn run doc",

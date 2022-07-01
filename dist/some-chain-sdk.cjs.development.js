@@ -1196,7 +1196,7 @@ var CONFIG_CHAIN_SOPHON = {
   EXPLORER_URL: "https://explorer.evmos.org",
   NETWORK_NAME: "Sophon TestNet",
   NETWORK_TYPE: "testnet",
-  CHAIN_ID: "sophond_9000-1",
+  CHAIN_ID: "sophon_99237-1",
   CHAIN_NAME: "Sophon Dev",
   COIN_DENOM: "usop",
   COIN_MINIMAL_DENOM: "SOP",

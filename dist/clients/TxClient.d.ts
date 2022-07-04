@@ -5,7 +5,7 @@ import { AuthInfo, SignDoc } from "../proto/cosmos/tx/v1beta1/tx";
 import { SignMode } from "../proto/cosmos/tx/signing/v1beta1/signing";
 export interface ISender {
     address: string;
-    pubkey: string;
+    pubkey: Uint8Array;
     accountNumber: number;
     sequence: number;
 }

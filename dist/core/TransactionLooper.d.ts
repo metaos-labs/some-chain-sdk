@@ -4,6 +4,6 @@ export declare class TransactionLooper {
     description: string;
     status: Transaction_Status;
     counter: number;
-    onTransactionSuccess: Function;
-    constructor(txHash: string, description: string, status: Transaction_Status, onTransactionSuccess: Function);
+    onTransactionSuccess: Function | undefined;
+    constructor(txHash: string, description: string, status: Transaction_Status, onTransactionSuccess?: Function);
 }

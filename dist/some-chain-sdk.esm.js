@@ -5,7 +5,6 @@ import moment from 'moment';
 import { Bech32, toUtf8, fromBase64 } from '@cosmjs/encoding';
 import { sha256 } from '@cosmjs/crypto';
 import invariant from 'tiny-invariant';
-import { Buffer } from 'buffer';
 import { Registry } from '@cosmjs/proto-signing';
 import { Any as Any$1 } from 'cosmjs-types/google/protobuf/any';
 import Long from 'long';
@@ -4475,7 +4474,7 @@ var TxClient = /*#__PURE__*/function () {
 
   _proto.getSender = /*#__PURE__*/function () {
     var _getSender = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var authAPI, _yield$authAPI$apiAcc, _yield$authAPI$apiAcc2, key, account_number, sequence;
+      var authAPI, _yield$authAPI$apiAcc, _yield$authAPI$apiAcc2, account_number, sequence, _yield$this$signer$ge, pubkey;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
@@ -4488,17 +4487,22 @@ var TxClient = /*#__PURE__*/function () {
             case 3:
               _yield$authAPI$apiAcc = _context.sent;
               _yield$authAPI$apiAcc2 = _yield$authAPI$apiAcc.account.base_account;
-              key = _yield$authAPI$apiAcc2.pub_key.key;
               account_number = _yield$authAPI$apiAcc2.account_number;
               sequence = _yield$authAPI$apiAcc2.sequence;
+              _context.next = 10;
+              return this.signer.getAccounts();
+
+            case 10:
+              _yield$this$signer$ge = _context.sent[0];
+              pubkey = _yield$this$signer$ge.pubkey;
               return _context.abrupt("return", {
                 address: this.accountAddress,
-                pubkey: key,
+                pubkey: pubkey,
                 accountNumber: parseInt(account_number),
                 sequence: parseInt(sequence)
               });
 
-            case 9:
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -4518,7 +4522,7 @@ var TxClient = /*#__PURE__*/function () {
     // denom: string,
     // gasLimit: number,
     ) {
-      var sender, pubKeyDecoded, signInfoDirect, feeMessage, authInfoDirect, _messages, body, signDocDirect, walletClient, _yield$walletClient$s, signed, signature, txRaw, txBytes;
+      var sender, signInfoDirect, feeMessage, authInfoDirect, _messages, body, signDocDirect, walletClient, _yield$walletClient$s, signed, signature, txRaw, txBytes;
 
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
@@ -4533,9 +4537,9 @@ var TxClient = /*#__PURE__*/function () {
 
             case 3:
               sender = _context2.sent;
-              pubKeyDecoded = Buffer.from(sender.pubkey, "base64"); // 1. SignDirect
-
-              signInfoDirect = createSignerInfo(new Uint8Array(pubKeyDecoded), sender.sequence, SIGN_DIRECT); // 2. Fee
+              // const pubKeyDecoded = Buffer.from(sender.pubkey, "base64");
+              // 1. SignDirect
+              signInfoDirect = createSignerInfo(sender.pubkey, sender.sequence, SIGN_DIRECT); // 2. Fee
 
               feeMessage = createFee(defaultFee.amount, defaultFee.denom, defaultFee.gas); // 3. authInfo
 
@@ -4547,18 +4551,18 @@ var TxClient = /*#__PURE__*/function () {
               body = createTxBodyEncodeObject(_messages, memo); // 5. signDoc
 
               signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), CONFIG_CHAIN_SOPHON.CHAIN_ID, sender.accountNumber);
-              _context2.next = 13;
+              _context2.next = 12;
               return SigningStargateClient.connectWithSigner(this.rpcUrl, this.signer, {
                 registry: this.registry,
                 prefix: CONFIG_CHAIN_SOPHON.COIN_MINIMAL_DENOM.toLowerCase()
               });
 
-            case 13:
+            case 12:
               walletClient = _context2.sent;
-              _context2.next = 16;
+              _context2.next = 15;
               return walletClient.signer.signDirect(this.accountAddress, signDocDirect);
 
-            case 16:
+            case 15:
               _yield$walletClient$s = _context2.sent;
               signed = _yield$walletClient$s.signed;
               signature = _yield$walletClient$s.signature;
@@ -4570,7 +4574,7 @@ var TxClient = /*#__PURE__*/function () {
               txBytes = TxRaw.encode(txRaw).finish();
               return _context2.abrupt("return", walletClient.broadcastTx(txBytes));
 
-            case 22:
+            case 21:
             case "end":
               return _context2.stop();
           }

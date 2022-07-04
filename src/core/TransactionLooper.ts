@@ -5,13 +5,13 @@ export class TransactionLooper {
   description: string;
   status: Transaction_Status;
   counter: number;
-  onTransactionSuccess: Function;
+  onTransactionSuccess: Function | undefined;
 
   constructor(
     txHash: string,
     description: string,
     status: Transaction_Status,
-    onTransactionSuccess: Function
+    onTransactionSuccess?: Function
   ) {
     this.transactionHash = txHash;
     this.description = description;

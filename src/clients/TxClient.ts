@@ -40,7 +40,7 @@ import { fromBase64 } from "@cosmjs/encoding";
 
 export interface ISender {
   address: string;
-  pubkey: string;
+  pubkey: Uint8Array;
   accountNumber: number;
   sequence: number;
 }
@@ -108,15 +108,16 @@ export class TxClient {
     const {
       account: {
         base_account: {
-          pub_key: { key },
+          pub_key,
           account_number,
           sequence,
         },
       },
     } = await authAPI.apiAccountInfo(this.accountAddress);
+    const { address, pubkey } = (await this.signer.getAccounts())[0];
     return {
       address: this.accountAddress,
-      pubkey: key,
+      pubkey,
       accountNumber: parseInt(account_number),
       sequence: parseInt(sequence),
     } as ISender;
@@ -130,11 +131,11 @@ export class TxClient {
     // gasLimit: number,
   ) {
     const sender = await this.getSender();
-    const pubKeyDecoded = Buffer.from(sender.pubkey, "base64");
+    // const pubKeyDecoded = Buffer.from(sender.pubkey, "base64");
 
     // 1. SignDirect
     const signInfoDirect = createSignerInfo(
-      new Uint8Array(pubKeyDecoded),
+      sender.pubkey,
       sender.sequence,
       SIGN_DIRECT
     );

@@ -3169,7 +3169,7 @@ exports.MsgSwapExactIn = /*#__PURE__*/function (_BaseMsg3) {
 
   _proto3.generateMessage = function generateMessage() {
     return {
-      typeUrl: exports.MsgCreatePool.typeUrl,
+      typeUrl: MsgSwapExactIn$1.typeUrl,
       value: MsgSwapExactIn.fromPartial(this.protoMsg)
     };
   };

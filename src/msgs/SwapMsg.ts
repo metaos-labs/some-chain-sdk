@@ -60,7 +60,7 @@ export class MsgSwapExactIn extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgCreatePool.typeUrl,
+      typeUrl: MsgSwapExactIn.typeUrl,
       value: MsgSwapExactIn_pb.fromPartial(this.protoMsg),
     };
   }

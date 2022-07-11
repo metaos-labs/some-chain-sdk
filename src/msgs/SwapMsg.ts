@@ -20,7 +20,7 @@ export class MsgCollectReward extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgCreatePool.typeUrl,
+      typeUrl: MsgCollectReward.typeUrl,
       value: MsgCollectReward_pb.fromPartial(this.protoMsg),
     };
   }

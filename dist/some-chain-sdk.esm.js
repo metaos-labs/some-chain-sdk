@@ -3115,7 +3115,7 @@ var MsgCollectReward$1 = /*#__PURE__*/function (_BaseMsg) {
 
   _proto.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgCreatePool$1.typeUrl,
+      typeUrl: MsgCollectReward$1.typeUrl,
       value: MsgCollectReward.fromPartial(this.protoMsg)
     };
   };
@@ -3333,20 +3333,25 @@ var MsgIncreaseLiquidity$1 = /*#__PURE__*/function (_BaseMsg8) {
 
 /* eslint-disable */
 
-function createBasePubKey() {
+function createBaseAny() {
   return {
-    key: new Uint8Array()
+    typeUrl: "",
+    value: new Uint8Array()
   };
 }
 
-var PubKey = {
+var Any = {
   encode: function encode(message, writer) {
     if (writer === void 0) {
       writer = Writer.create();
     }
 
-    if (message.key.length !== 0) {
-      writer.uint32(10).bytes(message.key);
+    if (message.typeUrl !== "") {
+      writer.uint32(10).string(message.typeUrl);
+    }
+
+    if (message.value.length !== 0) {
+      writer.uint32(18).bytes(message.value);
     }
 
     return writer;
@@ -3354,14 +3359,18 @@ var PubKey = {
   decode: function decode(input, length) {
     var reader = input instanceof Reader ? input : new Reader(input);
     var end = length === undefined ? reader.len : reader.pos + length;
-    var message = createBasePubKey();
+    var message = createBaseAny();
 
     while (reader.pos < end) {
       var tag = reader.uint32();
 
       switch (tag >>> 3) {
         case 1:
-          message.key = reader.bytes();
+          message.typeUrl = reader.string();
+          break;
+
+        case 2:
+          message.value = reader.bytes();
           break;
 
         default:
@@ -3374,19 +3383,22 @@ var PubKey = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      key: isSet$2(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
+      typeUrl: isSet$2(object.typeUrl) ? String(object.typeUrl) : "",
+      value: isSet$2(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
   toJSON: function toJSON(message) {
     var obj = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial: function fromPartial(object) {
-    var _object$key;
+    var _object$typeUrl, _object$value;
 
-    var message = createBasePubKey();
-    message.key = (_object$key = object.key) != null ? _object$key : new Uint8Array();
+    var message = createBaseAny();
+    message.typeUrl = (_object$typeUrl = object.typeUrl) != null ? _object$typeUrl : "";
+    message.value = (_object$value = object.value) != null ? _object$value : new Uint8Array();
     return message;
   }
 };
@@ -3438,25 +3450,33 @@ function isSet$2(value) {
 
 /* eslint-disable */
 
-function createBaseAny() {
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+/* eslint-disable */
+
+function createBaseCoin() {
   return {
-    typeUrl: "",
-    value: new Uint8Array()
+    denom: "",
+    amount: ""
   };
 }
 
-var Any = {
+var Coin = {
   encode: function encode(message, writer) {
     if (writer === void 0) {
       writer = Writer.create();
     }
 
-    if (message.typeUrl !== "") {
-      writer.uint32(10).string(message.typeUrl);
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
     }
 
-    if (message.value.length !== 0) {
-      writer.uint32(18).bytes(message.value);
+    if (message.amount !== "") {
+      writer.uint32(18).string(message.amount);
     }
 
     return writer;
@@ -3464,18 +3484,18 @@ var Any = {
   decode: function decode(input, length) {
     var reader = input instanceof Reader ? input : new Reader(input);
     var end = length === undefined ? reader.len : reader.pos + length;
-    var message = createBaseAny();
+    var message = createBaseCoin();
 
     while (reader.pos < end) {
       var tag = reader.uint32();
 
       switch (tag >>> 3) {
         case 1:
-          message.typeUrl = reader.string();
+          message.denom = reader.string();
           break;
 
         case 2:
-          message.value = reader.bytes();
+          message.amount = reader.string();
           break;
 
         default:
@@ -3488,22 +3508,1653 @@ var Any = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      typeUrl: isSet$3(object.typeUrl) ? String(object.typeUrl) : "",
-      value: isSet$3(object.value) ? bytesFromBase64$1(object.value) : new Uint8Array()
+      denom: isSet$3(object.denom) ? String(object.denom) : "",
+      amount: isSet$3(object.amount) ? String(object.amount) : ""
     };
   },
   toJSON: function toJSON(message) {
     var obj = {};
-    message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
-    message.value !== undefined && (obj.value = base64FromBytes$1(message.value !== undefined ? message.value : new Uint8Array()));
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.amount !== undefined && (obj.amount = message.amount);
     return obj;
   },
   fromPartial: function fromPartial(object) {
-    var _object$typeUrl, _object$value;
+    var _object$denom, _object$amount;
 
-    var message = createBaseAny();
-    message.typeUrl = (_object$typeUrl = object.typeUrl) != null ? _object$typeUrl : "";
-    message.value = (_object$value = object.value) != null ? _object$value : new Uint8Array();
+    var message = createBaseCoin();
+    message.denom = (_object$denom = object.denom) != null ? _object$denom : "";
+    message.amount = (_object$amount = object.amount) != null ? _object$amount : "";
+    return message;
+  }
+};
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+function isSet$3(value) {
+  return value !== null && value !== undefined;
+}
+
+/** VoteOption enumerates the valid vote options for a given governance proposal. */
+
+var VoteOption;
+
+(function (VoteOption) {
+  /** VOTE_OPTION_UNSPECIFIED - VOTE_OPTION_UNSPECIFIED defines a no-op vote option. */
+  VoteOption[VoteOption["VOTE_OPTION_UNSPECIFIED"] = 0] = "VOTE_OPTION_UNSPECIFIED";
+  /** VOTE_OPTION_YES - VOTE_OPTION_YES defines a yes vote option. */
+
+  VoteOption[VoteOption["VOTE_OPTION_YES"] = 1] = "VOTE_OPTION_YES";
+  /** VOTE_OPTION_ABSTAIN - VOTE_OPTION_ABSTAIN defines an abstain vote option. */
+
+  VoteOption[VoteOption["VOTE_OPTION_ABSTAIN"] = 2] = "VOTE_OPTION_ABSTAIN";
+  /** VOTE_OPTION_NO - VOTE_OPTION_NO defines a no vote option. */
+
+  VoteOption[VoteOption["VOTE_OPTION_NO"] = 3] = "VOTE_OPTION_NO";
+  /** VOTE_OPTION_NO_WITH_VETO - VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option. */
+
+  VoteOption[VoteOption["VOTE_OPTION_NO_WITH_VETO"] = 4] = "VOTE_OPTION_NO_WITH_VETO";
+  VoteOption[VoteOption["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(VoteOption || (VoteOption = {}));
+
+function voteOptionFromJSON(object) {
+  switch (object) {
+    case 0:
+    case "VOTE_OPTION_UNSPECIFIED":
+      return VoteOption.VOTE_OPTION_UNSPECIFIED;
+
+    case 1:
+    case "VOTE_OPTION_YES":
+      return VoteOption.VOTE_OPTION_YES;
+
+    case 2:
+    case "VOTE_OPTION_ABSTAIN":
+      return VoteOption.VOTE_OPTION_ABSTAIN;
+
+    case 3:
+    case "VOTE_OPTION_NO":
+      return VoteOption.VOTE_OPTION_NO;
+
+    case 4:
+    case "VOTE_OPTION_NO_WITH_VETO":
+      return VoteOption.VOTE_OPTION_NO_WITH_VETO;
+
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return VoteOption.UNRECOGNIZED;
+  }
+}
+function voteOptionToJSON(object) {
+  switch (object) {
+    case VoteOption.VOTE_OPTION_UNSPECIFIED:
+      return "VOTE_OPTION_UNSPECIFIED";
+
+    case VoteOption.VOTE_OPTION_YES:
+      return "VOTE_OPTION_YES";
+
+    case VoteOption.VOTE_OPTION_ABSTAIN:
+      return "VOTE_OPTION_ABSTAIN";
+
+    case VoteOption.VOTE_OPTION_NO:
+      return "VOTE_OPTION_NO";
+
+    case VoteOption.VOTE_OPTION_NO_WITH_VETO:
+      return "VOTE_OPTION_NO_WITH_VETO";
+
+    case VoteOption.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+/** ProposalStatus enumerates the valid statuses of a proposal. */
+
+var ProposalStatus;
+
+(function (ProposalStatus) {
+  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
+  ProposalStatus[ProposalStatus["PROPOSAL_STATUS_UNSPECIFIED"] = 0] = "PROPOSAL_STATUS_UNSPECIFIED";
+  /**
+   * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
+   * period.
+   */
+
+  ProposalStatus[ProposalStatus["PROPOSAL_STATUS_DEPOSIT_PERIOD"] = 1] = "PROPOSAL_STATUS_DEPOSIT_PERIOD";
+  /**
+   * PROPOSAL_STATUS_VOTING_PERIOD - PROPOSAL_STATUS_VOTING_PERIOD defines a proposal status during the voting
+   * period.
+   */
+
+  ProposalStatus[ProposalStatus["PROPOSAL_STATUS_VOTING_PERIOD"] = 2] = "PROPOSAL_STATUS_VOTING_PERIOD";
+  /**
+   * PROPOSAL_STATUS_PASSED - PROPOSAL_STATUS_PASSED defines a proposal status of a proposal that has
+   * passed.
+   */
+
+  ProposalStatus[ProposalStatus["PROPOSAL_STATUS_PASSED"] = 3] = "PROPOSAL_STATUS_PASSED";
+  /**
+   * PROPOSAL_STATUS_REJECTED - PROPOSAL_STATUS_REJECTED defines a proposal status of a proposal that has
+   * been rejected.
+   */
+
+  ProposalStatus[ProposalStatus["PROPOSAL_STATUS_REJECTED"] = 4] = "PROPOSAL_STATUS_REJECTED";
+  /**
+   * PROPOSAL_STATUS_FAILED - PROPOSAL_STATUS_FAILED defines a proposal status of a proposal that has
+   * failed.
+   */
+
+  ProposalStatus[ProposalStatus["PROPOSAL_STATUS_FAILED"] = 5] = "PROPOSAL_STATUS_FAILED";
+  ProposalStatus[ProposalStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(ProposalStatus || (ProposalStatus = {}));
+
+function createBaseWeightedVoteOption() {
+  return {
+    option: 0,
+    weight: ""
+  };
+}
+
+var WeightedVoteOption = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.option !== 0) {
+      writer.uint32(8).int32(message.option);
+    }
+
+    if (message.weight !== "") {
+      writer.uint32(18).string(message.weight);
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseWeightedVoteOption();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.option = reader.int32();
+          break;
+
+        case 2:
+          message.weight = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      option: isSet$4(object.option) ? voteOptionFromJSON(object.option) : 0,
+      weight: isSet$4(object.weight) ? String(object.weight) : ""
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
+    message.weight !== undefined && (obj.weight = message.weight);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$option, _object$weight;
+
+    var message = createBaseWeightedVoteOption();
+    message.option = (_object$option = object.option) != null ? _object$option : 0;
+    message.weight = (_object$weight = object.weight) != null ? _object$weight : "";
+    return message;
+  }
+};
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+function isSet$4(value) {
+  return value !== null && value !== undefined;
+}
+
+var protobufPackage$1 = "cosmos.gov.v1beta1";
+
+function createBaseMsgSubmitProposal() {
+  return {
+    content: undefined,
+    initialDeposit: [],
+    proposer: ""
+  };
+}
+
+var MsgSubmitProposal = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.content !== undefined) {
+      Any.encode(message.content, writer.uint32(10).fork()).ldelim();
+    }
+
+    for (var _iterator = _createForOfIteratorHelperLoose(message.initialDeposit), _step; !(_step = _iterator()).done;) {
+      var v = _step.value;
+      Coin.encode(v, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.proposer !== "") {
+      writer.uint32(26).string(message.proposer);
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgSubmitProposal();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.content = Any.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.initialDeposit.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        case 3:
+          message.proposer = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      content: isSet$5(object.content) ? Any.fromJSON(object.content) : undefined,
+      initialDeposit: Array.isArray(object == null ? void 0 : object.initialDeposit) ? object.initialDeposit.map(function (e) {
+        return Coin.fromJSON(e);
+      }) : [],
+      proposer: isSet$5(object.proposer) ? String(object.proposer) : ""
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
+
+    if (message.initialDeposit) {
+      obj.initialDeposit = message.initialDeposit.map(function (e) {
+        return e ? Coin.toJSON(e) : undefined;
+      });
+    } else {
+      obj.initialDeposit = [];
+    }
+
+    message.proposer !== undefined && (obj.proposer = message.proposer);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$initialDeposi, _object$proposer;
+
+    var message = createBaseMsgSubmitProposal();
+    message.content = object.content !== undefined && object.content !== null ? Any.fromPartial(object.content) : undefined;
+    message.initialDeposit = ((_object$initialDeposi = object.initialDeposit) == null ? void 0 : _object$initialDeposi.map(function (e) {
+      return Coin.fromPartial(e);
+    })) || [];
+    message.proposer = (_object$proposer = object.proposer) != null ? _object$proposer : "";
+    return message;
+  }
+};
+
+function createBaseMsgVote() {
+  return {
+    proposalId: Long.UZERO,
+    voter: "",
+    option: 0
+  };
+}
+
+var MsgVote = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (!message.proposalId.isZero()) {
+      writer.uint32(8).uint64(message.proposalId);
+    }
+
+    if (message.voter !== "") {
+      writer.uint32(18).string(message.voter);
+    }
+
+    if (message.option !== 0) {
+      writer.uint32(24).int32(message.option);
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgVote();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.proposalId = reader.uint64();
+          break;
+
+        case 2:
+          message.voter = reader.string();
+          break;
+
+        case 3:
+          message.option = reader.int32();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      proposalId: isSet$5(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet$5(object.voter) ? String(object.voter) : "",
+      option: isSet$5(object.option) ? voteOptionFromJSON(object.option) : 0
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.voter !== undefined && (obj.voter = message.voter);
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$voter, _object$option;
+
+    var message = createBaseMsgVote();
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.voter = (_object$voter = object.voter) != null ? _object$voter : "";
+    message.option = (_object$option = object.option) != null ? _object$option : 0;
+    return message;
+  }
+};
+
+function createBaseMsgVoteWeighted() {
+  return {
+    proposalId: Long.UZERO,
+    voter: "",
+    options: []
+  };
+}
+
+var MsgVoteWeighted = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (!message.proposalId.isZero()) {
+      writer.uint32(8).uint64(message.proposalId);
+    }
+
+    if (message.voter !== "") {
+      writer.uint32(18).string(message.voter);
+    }
+
+    for (var _iterator2 = _createForOfIteratorHelperLoose(message.options), _step2; !(_step2 = _iterator2()).done;) {
+      var v = _step2.value;
+      WeightedVoteOption.encode(v, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgVoteWeighted();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.proposalId = reader.uint64();
+          break;
+
+        case 2:
+          message.voter = reader.string();
+          break;
+
+        case 3:
+          message.options.push(WeightedVoteOption.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      proposalId: isSet$5(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet$5(object.voter) ? String(object.voter) : "",
+      options: Array.isArray(object == null ? void 0 : object.options) ? object.options.map(function (e) {
+        return WeightedVoteOption.fromJSON(e);
+      }) : []
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.voter !== undefined && (obj.voter = message.voter);
+
+    if (message.options) {
+      obj.options = message.options.map(function (e) {
+        return e ? WeightedVoteOption.toJSON(e) : undefined;
+      });
+    } else {
+      obj.options = [];
+    }
+
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$voter2, _object$options;
+
+    var message = createBaseMsgVoteWeighted();
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.voter = (_object$voter2 = object.voter) != null ? _object$voter2 : "";
+    message.options = ((_object$options = object.options) == null ? void 0 : _object$options.map(function (e) {
+      return WeightedVoteOption.fromPartial(e);
+    })) || [];
+    return message;
+  }
+};
+
+function createBaseMsgDeposit() {
+  return {
+    proposalId: Long.UZERO,
+    depositor: "",
+    amount: []
+  };
+}
+
+var MsgDeposit = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (!message.proposalId.isZero()) {
+      writer.uint32(8).uint64(message.proposalId);
+    }
+
+    if (message.depositor !== "") {
+      writer.uint32(18).string(message.depositor);
+    }
+
+    for (var _iterator3 = _createForOfIteratorHelperLoose(message.amount), _step3; !(_step3 = _iterator3()).done;) {
+      var v = _step3.value;
+      Coin.encode(v, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgDeposit();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.proposalId = reader.uint64();
+          break;
+
+        case 2:
+          message.depositor = reader.string();
+          break;
+
+        case 3:
+          message.amount.push(Coin.decode(reader, reader.uint32()));
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      proposalId: isSet$5(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      depositor: isSet$5(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object == null ? void 0 : object.amount) ? object.amount.map(function (e) {
+        return Coin.fromJSON(e);
+      }) : []
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.depositor !== undefined && (obj.depositor = message.depositor);
+
+    if (message.amount) {
+      obj.amount = message.amount.map(function (e) {
+        return e ? Coin.toJSON(e) : undefined;
+      });
+    } else {
+      obj.amount = [];
+    }
+
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$depositor, _object$amount;
+
+    var message = createBaseMsgDeposit();
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? Long.fromValue(object.proposalId) : Long.UZERO;
+    message.depositor = (_object$depositor = object.depositor) != null ? _object$depositor : "";
+    message.amount = ((_object$amount = object.amount) == null ? void 0 : _object$amount.map(function (e) {
+      return Coin.fromPartial(e);
+    })) || [];
+    return message;
+  }
+};
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+function isSet$5(value) {
+  return value !== null && value !== undefined;
+}
+
+var MsgSubmitProposal$1 = /*#__PURE__*/function (_BaseMsg) {
+  _inheritsLoose(MsgSubmitProposal$1, _BaseMsg);
+
+  function MsgSubmitProposal$1(msg) {
+    var _this;
+
+    _this = _BaseMsg.call(this) || this;
+    _this.protoMsg = void 0;
+    _this.protoMsg = msg;
+    return _this;
+  }
+
+  var _proto = MsgSubmitProposal$1.prototype;
+
+  _proto.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgSubmitProposal$1.TYPE_URL,
+      value: MsgSubmitProposal.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgSubmitProposal$1;
+}(BaseMsg);
+MsgSubmitProposal$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgSubmitProposal";
+var MsgDeposit$1 = /*#__PURE__*/function (_BaseMsg2) {
+  _inheritsLoose(MsgDeposit$1, _BaseMsg2);
+
+  function MsgDeposit$1(msg) {
+    var _this2;
+
+    _this2 = _BaseMsg2.call(this) || this;
+    _this2.protoMsg = void 0;
+    _this2.protoMsg = msg;
+    return _this2;
+  }
+
+  var _proto2 = MsgDeposit$1.prototype;
+
+  _proto2.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgDeposit$1.TYPE_URL,
+      value: MsgDeposit.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgDeposit$1;
+}(BaseMsg);
+MsgDeposit$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgDeposit";
+var MsgVote$1 = /*#__PURE__*/function (_BaseMsg3) {
+  _inheritsLoose(MsgVote$1, _BaseMsg3);
+
+  function MsgVote$1(msg) {
+    var _this3;
+
+    _this3 = _BaseMsg3.call(this) || this;
+    _this3.protoMsg = void 0;
+    _this3.protoMsg = msg;
+    return _this3;
+  }
+
+  var _proto3 = MsgVote$1.prototype;
+
+  _proto3.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgVote$1.TYPE_URL,
+      value: MsgVote.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgVote$1;
+}(BaseMsg);
+MsgVote$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgVote";
+var MsgVoteWeighted$1 = /*#__PURE__*/function (_BaseMsg4) {
+  _inheritsLoose(MsgVoteWeighted$1, _BaseMsg4);
+
+  function MsgVoteWeighted$1(msg) {
+    var _this4;
+
+    _this4 = _BaseMsg4.call(this) || this;
+    _this4.protoMsg = void 0;
+    _this4.protoMsg = msg;
+    return _this4;
+  }
+
+  var _proto4 = MsgVoteWeighted$1.prototype;
+
+  _proto4.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgVoteWeighted$1.TYPE_URL,
+      value: MsgVoteWeighted.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgVoteWeighted$1;
+}(BaseMsg);
+MsgVoteWeighted$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgVoteWeighted";
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+/* eslint-disable */
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+/* eslint-disable */
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+/** BlockIdFlag indicates which BlcokID the signature is for */
+
+var BlockIDFlag;
+
+(function (BlockIDFlag) {
+  BlockIDFlag[BlockIDFlag["BLOCK_ID_FLAG_UNKNOWN"] = 0] = "BLOCK_ID_FLAG_UNKNOWN";
+  BlockIDFlag[BlockIDFlag["BLOCK_ID_FLAG_ABSENT"] = 1] = "BLOCK_ID_FLAG_ABSENT";
+  BlockIDFlag[BlockIDFlag["BLOCK_ID_FLAG_COMMIT"] = 2] = "BLOCK_ID_FLAG_COMMIT";
+  BlockIDFlag[BlockIDFlag["BLOCK_ID_FLAG_NIL"] = 3] = "BLOCK_ID_FLAG_NIL";
+  BlockIDFlag[BlockIDFlag["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(BlockIDFlag || (BlockIDFlag = {}));
+/** SignedMsgType is a type of signed message in the consensus. */
+
+var SignedMsgType;
+
+(function (SignedMsgType) {
+  SignedMsgType[SignedMsgType["SIGNED_MSG_TYPE_UNKNOWN"] = 0] = "SIGNED_MSG_TYPE_UNKNOWN";
+  /** SIGNED_MSG_TYPE_PREVOTE - Votes */
+
+  SignedMsgType[SignedMsgType["SIGNED_MSG_TYPE_PREVOTE"] = 1] = "SIGNED_MSG_TYPE_PREVOTE";
+  SignedMsgType[SignedMsgType["SIGNED_MSG_TYPE_PRECOMMIT"] = 2] = "SIGNED_MSG_TYPE_PRECOMMIT";
+  /** SIGNED_MSG_TYPE_PROPOSAL - Proposals */
+
+  SignedMsgType[SignedMsgType["SIGNED_MSG_TYPE_PROPOSAL"] = 32] = "SIGNED_MSG_TYPE_PROPOSAL";
+  SignedMsgType[SignedMsgType["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(SignedMsgType || (SignedMsgType = {}));
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+/** BondStatus is the status of a validator. */
+
+var BondStatus;
+
+(function (BondStatus) {
+  /** BOND_STATUS_UNSPECIFIED - UNSPECIFIED defines an invalid validator status. */
+  BondStatus[BondStatus["BOND_STATUS_UNSPECIFIED"] = 0] = "BOND_STATUS_UNSPECIFIED";
+  /** BOND_STATUS_UNBONDED - UNBONDED defines a validator that is not bonded. */
+
+  BondStatus[BondStatus["BOND_STATUS_UNBONDED"] = 1] = "BOND_STATUS_UNBONDED";
+  /** BOND_STATUS_UNBONDING - UNBONDING defines a validator that is unbonding. */
+
+  BondStatus[BondStatus["BOND_STATUS_UNBONDING"] = 2] = "BOND_STATUS_UNBONDING";
+  /** BOND_STATUS_BONDED - BONDED defines a validator that is bonded. */
+
+  BondStatus[BondStatus["BOND_STATUS_BONDED"] = 3] = "BOND_STATUS_BONDED";
+  BondStatus[BondStatus["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
+})(BondStatus || (BondStatus = {}));
+
+function createBaseCommissionRates() {
+  return {
+    rate: "",
+    maxRate: "",
+    maxChangeRate: ""
+  };
+}
+
+var CommissionRates = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.rate !== "") {
+      writer.uint32(10).string(message.rate);
+    }
+
+    if (message.maxRate !== "") {
+      writer.uint32(18).string(message.maxRate);
+    }
+
+    if (message.maxChangeRate !== "") {
+      writer.uint32(26).string(message.maxChangeRate);
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseCommissionRates();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.rate = reader.string();
+          break;
+
+        case 2:
+          message.maxRate = reader.string();
+          break;
+
+        case 3:
+          message.maxChangeRate = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      rate: isSet$6(object.rate) ? String(object.rate) : "",
+      maxRate: isSet$6(object.maxRate) ? String(object.maxRate) : "",
+      maxChangeRate: isSet$6(object.maxChangeRate) ? String(object.maxChangeRate) : ""
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.rate !== undefined && (obj.rate = message.rate);
+    message.maxRate !== undefined && (obj.maxRate = message.maxRate);
+    message.maxChangeRate !== undefined && (obj.maxChangeRate = message.maxChangeRate);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$rate, _object$maxRate, _object$maxChangeRate;
+
+    var message = createBaseCommissionRates();
+    message.rate = (_object$rate = object.rate) != null ? _object$rate : "";
+    message.maxRate = (_object$maxRate = object.maxRate) != null ? _object$maxRate : "";
+    message.maxChangeRate = (_object$maxChangeRate = object.maxChangeRate) != null ? _object$maxChangeRate : "";
+    return message;
+  }
+};
+
+function createBaseDescription() {
+  return {
+    moniker: "",
+    identity: "",
+    website: "",
+    securityContact: "",
+    details: ""
+  };
+}
+
+var Description = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.moniker !== "") {
+      writer.uint32(10).string(message.moniker);
+    }
+
+    if (message.identity !== "") {
+      writer.uint32(18).string(message.identity);
+    }
+
+    if (message.website !== "") {
+      writer.uint32(26).string(message.website);
+    }
+
+    if (message.securityContact !== "") {
+      writer.uint32(34).string(message.securityContact);
+    }
+
+    if (message.details !== "") {
+      writer.uint32(42).string(message.details);
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseDescription();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.moniker = reader.string();
+          break;
+
+        case 2:
+          message.identity = reader.string();
+          break;
+
+        case 3:
+          message.website = reader.string();
+          break;
+
+        case 4:
+          message.securityContact = reader.string();
+          break;
+
+        case 5:
+          message.details = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      moniker: isSet$6(object.moniker) ? String(object.moniker) : "",
+      identity: isSet$6(object.identity) ? String(object.identity) : "",
+      website: isSet$6(object.website) ? String(object.website) : "",
+      securityContact: isSet$6(object.securityContact) ? String(object.securityContact) : "",
+      details: isSet$6(object.details) ? String(object.details) : ""
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.moniker !== undefined && (obj.moniker = message.moniker);
+    message.identity !== undefined && (obj.identity = message.identity);
+    message.website !== undefined && (obj.website = message.website);
+    message.securityContact !== undefined && (obj.securityContact = message.securityContact);
+    message.details !== undefined && (obj.details = message.details);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$moniker, _object$identity, _object$website, _object$securityConta, _object$details;
+
+    var message = createBaseDescription();
+    message.moniker = (_object$moniker = object.moniker) != null ? _object$moniker : "";
+    message.identity = (_object$identity = object.identity) != null ? _object$identity : "";
+    message.website = (_object$website = object.website) != null ? _object$website : "";
+    message.securityContact = (_object$securityConta = object.securityContact) != null ? _object$securityConta : "";
+    message.details = (_object$details = object.details) != null ? _object$details : "";
+    return message;
+  }
+};
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+function isSet$6(value) {
+  return value !== null && value !== undefined;
+}
+
+var protobufPackage$2 = "cosmos.staking.v1beta1";
+
+function createBaseMsgCreateValidator() {
+  return {
+    description: undefined,
+    commission: undefined,
+    minSelfDelegation: "",
+    delegatorAddress: "",
+    validatorAddress: "",
+    pubkey: undefined,
+    value: undefined
+  };
+}
+
+var MsgCreateValidator = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.description !== undefined) {
+      Description.encode(message.description, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.commission !== undefined) {
+      CommissionRates.encode(message.commission, writer.uint32(18).fork()).ldelim();
+    }
+
+    if (message.minSelfDelegation !== "") {
+      writer.uint32(26).string(message.minSelfDelegation);
+    }
+
+    if (message.delegatorAddress !== "") {
+      writer.uint32(34).string(message.delegatorAddress);
+    }
+
+    if (message.validatorAddress !== "") {
+      writer.uint32(42).string(message.validatorAddress);
+    }
+
+    if (message.pubkey !== undefined) {
+      Any.encode(message.pubkey, writer.uint32(50).fork()).ldelim();
+    }
+
+    if (message.value !== undefined) {
+      Coin.encode(message.value, writer.uint32(58).fork()).ldelim();
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgCreateValidator();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.description = Description.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.commission = CommissionRates.decode(reader, reader.uint32());
+          break;
+
+        case 3:
+          message.minSelfDelegation = reader.string();
+          break;
+
+        case 4:
+          message.delegatorAddress = reader.string();
+          break;
+
+        case 5:
+          message.validatorAddress = reader.string();
+          break;
+
+        case 6:
+          message.pubkey = Any.decode(reader, reader.uint32());
+          break;
+
+        case 7:
+          message.value = Coin.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      description: isSet$7(object.description) ? Description.fromJSON(object.description) : undefined,
+      commission: isSet$7(object.commission) ? CommissionRates.fromJSON(object.commission) : undefined,
+      minSelfDelegation: isSet$7(object.minSelfDelegation) ? String(object.minSelfDelegation) : "",
+      delegatorAddress: isSet$7(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet$7(object.validatorAddress) ? String(object.validatorAddress) : "",
+      pubkey: isSet$7(object.pubkey) ? Any.fromJSON(object.pubkey) : undefined,
+      value: isSet$7(object.value) ? Coin.fromJSON(object.value) : undefined
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
+    message.commission !== undefined && (obj.commission = message.commission ? CommissionRates.toJSON(message.commission) : undefined);
+    message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
+    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
+    message.pubkey !== undefined && (obj.pubkey = message.pubkey ? Any.toJSON(message.pubkey) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Coin.toJSON(message.value) : undefined);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$minSelfDelega, _object$delegatorAddr, _object$validatorAddr;
+
+    var message = createBaseMsgCreateValidator();
+    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
+    message.commission = object.commission !== undefined && object.commission !== null ? CommissionRates.fromPartial(object.commission) : undefined;
+    message.minSelfDelegation = (_object$minSelfDelega = object.minSelfDelegation) != null ? _object$minSelfDelega : "";
+    message.delegatorAddress = (_object$delegatorAddr = object.delegatorAddress) != null ? _object$delegatorAddr : "";
+    message.validatorAddress = (_object$validatorAddr = object.validatorAddress) != null ? _object$validatorAddr : "";
+    message.pubkey = object.pubkey !== undefined && object.pubkey !== null ? Any.fromPartial(object.pubkey) : undefined;
+    message.value = object.value !== undefined && object.value !== null ? Coin.fromPartial(object.value) : undefined;
+    return message;
+  }
+};
+
+function createBaseMsgEditValidator() {
+  return {
+    description: undefined,
+    validatorAddress: "",
+    commissionRate: "",
+    minSelfDelegation: ""
+  };
+}
+
+var MsgEditValidator = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.description !== undefined) {
+      Description.encode(message.description, writer.uint32(10).fork()).ldelim();
+    }
+
+    if (message.validatorAddress !== "") {
+      writer.uint32(18).string(message.validatorAddress);
+    }
+
+    if (message.commissionRate !== "") {
+      writer.uint32(26).string(message.commissionRate);
+    }
+
+    if (message.minSelfDelegation !== "") {
+      writer.uint32(34).string(message.minSelfDelegation);
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgEditValidator();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.description = Description.decode(reader, reader.uint32());
+          break;
+
+        case 2:
+          message.validatorAddress = reader.string();
+          break;
+
+        case 3:
+          message.commissionRate = reader.string();
+          break;
+
+        case 4:
+          message.minSelfDelegation = reader.string();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      description: isSet$7(object.description) ? Description.fromJSON(object.description) : undefined,
+      validatorAddress: isSet$7(object.validatorAddress) ? String(object.validatorAddress) : "",
+      commissionRate: isSet$7(object.commissionRate) ? String(object.commissionRate) : "",
+      minSelfDelegation: isSet$7(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
+    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
+    message.commissionRate !== undefined && (obj.commissionRate = message.commissionRate);
+    message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$validatorAddr2, _object$commissionRat, _object$minSelfDelega2;
+
+    var message = createBaseMsgEditValidator();
+    message.description = object.description !== undefined && object.description !== null ? Description.fromPartial(object.description) : undefined;
+    message.validatorAddress = (_object$validatorAddr2 = object.validatorAddress) != null ? _object$validatorAddr2 : "";
+    message.commissionRate = (_object$commissionRat = object.commissionRate) != null ? _object$commissionRat : "";
+    message.minSelfDelegation = (_object$minSelfDelega2 = object.minSelfDelegation) != null ? _object$minSelfDelega2 : "";
+    return message;
+  }
+};
+
+function createBaseMsgDelegate() {
+  return {
+    delegatorAddress: "",
+    validatorAddress: "",
+    amount: undefined
+  };
+}
+
+var MsgDelegate = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.delegatorAddress !== "") {
+      writer.uint32(10).string(message.delegatorAddress);
+    }
+
+    if (message.validatorAddress !== "") {
+      writer.uint32(18).string(message.validatorAddress);
+    }
+
+    if (message.amount !== undefined) {
+      Coin.encode(message.amount, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgDelegate();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.delegatorAddress = reader.string();
+          break;
+
+        case 2:
+          message.validatorAddress = reader.string();
+          break;
+
+        case 3:
+          message.amount = Coin.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      delegatorAddress: isSet$7(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet$7(object.validatorAddress) ? String(object.validatorAddress) : "",
+      amount: isSet$7(object.amount) ? Coin.fromJSON(object.amount) : undefined
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$delegatorAddr2, _object$validatorAddr3;
+
+    var message = createBaseMsgDelegate();
+    message.delegatorAddress = (_object$delegatorAddr2 = object.delegatorAddress) != null ? _object$delegatorAddr2 : "";
+    message.validatorAddress = (_object$validatorAddr3 = object.validatorAddress) != null ? _object$validatorAddr3 : "";
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    return message;
+  }
+};
+
+function createBaseMsgBeginRedelegate() {
+  return {
+    delegatorAddress: "",
+    validatorSrcAddress: "",
+    validatorDstAddress: "",
+    amount: undefined
+  };
+}
+
+var MsgBeginRedelegate = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.delegatorAddress !== "") {
+      writer.uint32(10).string(message.delegatorAddress);
+    }
+
+    if (message.validatorSrcAddress !== "") {
+      writer.uint32(18).string(message.validatorSrcAddress);
+    }
+
+    if (message.validatorDstAddress !== "") {
+      writer.uint32(26).string(message.validatorDstAddress);
+    }
+
+    if (message.amount !== undefined) {
+      Coin.encode(message.amount, writer.uint32(34).fork()).ldelim();
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgBeginRedelegate();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.delegatorAddress = reader.string();
+          break;
+
+        case 2:
+          message.validatorSrcAddress = reader.string();
+          break;
+
+        case 3:
+          message.validatorDstAddress = reader.string();
+          break;
+
+        case 4:
+          message.amount = Coin.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      delegatorAddress: isSet$7(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorSrcAddress: isSet$7(object.validatorSrcAddress) ? String(object.validatorSrcAddress) : "",
+      validatorDstAddress: isSet$7(object.validatorDstAddress) ? String(object.validatorDstAddress) : "",
+      amount: isSet$7(object.amount) ? Coin.fromJSON(object.amount) : undefined
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
+    message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
+    message.validatorDstAddress !== undefined && (obj.validatorDstAddress = message.validatorDstAddress);
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$delegatorAddr3, _object$validatorSrcA, _object$validatorDstA;
+
+    var message = createBaseMsgBeginRedelegate();
+    message.delegatorAddress = (_object$delegatorAddr3 = object.delegatorAddress) != null ? _object$delegatorAddr3 : "";
+    message.validatorSrcAddress = (_object$validatorSrcA = object.validatorSrcAddress) != null ? _object$validatorSrcA : "";
+    message.validatorDstAddress = (_object$validatorDstA = object.validatorDstAddress) != null ? _object$validatorDstA : "";
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    return message;
+  }
+};
+
+function createBaseMsgUndelegate() {
+  return {
+    delegatorAddress: "",
+    validatorAddress: "",
+    amount: undefined
+  };
+}
+
+var MsgUndelegate = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.delegatorAddress !== "") {
+      writer.uint32(10).string(message.delegatorAddress);
+    }
+
+    if (message.validatorAddress !== "") {
+      writer.uint32(18).string(message.validatorAddress);
+    }
+
+    if (message.amount !== undefined) {
+      Coin.encode(message.amount, writer.uint32(26).fork()).ldelim();
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBaseMsgUndelegate();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.delegatorAddress = reader.string();
+          break;
+
+        case 2:
+          message.validatorAddress = reader.string();
+          break;
+
+        case 3:
+          message.amount = Coin.decode(reader, reader.uint32());
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      delegatorAddress: isSet$7(object.delegatorAddress) ? String(object.delegatorAddress) : "",
+      validatorAddress: isSet$7(object.validatorAddress) ? String(object.validatorAddress) : "",
+      amount: isSet$7(object.amount) ? Coin.fromJSON(object.amount) : undefined
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
+    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
+    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$delegatorAddr4, _object$validatorAddr4;
+
+    var message = createBaseMsgUndelegate();
+    message.delegatorAddress = (_object$delegatorAddr4 = object.delegatorAddress) != null ? _object$delegatorAddr4 : "";
+    message.validatorAddress = (_object$validatorAddr4 = object.validatorAddress) != null ? _object$validatorAddr4 : "";
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    return message;
+  }
+};
+
+if (util.Long !== Long) {
+  util.Long = Long;
+
+  configure();
+}
+
+function isSet$7(value) {
+  return value !== null && value !== undefined;
+}
+
+var MsgCreateValidator$1 = /*#__PURE__*/function (_BaseMsg) {
+  _inheritsLoose(MsgCreateValidator$1, _BaseMsg);
+
+  function MsgCreateValidator$1(msg) {
+    var _this;
+
+    _this = _BaseMsg.call(this) || this;
+    _this.protoMsg = void 0;
+    _this.protoMsg = msg;
+    return _this;
+  }
+
+  var _proto = MsgCreateValidator$1.prototype;
+
+  _proto.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgCreateValidator$1.TYPE_URL,
+      value: MsgCreateValidator.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgCreateValidator$1;
+}(BaseMsg);
+MsgCreateValidator$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgCreateValidator";
+var MsgEditValidator$1 = /*#__PURE__*/function (_BaseMsg2) {
+  _inheritsLoose(MsgEditValidator$1, _BaseMsg2);
+
+  function MsgEditValidator$1(msg) {
+    var _this2;
+
+    _this2 = _BaseMsg2.call(this) || this;
+    _this2.protoMsg = void 0;
+    _this2.protoMsg = msg;
+    return _this2;
+  }
+
+  var _proto2 = MsgEditValidator$1.prototype;
+
+  _proto2.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgEditValidator$1.TYPE_URL,
+      value: MsgEditValidator.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgEditValidator$1;
+}(BaseMsg);
+MsgEditValidator$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgEditValidator";
+var MsgDelegate$1 = /*#__PURE__*/function (_BaseMsg3) {
+  _inheritsLoose(MsgDelegate$1, _BaseMsg3);
+
+  function MsgDelegate$1(msg) {
+    var _this3;
+
+    _this3 = _BaseMsg3.call(this) || this;
+    _this3.protoMsg = void 0;
+    _this3.protoMsg = msg;
+    return _this3;
+  }
+
+  var _proto3 = MsgDelegate$1.prototype;
+
+  _proto3.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgDelegate$1.TYPE_URL,
+      value: MsgDelegate.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgDelegate$1;
+}(BaseMsg);
+MsgDelegate$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgDelegate";
+var MsgBeginRedelegate$1 = /*#__PURE__*/function (_BaseMsg4) {
+  _inheritsLoose(MsgBeginRedelegate$1, _BaseMsg4);
+
+  function MsgBeginRedelegate$1(msg) {
+    var _this4;
+
+    _this4 = _BaseMsg4.call(this) || this;
+    _this4.protoMsg = void 0;
+    _this4.protoMsg = msg;
+    return _this4;
+  }
+
+  var _proto4 = MsgBeginRedelegate$1.prototype;
+
+  _proto4.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgBeginRedelegate$1.TYPE_URL,
+      value: MsgBeginRedelegate.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgBeginRedelegate$1;
+}(BaseMsg);
+MsgBeginRedelegate$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgBeginRedelegate";
+var MsgUndelegate$1 = /*#__PURE__*/function (_BaseMsg5) {
+  _inheritsLoose(MsgUndelegate$1, _BaseMsg5);
+
+  function MsgUndelegate$1(msg) {
+    var _this5;
+
+    _this5 = _BaseMsg5.call(this) || this;
+    _this5.protoMsg = void 0;
+    _this5.protoMsg = msg;
+    return _this5;
+  }
+
+  var _proto5 = MsgUndelegate$1.prototype;
+
+  _proto5.generateMessage = function generateMessage() {
+    return {
+      typeUrl: MsgUndelegate$1.TYPE_URL,
+      value: MsgUndelegate.fromPartial(this.protoMsg)
+    };
+  };
+
+  return MsgUndelegate$1;
+}(BaseMsg);
+MsgUndelegate$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgUndelegate";
+
+/* eslint-disable */
+
+function createBasePubKey() {
+  return {
+    key: new Uint8Array()
+  };
+}
+
+var PubKey = {
+  encode: function encode(message, writer) {
+    if (writer === void 0) {
+      writer = Writer.create();
+    }
+
+    if (message.key.length !== 0) {
+      writer.uint32(10).bytes(message.key);
+    }
+
+    return writer;
+  },
+  decode: function decode(input, length) {
+    var reader = input instanceof Reader ? input : new Reader(input);
+    var end = length === undefined ? reader.len : reader.pos + length;
+    var message = createBasePubKey();
+
+    while (reader.pos < end) {
+      var tag = reader.uint32();
+
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.bytes();
+          break;
+
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+
+    return message;
+  },
+  fromJSON: function fromJSON(object) {
+    return {
+      key: isSet$8(object.key) ? bytesFromBase64$1(object.key) : new Uint8Array()
+    };
+  },
+  toJSON: function toJSON(message) {
+    var obj = {};
+    message.key !== undefined && (obj.key = base64FromBytes$1(message.key !== undefined ? message.key : new Uint8Array()));
+    return obj;
+  },
+  fromPartial: function fromPartial(object) {
+    var _object$key;
+
+    var message = createBasePubKey();
+    message.key = (_object$key = object.key) != null ? _object$key : new Uint8Array();
     return message;
   }
 };
@@ -3549,7 +5200,7 @@ if (util.Long !== Long) {
   configure();
 }
 
-function isSet$3(value) {
+function isSet$8(value) {
   return value !== null && value !== undefined;
 }
 
@@ -3603,8 +5254,8 @@ var CompactBitArray = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      extraBitsStored: isSet$4(object.extraBitsStored) ? Number(object.extraBitsStored) : 0,
-      elems: isSet$4(object.elems) ? bytesFromBase64$2(object.elems) : new Uint8Array()
+      extraBitsStored: isSet$9(object.extraBitsStored) ? Number(object.extraBitsStored) : 0,
+      elems: isSet$9(object.elems) ? bytesFromBase64$2(object.elems) : new Uint8Array()
     };
   },
   toJSON: function toJSON(message) {
@@ -3664,7 +5315,7 @@ if (util.Long !== Long) {
   configure();
 }
 
-function isSet$4(value) {
+function isSet$9(value) {
   return value !== null && value !== undefined;
 }
 
@@ -3750,88 +5401,6 @@ if (util.Long !== Long) {
   configure();
 }
 
-/* eslint-disable */
-
-function createBaseCoin() {
-  return {
-    denom: "",
-    amount: ""
-  };
-}
-
-var Coin = {
-  encode: function encode(message, writer) {
-    if (writer === void 0) {
-      writer = Writer.create();
-    }
-
-    if (message.denom !== "") {
-      writer.uint32(10).string(message.denom);
-    }
-
-    if (message.amount !== "") {
-      writer.uint32(18).string(message.amount);
-    }
-
-    return writer;
-  },
-  decode: function decode(input, length) {
-    var reader = input instanceof Reader ? input : new Reader(input);
-    var end = length === undefined ? reader.len : reader.pos + length;
-    var message = createBaseCoin();
-
-    while (reader.pos < end) {
-      var tag = reader.uint32();
-
-      switch (tag >>> 3) {
-        case 1:
-          message.denom = reader.string();
-          break;
-
-        case 2:
-          message.amount = reader.string();
-          break;
-
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-
-    return message;
-  },
-  fromJSON: function fromJSON(object) {
-    return {
-      denom: isSet$5(object.denom) ? String(object.denom) : "",
-      amount: isSet$5(object.amount) ? String(object.amount) : ""
-    };
-  },
-  toJSON: function toJSON(message) {
-    var obj = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
-  fromPartial: function fromPartial(object) {
-    var _object$denom, _object$amount;
-
-    var message = createBaseCoin();
-    message.denom = (_object$denom = object.denom) != null ? _object$denom : "";
-    message.amount = (_object$amount = object.amount) != null ? _object$amount : "";
-    return message;
-  }
-};
-
-if (util.Long !== Long) {
-  util.Long = Long;
-
-  configure();
-}
-
-function isSet$5(value) {
-  return value !== null && value !== undefined;
-}
-
 function createBaseTxRaw() {
   return {
     bodyBytes: new Uint8Array(),
@@ -3892,8 +5461,8 @@ var TxRaw = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      bodyBytes: isSet$6(object.bodyBytes) ? bytesFromBase64$3(object.bodyBytes) : new Uint8Array(),
-      authInfoBytes: isSet$6(object.authInfoBytes) ? bytesFromBase64$3(object.authInfoBytes) : new Uint8Array(),
+      bodyBytes: isSet$a(object.bodyBytes) ? bytesFromBase64$3(object.bodyBytes) : new Uint8Array(),
+      authInfoBytes: isSet$a(object.authInfoBytes) ? bytesFromBase64$3(object.authInfoBytes) : new Uint8Array(),
       signatures: Array.isArray(object == null ? void 0 : object.signatures) ? object.signatures.map(function (e) {
         return bytesFromBase64$3(e);
       }) : []
@@ -3995,10 +5564,10 @@ var SignDoc = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      bodyBytes: isSet$6(object.bodyBytes) ? bytesFromBase64$3(object.bodyBytes) : new Uint8Array(),
-      authInfoBytes: isSet$6(object.authInfoBytes) ? bytesFromBase64$3(object.authInfoBytes) : new Uint8Array(),
-      chainId: isSet$6(object.chainId) ? String(object.chainId) : "",
-      accountNumber: isSet$6(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO
+      bodyBytes: isSet$a(object.bodyBytes) ? bytesFromBase64$3(object.bodyBytes) : new Uint8Array(),
+      authInfoBytes: isSet$a(object.authInfoBytes) ? bytesFromBase64$3(object.authInfoBytes) : new Uint8Array(),
+      chainId: isSet$a(object.chainId) ? String(object.chainId) : "",
+      accountNumber: isSet$a(object.accountNumber) ? Long.fromValue(object.accountNumber) : Long.UZERO
     };
   },
   toJSON: function toJSON(message) {
@@ -4075,7 +5644,7 @@ var AuthInfo = {
       signerInfos: Array.isArray(object == null ? void 0 : object.signerInfos) ? object.signerInfos.map(function (e) {
         return SignerInfo.fromJSON(e);
       }) : [],
-      fee: isSet$6(object.fee) ? Fee.fromJSON(object.fee) : undefined
+      fee: isSet$a(object.fee) ? Fee.fromJSON(object.fee) : undefined
     };
   },
   toJSON: function toJSON(message) {
@@ -4163,9 +5732,9 @@ var SignerInfo = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      publicKey: isSet$6(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
-      modeInfo: isSet$6(object.modeInfo) ? ModeInfo.fromJSON(object.modeInfo) : undefined,
-      sequence: isSet$6(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
+      publicKey: isSet$a(object.publicKey) ? Any.fromJSON(object.publicKey) : undefined,
+      modeInfo: isSet$a(object.modeInfo) ? ModeInfo.fromJSON(object.modeInfo) : undefined,
+      sequence: isSet$a(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
   toJSON: function toJSON(message) {
@@ -4234,8 +5803,8 @@ var ModeInfo = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      single: isSet$6(object.single) ? ModeInfo_Single.fromJSON(object.single) : undefined,
-      multi: isSet$6(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
+      single: isSet$a(object.single) ? ModeInfo_Single.fromJSON(object.single) : undefined,
+      multi: isSet$a(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
     };
   },
   toJSON: function toJSON(message) {
@@ -4293,7 +5862,7 @@ var ModeInfo_Single = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      mode: isSet$6(object.mode) ? signModeFromJSON(object.mode) : 0
+      mode: isSet$a(object.mode) ? signModeFromJSON(object.mode) : 0
     };
   },
   toJSON: function toJSON(message) {
@@ -4361,7 +5930,7 @@ var ModeInfo_Multi = {
   },
   fromJSON: function fromJSON(object) {
     return {
-      bitarray: isSet$6(object.bitarray) ? CompactBitArray.fromJSON(object.bitarray) : undefined,
+      bitarray: isSet$a(object.bitarray) ? CompactBitArray.fromJSON(object.bitarray) : undefined,
       modeInfos: Array.isArray(object == null ? void 0 : object.modeInfos) ? object.modeInfos.map(function (e) {
         return ModeInfo.fromJSON(e);
       }) : []
@@ -4465,9 +6034,9 @@ var Fee = {
       amount: Array.isArray(object == null ? void 0 : object.amount) ? object.amount.map(function (e) {
         return Coin.fromJSON(e);
       }) : [],
-      gasLimit: isSet$6(object.gasLimit) ? Long.fromValue(object.gasLimit) : Long.UZERO,
-      payer: isSet$6(object.payer) ? String(object.payer) : "",
-      granter: isSet$6(object.granter) ? String(object.granter) : ""
+      gasLimit: isSet$a(object.gasLimit) ? Long.fromValue(object.gasLimit) : Long.UZERO,
+      payer: isSet$a(object.payer) ? String(object.payer) : "",
+      granter: isSet$a(object.granter) ? String(object.granter) : ""
     };
   },
   toJSON: function toJSON(message) {
@@ -4541,7 +6110,7 @@ if (util.Long !== Long) {
   configure();
 }
 
-function isSet$6(value) {
+function isSet$a(value) {
   return value !== null && value !== undefined;
 }
 
@@ -4759,5 +6328,5 @@ function createSignerInfo(publicKey, sequence, mode) {
   return signerInfo;
 }
 
-export { APIClient, APIRequester, AVALANCHE, AVALANCHE_CHAIN_ID, AVALANCHE_CHAIN_NAME, AVALANCHE_NETWORK_ID, AVALANCHE_SYMBOL, AuthAPI, BASE_UNIT_TICK, BNB_SYMBOL, BSC, BSC_CHAIN_ID, BSC_CHAIN_ID_TEST, BSC_CHAIN_NAME, BSC_NETWORK_ID, BSC_NETWORK_TEST_ID, BankAPI, BaseAPI, BaseMsg, Bound, CHAIN_ETH, CHAIN_SOP, CONFIG_CHAIN_SOPHON, DEFAULT_PRECISION, DEFAULT_USER_PRECISION, ETH, ETH_CHAIN_ID, ETH_CHAIN_NAME, ETH_NETWORK_ID, ETH_SYMBOL, ETH_TEST_NETWORK_ID, FANTOM, FANTOM_CHAIN_ID, FANTOM_CHAIN_NAME, FANTOM_NETWORK_ID, FANTOM_SYMBOL, FEE_AMOUNT_DETAIL, Fee_Amount, HECO, HECO_CHAIN_ID, HECO_CHAIN_NAME, HECO_NETWORK_ID, HOO, HOO_CHAIN_ID, HOO_CHAIN_NAME, HOO_NETWORK_ID, HOO_SYMBOL, HT_SYMBOL, KCC, KCC_CHAIN_ID, KCC_CHAIN_NAME, KCC_NETWORK_ID, KCC_SYMBOL, LiquidityMath, MAX_PRECISION, MsgCollect$1 as MsgCollect, MsgCollectReward$1 as MsgCollectReward, MsgCreatePool$1 as MsgCreatePool, MsgCreatePosition$1 as MsgCreatePosition, MsgDecreaseLiquidity$1 as MsgDecreaseLiquidity, MsgIncreaseLiquidity$1 as MsgIncreaseLiquidity, MsgSwapExactIn$1 as MsgSwapExactIn, MsgSwapExactOut$1 as MsgSwapExactOut, NETWORK_MAP, OEC, OEC_CHAIN_ID, OEC_CHAIN_NAME, OEC_NETWORK_ID, OKT_SYMBOL, ONE_DAY_TO_SECONDS, ONE_YEAR_TO_DAYS, POLYGON, POLYGON_CHAIN_ID, POLYGON_CHAIN_NAME, POLYGON_NETWORK_ID, POLYGON_SYMBOL, REG_DECIMAL, REG_DECIMAL_SIMPLE, REG_NUMBER, SIGN_DIRECT, SOPHON, SOPHON_SYMBOL, SOPHON_TEST_CHAIN_ID, SOPHON_TEST_CHAIN_NAME, SOPHON_TEST_NETWORK_ID, SUPPORTED_CHAIN_IDS, SwapAPI, Swap_Direction, TICK_SPACINGS, TickMath, Tip_Level, TransactionLooper, Transaction_Status, TxAPI, TxClient, XDAI, XDAI_CHAIN_ID, XDAI_CHAIN_NAME, XDAI_NETWORK_ID, XDAI_SYMBOL, ZERO, arrayToMap, checkInputNumber, createSigDoc, createTxBodyEncodeObject, decimalNumber, deepCopy, div, encrypt, findTokenByDenom, findTokenBySymbol, formatDiffTime, formatMoment, formatNumber, formatTime, formatUnixMoment, getPercentByFeeAmount, getPoolAddress, isEmptyAmount, isEqualTo, isGreaterThan, isLessThan, isNumeric, isPositive, longToNumber, minus, multipliedBy, objectToMap, percentage, plus, pow, pow18, powM18, shift, sortsBefore, to32, toAmountCeil, toAmountFee, toAmountFloor, toAmountString, toDecimalPlaces, toExactAmount, toPercent, toUsd };
+export { APIClient, APIRequester, AVALANCHE, AVALANCHE_CHAIN_ID, AVALANCHE_CHAIN_NAME, AVALANCHE_NETWORK_ID, AVALANCHE_SYMBOL, AuthAPI, BASE_UNIT_TICK, BNB_SYMBOL, BSC, BSC_CHAIN_ID, BSC_CHAIN_ID_TEST, BSC_CHAIN_NAME, BSC_NETWORK_ID, BSC_NETWORK_TEST_ID, BankAPI, BaseAPI, BaseMsg, Bound, CHAIN_ETH, CHAIN_SOP, CONFIG_CHAIN_SOPHON, DEFAULT_PRECISION, DEFAULT_USER_PRECISION, ETH, ETH_CHAIN_ID, ETH_CHAIN_NAME, ETH_NETWORK_ID, ETH_SYMBOL, ETH_TEST_NETWORK_ID, FANTOM, FANTOM_CHAIN_ID, FANTOM_CHAIN_NAME, FANTOM_NETWORK_ID, FANTOM_SYMBOL, FEE_AMOUNT_DETAIL, Fee_Amount, HECO, HECO_CHAIN_ID, HECO_CHAIN_NAME, HECO_NETWORK_ID, HOO, HOO_CHAIN_ID, HOO_CHAIN_NAME, HOO_NETWORK_ID, HOO_SYMBOL, HT_SYMBOL, KCC, KCC_CHAIN_ID, KCC_CHAIN_NAME, KCC_NETWORK_ID, KCC_SYMBOL, LiquidityMath, MAX_PRECISION, MsgBeginRedelegate$1 as MsgBeginRedelegate, MsgCollect$1 as MsgCollect, MsgCollectReward$1 as MsgCollectReward, MsgCreatePool$1 as MsgCreatePool, MsgCreatePosition$1 as MsgCreatePosition, MsgCreateValidator$1 as MsgCreateValidator, MsgDecreaseLiquidity$1 as MsgDecreaseLiquidity, MsgDelegate$1 as MsgDelegate, MsgDeposit$1 as MsgDeposit, MsgEditValidator$1 as MsgEditValidator, MsgIncreaseLiquidity$1 as MsgIncreaseLiquidity, MsgSubmitProposal$1 as MsgSubmitProposal, MsgSwapExactIn$1 as MsgSwapExactIn, MsgSwapExactOut$1 as MsgSwapExactOut, MsgUndelegate$1 as MsgUndelegate, MsgVote$1 as MsgVote, MsgVoteWeighted$1 as MsgVoteWeighted, NETWORK_MAP, OEC, OEC_CHAIN_ID, OEC_CHAIN_NAME, OEC_NETWORK_ID, OKT_SYMBOL, ONE_DAY_TO_SECONDS, ONE_YEAR_TO_DAYS, POLYGON, POLYGON_CHAIN_ID, POLYGON_CHAIN_NAME, POLYGON_NETWORK_ID, POLYGON_SYMBOL, REG_DECIMAL, REG_DECIMAL_SIMPLE, REG_NUMBER, SIGN_DIRECT, SOPHON, SOPHON_SYMBOL, SOPHON_TEST_CHAIN_ID, SOPHON_TEST_CHAIN_NAME, SOPHON_TEST_NETWORK_ID, SUPPORTED_CHAIN_IDS, SwapAPI, Swap_Direction, TICK_SPACINGS, TickMath, Tip_Level, TransactionLooper, Transaction_Status, TxAPI, TxClient, XDAI, XDAI_CHAIN_ID, XDAI_CHAIN_NAME, XDAI_NETWORK_ID, XDAI_SYMBOL, ZERO, arrayToMap, checkInputNumber, createSigDoc, createTxBodyEncodeObject, decimalNumber, deepCopy, div, encrypt, findTokenByDenom, findTokenBySymbol, formatDiffTime, formatMoment, formatNumber, formatTime, formatUnixMoment, getPercentByFeeAmount, getPoolAddress, isEmptyAmount, isEqualTo, isGreaterThan, isLessThan, isNumeric, isPositive, longToNumber, minus, multipliedBy, objectToMap, percentage, plus, pow, pow18, powM18, shift, sortsBefore, to32, toAmountCeil, toAmountFee, toAmountFloor, toAmountString, toDecimalPlaces, toExactAmount, toPercent, toUsd };
 //# sourceMappingURL=some-chain-sdk.esm.js.map

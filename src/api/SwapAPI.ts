@@ -15,7 +15,7 @@ export interface IFarmV3 {
 }
 
 export interface IResFarmList {
-  activatingPool: Array<IFarmV3>;
+  core_pools: Array<IFarmV3>;
   pagination: {
     next_key: null | string;
     total: string;

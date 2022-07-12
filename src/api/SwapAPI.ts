@@ -79,7 +79,7 @@ export class SwapAPI extends BaseAPI {
 
   public async apiActiveFarmList(): Promise<IResFarmList> {
     return this.request.get<IResFarmList>(
-      `/sophon-labs/sophon/swap/activating_pools`
+      `/sophon-labs/sophon/swap/core_pools`
     );
   }
 

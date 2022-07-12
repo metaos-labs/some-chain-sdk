@@ -785,7 +785,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              return _context7.abrupt("return", this.request.get("/sophon-labs/sophon/swap/activating_pools"));
+              return _context7.abrupt("return", this.request.get("/sophon-labs/sophon/swap/core_pools"));
 
             case 1:
             case "end":

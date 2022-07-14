@@ -42,5 +42,5 @@ export declare class SwapAPI extends BaseAPI {
         uri: string;
     }>;
     apiActiveFarmList(): Promise<IResFarmList>;
-    apiLiquidityPositionList(accountAddress: string): Promise<IResLiquidityPositionList>;
+    apiLiquidityPositionList(accountAddress: string, skip_zero_liquidity: boolean): Promise<IResLiquidityPositionList>;
 }

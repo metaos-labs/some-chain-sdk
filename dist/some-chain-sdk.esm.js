@@ -797,12 +797,14 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
   }();
 
   _proto.apiLiquidityPositionList = /*#__PURE__*/function () {
-    var _apiLiquidityPositionList = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(accountAddress) {
+    var _apiLiquidityPositionList = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(accountAddress, skip_zero_liquidity) {
       return _regeneratorRuntime().wrap(function _callee8$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              return _context8.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_positions_owner/" + accountAddress));
+              return _context8.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_positions_owner/" + accountAddress, {
+                skip_zero_liquidity: skip_zero_liquidity
+              }));
 
             case 1:
             case "end":
@@ -812,7 +814,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
       }, _callee8, this);
     }));
 
-    function apiLiquidityPositionList(_x7) {
+    function apiLiquidityPositionList(_x7, _x8) {
       return _apiLiquidityPositionList.apply(this, arguments);
     }
 

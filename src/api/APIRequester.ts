@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance } from "axios";
 import { OrderBy } from "../proto/cosmos/tx/v1beta1/service";
 
-export type APIParams = Record<string, string | number | null | undefined>;
+export type APIParams = Record<string, string | number | null | undefined | boolean>;
 
 export interface PaginationOptions {
   "pagination.limit": string;

@@ -1,5 +1,5 @@
 import { OrderBy } from "../proto/cosmos/tx/v1beta1/service";
-export declare type APIParams = Record<string, string | number | null | undefined>;
+export declare type APIParams = Record<string, string | number | null | undefined | boolean>;
 export interface PaginationOptions {
     "pagination.limit": string;
     "pagination.offset": string;

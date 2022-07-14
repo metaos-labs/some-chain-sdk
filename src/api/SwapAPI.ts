@@ -84,10 +84,14 @@ export class SwapAPI extends BaseAPI {
   }
 
   public async apiLiquidityPositionList(
-    accountAddress: string
+    accountAddress: string,
+    skip_zero_liquidity: boolean
   ): Promise<IResLiquidityPositionList> {
     return this.request.get<IResLiquidityPositionList>(
-      `/sophon-labs/sophon/swap/liquidity_positions_owner/${accountAddress}`
+      `/sophon-labs/sophon/swap/liquidity_positions_owner/${accountAddress}`,
+      {
+        skip_zero_liquidity
+      }
     );
   }
 }

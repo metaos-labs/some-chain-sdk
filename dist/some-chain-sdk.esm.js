@@ -4125,14 +4125,19 @@ var MsgSubmitProposal$1 = /*#__PURE__*/function (_BaseMsg) {
 
   _proto.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgSubmitProposal$1.TYPE_URL,
+      typeUrl: MsgSubmitProposal$1.typeUrl,
       value: MsgSubmitProposal.fromPartial(this.protoMsg)
     };
   };
 
   return MsgSubmitProposal$1;
 }(BaseMsg);
-MsgSubmitProposal$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgSubmitProposal";
+
+(function (MsgSubmitProposal$1) {
+  MsgSubmitProposal$1.typeUrl = "/" + protobufPackage$1 + ".MsgSubmitProposal";
+  MsgSubmitProposal$1.Proto = MsgSubmitProposal;
+})(MsgSubmitProposal$1 || (MsgSubmitProposal$1 = {}));
+
 var MsgDeposit$1 = /*#__PURE__*/function (_BaseMsg2) {
   _inheritsLoose(MsgDeposit$1, _BaseMsg2);
 
@@ -4157,6 +4162,12 @@ var MsgDeposit$1 = /*#__PURE__*/function (_BaseMsg2) {
   return MsgDeposit$1;
 }(BaseMsg);
 MsgDeposit$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgDeposit";
+
+(function (MsgDeposit$1) {
+  MsgDeposit$1.typeUrl = "/" + protobufPackage$1 + ".MsgDeposit";
+  MsgDeposit$1.Proto = MsgDeposit;
+})(MsgDeposit$1 || (MsgDeposit$1 = {}));
+
 var MsgVote$1 = /*#__PURE__*/function (_BaseMsg3) {
   _inheritsLoose(MsgVote$1, _BaseMsg3);
 
@@ -4173,14 +4184,19 @@ var MsgVote$1 = /*#__PURE__*/function (_BaseMsg3) {
 
   _proto3.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgVote$1.TYPE_URL,
+      typeUrl: MsgVote$1.typeUrl,
       value: MsgVote.fromPartial(this.protoMsg)
     };
   };
 
   return MsgVote$1;
 }(BaseMsg);
-MsgVote$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgVote";
+
+(function (MsgVote$1) {
+  MsgVote$1.typeUrl = "/" + protobufPackage$1 + ".MsgVote";
+  MsgVote$1.Proto = MsgVote;
+})(MsgVote$1 || (MsgVote$1 = {}));
+
 var MsgVoteWeighted$1 = /*#__PURE__*/function (_BaseMsg4) {
   _inheritsLoose(MsgVoteWeighted$1, _BaseMsg4);
 
@@ -4197,14 +4213,18 @@ var MsgVoteWeighted$1 = /*#__PURE__*/function (_BaseMsg4) {
 
   _proto4.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgVoteWeighted$1.TYPE_URL,
+      typeUrl: MsgVoteWeighted$1.typeUrl,
       value: MsgVoteWeighted.fromPartial(this.protoMsg)
     };
   };
 
   return MsgVoteWeighted$1;
 }(BaseMsg);
-MsgVoteWeighted$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgVoteWeighted";
+
+(function (MsgVoteWeighted$1) {
+  MsgVoteWeighted$1.typeUrl = "/" + protobufPackage$1 + ".MsgVoteWeighted";
+  MsgVoteWeighted$1.Proto = MsgVoteWeighted;
+})(MsgVoteWeighted$1 || (MsgVoteWeighted$1 = {}));
 
 if (util.Long !== Long) {
   util.Long = Long;
@@ -6147,6 +6167,10 @@ var TxClient = /*#__PURE__*/function () {
     registryTypes.set(MsgIncreaseLiquidity$1.typeUrl, MsgIncreaseLiquidity$1.Proto);
     registryTypes.set(MsgSwapExactIn$1.typeUrl, MsgSwapExactIn$1.Proto);
     registryTypes.set(MsgSwapExactOut$1.typeUrl, MsgSwapExactOut$1.Proto);
+    registryTypes.set(MsgSubmitProposal$1.typeUrl, MsgSubmitProposal$1.Proto);
+    registryTypes.set(MsgDeposit$1.typeUrl, MsgDeposit$1.Proto);
+    registryTypes.set(MsgVote$1.typeUrl, MsgVote$1.Proto);
+    registryTypes.set(MsgVoteWeighted$1.typeUrl, MsgVoteWeighted$1.Proto);
     this.registry = new Registry(registryTypes);
   }
 

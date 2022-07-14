@@ -9,7 +9,6 @@ import {
 import {EncodeObject} from "@cosmjs/proto-signing";
 
 export class MsgSubmitProposal extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgSubmitProposal`;
   public protoMsg: MsgSubmitProposal_pb;
   constructor(msg: MsgSubmitProposal_pb) {
     super();
@@ -17,10 +16,16 @@ export class MsgSubmitProposal extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgSubmitProposal.TYPE_URL,
+      typeUrl: MsgSubmitProposal.typeUrl,
       value: MsgSubmitProposal_pb.fromPartial(this.protoMsg),
     };
   }
+}
+
+export namespace MsgSubmitProposal {
+  export const typeUrl: string = `/${protobufPackage}.MsgSubmitProposal`;
+  export const Proto = MsgSubmitProposal_pb;
+  export interface Proto extends MsgSubmitProposal_pb {}
 }
 
 export class MsgDeposit extends BaseMsg {
@@ -38,8 +43,13 @@ export class MsgDeposit extends BaseMsg {
   }
 }
 
+export namespace MsgDeposit {
+  export const typeUrl: string = `/${protobufPackage}.MsgDeposit`;
+  export const Proto = MsgDeposit_pb;
+  export interface Proto extends MsgDeposit_pb {}
+}
+
 export class MsgVote extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgVote`;
   public protoMsg: MsgVote_pb;
   constructor(msg: MsgVote_pb) {
     super();
@@ -47,14 +57,19 @@ export class MsgVote extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgVote.TYPE_URL,
+      typeUrl: MsgVote.typeUrl,
       value: MsgVote_pb.fromPartial(this.protoMsg),
     };
   }
 }
 
+export namespace MsgVote {
+  export const typeUrl: string = `/${protobufPackage}.MsgVote`;
+  export const Proto = MsgVote_pb;
+  export interface Proto extends MsgVote_pb {}
+}
+
 export class MsgVoteWeighted extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgVoteWeighted`;
   public protoMsg: MsgVoteWeighted_pb;
   constructor(msg: MsgVoteWeighted_pb) {
     super();
@@ -62,8 +77,14 @@ export class MsgVoteWeighted extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgVoteWeighted.TYPE_URL,
+      typeUrl: MsgVoteWeighted.typeUrl,
       value: MsgVoteWeighted_pb.fromPartial(this.protoMsg),
     };
   }
+}
+
+export namespace MsgVoteWeighted {
+  export const typeUrl: string = `/${protobufPackage}.MsgVoteWeighted`;
+  export const Proto = MsgVoteWeighted_pb;
+  export interface Proto extends MsgVoteWeighted_pb {}
 }

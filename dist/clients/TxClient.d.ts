@@ -1,4 +1,4 @@
-import { APIClient } from "../index";
+import { APIClient } from "./APIClient";
 import { OfflineSigner, Registry, TxBodyEncodeObject } from "@cosmjs/proto-signing";
 import { BaseMsg } from "../msgs";
 import { AuthInfo, SignDoc } from "../proto/cosmos/tx/v1beta1/tx";

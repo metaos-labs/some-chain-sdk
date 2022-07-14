@@ -4105,7 +4105,7 @@ function isSet$5(value) {
   return value !== null && value !== undefined;
 }
 
-var MsgSubmitProposal$1 = /*#__PURE__*/function (_BaseMsg) {
+exports.MsgSubmitProposal = /*#__PURE__*/function (_BaseMsg) {
   _inheritsLoose(MsgSubmitProposal$1, _BaseMsg);
 
   function MsgSubmitProposal$1(msg) {
@@ -4121,15 +4121,20 @@ var MsgSubmitProposal$1 = /*#__PURE__*/function (_BaseMsg) {
 
   _proto.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgSubmitProposal$1.TYPE_URL,
+      typeUrl: MsgSubmitProposal$1.typeUrl,
       value: MsgSubmitProposal.fromPartial(this.protoMsg)
     };
   };
 
   return MsgSubmitProposal$1;
 }(BaseMsg);
-MsgSubmitProposal$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgSubmitProposal";
-var MsgDeposit$1 = /*#__PURE__*/function (_BaseMsg2) {
+
+(function (MsgSubmitProposal$1) {
+  MsgSubmitProposal$1.typeUrl = "/" + protobufPackage$1 + ".MsgSubmitProposal";
+  MsgSubmitProposal$1.Proto = MsgSubmitProposal;
+})(exports.MsgSubmitProposal || (exports.MsgSubmitProposal = {}));
+
+exports.MsgDeposit = /*#__PURE__*/function (_BaseMsg2) {
   _inheritsLoose(MsgDeposit$1, _BaseMsg2);
 
   function MsgDeposit$1(msg) {
@@ -4152,8 +4157,14 @@ var MsgDeposit$1 = /*#__PURE__*/function (_BaseMsg2) {
 
   return MsgDeposit$1;
 }(BaseMsg);
-MsgDeposit$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgDeposit";
-var MsgVote$1 = /*#__PURE__*/function (_BaseMsg3) {
+exports.MsgDeposit.TYPE_URL = "/" + protobufPackage$1 + ".MsgDeposit";
+
+(function (MsgDeposit$1) {
+  MsgDeposit$1.typeUrl = "/" + protobufPackage$1 + ".MsgDeposit";
+  MsgDeposit$1.Proto = MsgDeposit;
+})(exports.MsgDeposit || (exports.MsgDeposit = {}));
+
+exports.MsgVote = /*#__PURE__*/function (_BaseMsg3) {
   _inheritsLoose(MsgVote$1, _BaseMsg3);
 
   function MsgVote$1(msg) {
@@ -4169,15 +4180,20 @@ var MsgVote$1 = /*#__PURE__*/function (_BaseMsg3) {
 
   _proto3.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgVote$1.TYPE_URL,
+      typeUrl: MsgVote$1.typeUrl,
       value: MsgVote.fromPartial(this.protoMsg)
     };
   };
 
   return MsgVote$1;
 }(BaseMsg);
-MsgVote$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgVote";
-var MsgVoteWeighted$1 = /*#__PURE__*/function (_BaseMsg4) {
+
+(function (MsgVote$1) {
+  MsgVote$1.typeUrl = "/" + protobufPackage$1 + ".MsgVote";
+  MsgVote$1.Proto = MsgVote;
+})(exports.MsgVote || (exports.MsgVote = {}));
+
+exports.MsgVoteWeighted = /*#__PURE__*/function (_BaseMsg4) {
   _inheritsLoose(MsgVoteWeighted$1, _BaseMsg4);
 
   function MsgVoteWeighted$1(msg) {
@@ -4193,14 +4209,18 @@ var MsgVoteWeighted$1 = /*#__PURE__*/function (_BaseMsg4) {
 
   _proto4.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgVoteWeighted$1.TYPE_URL,
+      typeUrl: MsgVoteWeighted$1.typeUrl,
       value: MsgVoteWeighted.fromPartial(this.protoMsg)
     };
   };
 
   return MsgVoteWeighted$1;
 }(BaseMsg);
-MsgVoteWeighted$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgVoteWeighted";
+
+(function (MsgVoteWeighted$1) {
+  MsgVoteWeighted$1.typeUrl = "/" + protobufPackage$1 + ".MsgVoteWeighted";
+  MsgVoteWeighted$1.Proto = MsgVoteWeighted;
+})(exports.MsgVoteWeighted || (exports.MsgVoteWeighted = {}));
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long;
@@ -6143,6 +6163,10 @@ var TxClient = /*#__PURE__*/function () {
     registryTypes.set(exports.MsgIncreaseLiquidity.typeUrl, exports.MsgIncreaseLiquidity.Proto);
     registryTypes.set(exports.MsgSwapExactIn.typeUrl, exports.MsgSwapExactIn.Proto);
     registryTypes.set(exports.MsgSwapExactOut.typeUrl, exports.MsgSwapExactOut.Proto);
+    registryTypes.set(exports.MsgSubmitProposal.typeUrl, exports.MsgSubmitProposal.Proto);
+    registryTypes.set(exports.MsgDeposit.typeUrl, exports.MsgDeposit.Proto);
+    registryTypes.set(exports.MsgVote.typeUrl, exports.MsgVote.Proto);
+    registryTypes.set(exports.MsgVoteWeighted.typeUrl, exports.MsgVoteWeighted.Proto);
     this.registry = new protoSigning.Registry(registryTypes);
   }
 
@@ -6380,12 +6404,8 @@ exports.MAX_PRECISION = MAX_PRECISION;
 exports.MsgBeginRedelegate = MsgBeginRedelegate$1;
 exports.MsgCreateValidator = MsgCreateValidator$1;
 exports.MsgDelegate = MsgDelegate$1;
-exports.MsgDeposit = MsgDeposit$1;
 exports.MsgEditValidator = MsgEditValidator$1;
-exports.MsgSubmitProposal = MsgSubmitProposal$1;
 exports.MsgUndelegate = MsgUndelegate$1;
-exports.MsgVote = MsgVote$1;
-exports.MsgVoteWeighted = MsgVoteWeighted$1;
 exports.NETWORK_MAP = NETWORK_MAP;
 exports.OEC = OEC;
 exports.OEC_CHAIN_ID = OEC_CHAIN_ID;

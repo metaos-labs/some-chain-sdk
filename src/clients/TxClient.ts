@@ -1,6 +1,6 @@
 import { Keccak } from "sha3";
 import invariant from "tiny-invariant";
-import { APIClient } from "../index";
+import {APIClient} from "./APIClient";
 import { Buffer } from "buffer";
 import { CONFIG_CHAIN_SOPHON } from "../constants";
 import {
@@ -21,6 +21,10 @@ import {
   MsgIncreaseLiquidity,
   MsgSwapExactIn,
   MsgSwapExactOut,
+  MsgSubmitProposal,
+  MsgDeposit,
+  MsgVote,
+  MsgVoteWeighted
 } from "../msgs";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { PubKey } from "../proto/cosmos/crypto/secp256k1/keys";
@@ -99,6 +103,10 @@ export class TxClient {
     registryTypes.set(MsgIncreaseLiquidity.typeUrl, MsgIncreaseLiquidity.Proto);
     registryTypes.set(MsgSwapExactIn.typeUrl, MsgSwapExactIn.Proto);
     registryTypes.set(MsgSwapExactOut.typeUrl, MsgSwapExactOut.Proto);
+    registryTypes.set(MsgSubmitProposal.typeUrl, MsgSubmitProposal.Proto);
+    registryTypes.set(MsgDeposit.typeUrl, MsgDeposit.Proto);
+    registryTypes.set(MsgVote.typeUrl, MsgVote.Proto);
+    registryTypes.set(MsgVoteWeighted.typeUrl, MsgVoteWeighted.Proto);
 
     this.registry = new Registry(registryTypes);
   }

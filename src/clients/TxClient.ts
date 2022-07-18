@@ -29,7 +29,8 @@ import {
   MsgEditValidator,
   MsgDelegate,
   MsgBeginRedelegate,
-  MsgUndelegate
+  MsgUndelegate,
+  MsgCollectRandSwapReward
 } from "../msgs";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { PubKey } from "../proto/cosmos/crypto/secp256k1/keys";
@@ -117,6 +118,7 @@ export class TxClient {
     registryTypes.set(MsgDelegate.typeUrl, MsgDelegate.Proto);
     registryTypes.set(MsgBeginRedelegate.typeUrl, MsgBeginRedelegate.Proto);
     registryTypes.set(MsgUndelegate.typeUrl, MsgUndelegate.Proto);
+    registryTypes.set(MsgCollectRandSwapReward.typeUrl, MsgCollectRandSwapReward.Proto);
 
     this.registry = new Registry(registryTypes);
   }

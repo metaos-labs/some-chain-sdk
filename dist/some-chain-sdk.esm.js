@@ -4156,14 +4156,13 @@ var MsgDeposit$1 = /*#__PURE__*/function (_BaseMsg2) {
 
   _proto2.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgDeposit$1.TYPE_URL,
+      typeUrl: MsgDeposit$1.typeUrl,
       value: MsgDeposit.fromPartial(this.protoMsg)
     };
   };
 
   return MsgDeposit$1;
 }(BaseMsg);
-MsgDeposit$1.TYPE_URL = "/" + protobufPackage$1 + ".MsgDeposit";
 
 (function (MsgDeposit$1) {
   MsgDeposit$1.typeUrl = "/" + protobufPackage$1 + ".MsgDeposit";
@@ -5016,14 +5015,19 @@ var MsgCreateValidator$1 = /*#__PURE__*/function (_BaseMsg) {
 
   _proto.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgCreateValidator$1.TYPE_URL,
+      typeUrl: MsgCreateValidator$1.typeUrl,
       value: MsgCreateValidator.fromPartial(this.protoMsg)
     };
   };
 
   return MsgCreateValidator$1;
 }(BaseMsg);
-MsgCreateValidator$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgCreateValidator";
+
+(function (MsgCreateValidator$1) {
+  MsgCreateValidator$1.typeUrl = "/" + protobufPackage$2 + ".MsgCreateValidator";
+  MsgCreateValidator$1.Proto = MsgCreateValidator;
+})(MsgCreateValidator$1 || (MsgCreateValidator$1 = {}));
+
 var MsgEditValidator$1 = /*#__PURE__*/function (_BaseMsg2) {
   _inheritsLoose(MsgEditValidator$1, _BaseMsg2);
 
@@ -5040,14 +5044,19 @@ var MsgEditValidator$1 = /*#__PURE__*/function (_BaseMsg2) {
 
   _proto2.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgEditValidator$1.TYPE_URL,
+      typeUrl: MsgEditValidator$1.typeUrl,
       value: MsgEditValidator.fromPartial(this.protoMsg)
     };
   };
 
   return MsgEditValidator$1;
 }(BaseMsg);
-MsgEditValidator$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgEditValidator";
+
+(function (MsgEditValidator$1) {
+  MsgEditValidator$1.typeUrl = "/" + protobufPackage$2 + ".MsgEditValidator";
+  MsgEditValidator$1.Proto = MsgEditValidator;
+})(MsgEditValidator$1 || (MsgEditValidator$1 = {}));
+
 var MsgDelegate$1 = /*#__PURE__*/function (_BaseMsg3) {
   _inheritsLoose(MsgDelegate$1, _BaseMsg3);
 
@@ -5064,14 +5073,19 @@ var MsgDelegate$1 = /*#__PURE__*/function (_BaseMsg3) {
 
   _proto3.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgDelegate$1.TYPE_URL,
+      typeUrl: MsgDelegate$1.typeUrl,
       value: MsgDelegate.fromPartial(this.protoMsg)
     };
   };
 
   return MsgDelegate$1;
 }(BaseMsg);
-MsgDelegate$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgDelegate";
+
+(function (MsgDelegate$1) {
+  MsgDelegate$1.typeUrl = "/" + protobufPackage$2 + ".MsgDelegate";
+  MsgDelegate$1.Proto = MsgDelegate;
+})(MsgDelegate$1 || (MsgDelegate$1 = {}));
+
 var MsgBeginRedelegate$1 = /*#__PURE__*/function (_BaseMsg4) {
   _inheritsLoose(MsgBeginRedelegate$1, _BaseMsg4);
 
@@ -5088,14 +5102,19 @@ var MsgBeginRedelegate$1 = /*#__PURE__*/function (_BaseMsg4) {
 
   _proto4.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgBeginRedelegate$1.TYPE_URL,
+      typeUrl: MsgBeginRedelegate$1.typeUrl,
       value: MsgBeginRedelegate.fromPartial(this.protoMsg)
     };
   };
 
   return MsgBeginRedelegate$1;
 }(BaseMsg);
-MsgBeginRedelegate$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgBeginRedelegate";
+
+(function (MsgBeginRedelegate$1) {
+  MsgBeginRedelegate$1.typeUrl = "/" + protobufPackage$2 + ".MsgBeginRedelegate";
+  MsgBeginRedelegate$1.Proto = MsgBeginRedelegate;
+})(MsgBeginRedelegate$1 || (MsgBeginRedelegate$1 = {}));
+
 var MsgUndelegate$1 = /*#__PURE__*/function (_BaseMsg5) {
   _inheritsLoose(MsgUndelegate$1, _BaseMsg5);
 
@@ -5112,14 +5131,18 @@ var MsgUndelegate$1 = /*#__PURE__*/function (_BaseMsg5) {
 
   _proto5.generateMessage = function generateMessage() {
     return {
-      typeUrl: MsgUndelegate$1.TYPE_URL,
+      typeUrl: MsgUndelegate$1.typeUrl,
       value: MsgUndelegate.fromPartial(this.protoMsg)
     };
   };
 
   return MsgUndelegate$1;
 }(BaseMsg);
-MsgUndelegate$1.TYPE_URL = "/" + protobufPackage$2 + ".MsgUndelegate";
+
+(function (MsgUndelegate$1) {
+  MsgUndelegate$1.typeUrl = "/" + protobufPackage$2 + ".MsgUndelegate";
+  MsgUndelegate$1.Proto = MsgUndelegate;
+})(MsgUndelegate$1 || (MsgUndelegate$1 = {}));
 
 /* eslint-disable */
 
@@ -6173,6 +6196,11 @@ var TxClient = /*#__PURE__*/function () {
     registryTypes.set(MsgDeposit$1.typeUrl, MsgDeposit$1.Proto);
     registryTypes.set(MsgVote$1.typeUrl, MsgVote$1.Proto);
     registryTypes.set(MsgVoteWeighted$1.typeUrl, MsgVoteWeighted$1.Proto);
+    registryTypes.set(MsgCreateValidator$1.typeUrl, MsgCreateValidator$1.Proto);
+    registryTypes.set(MsgEditValidator$1.typeUrl, MsgEditValidator$1.Proto);
+    registryTypes.set(MsgDelegate$1.typeUrl, MsgDelegate$1.Proto);
+    registryTypes.set(MsgBeginRedelegate$1.typeUrl, MsgBeginRedelegate$1.Proto);
+    registryTypes.set(MsgUndelegate$1.typeUrl, MsgUndelegate$1.Proto);
     this.registry = new Registry(registryTypes);
   }
 

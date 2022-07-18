@@ -10,7 +10,6 @@ import {
 import {EncodeObject} from "@cosmjs/proto-signing";
 
 export class MsgCreateValidator extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgCreateValidator`;
   public protoMsg: MsgCreateValidator_pb;
   constructor(msg: MsgCreateValidator_pb) {
     super();
@@ -18,14 +17,19 @@ export class MsgCreateValidator extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgCreateValidator.TYPE_URL,
+      typeUrl: MsgCreateValidator.typeUrl,
       value: MsgCreateValidator_pb.fromPartial(this.protoMsg),
     };
   }
 }
 
+export namespace MsgCreateValidator {
+  export const typeUrl: string = `/${protobufPackage}.MsgCreateValidator`;
+  export const Proto = MsgCreateValidator_pb;
+  export interface Proto extends MsgCreateValidator_pb {}
+}
+
 export class MsgEditValidator extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgEditValidator`;
   public protoMsg: MsgEditValidator_pb;
   constructor(msg: MsgEditValidator_pb) {
     super();
@@ -33,14 +37,19 @@ export class MsgEditValidator extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgEditValidator.TYPE_URL,
+      typeUrl: MsgEditValidator.typeUrl,
       value: MsgEditValidator_pb.fromPartial(this.protoMsg),
     };
   }
 }
 
+export namespace MsgEditValidator {
+  export const typeUrl: string = `/${protobufPackage}.MsgEditValidator`;
+  export const Proto = MsgEditValidator_pb;
+  export interface Proto extends MsgEditValidator_pb {}
+}
+
 export class MsgDelegate extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgDelegate`;
   public protoMsg: MsgDelegate_pb;
   constructor(msg: MsgDelegate_pb) {
     super();
@@ -48,14 +57,19 @@ export class MsgDelegate extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgDelegate.TYPE_URL,
+      typeUrl: MsgDelegate.typeUrl,
       value: MsgDelegate_pb.fromPartial(this.protoMsg),
     };
   }
 }
 
+export namespace MsgDelegate {
+  export const typeUrl: string = `/${protobufPackage}.MsgDelegate`;
+  export const Proto = MsgDelegate_pb;
+  export interface Proto extends MsgDelegate_pb {}
+}
+
 export class MsgBeginRedelegate extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgBeginRedelegate`;
   public protoMsg: MsgBeginRedelegate_pb;
   constructor(msg: MsgBeginRedelegate_pb) {
     super();
@@ -63,14 +77,19 @@ export class MsgBeginRedelegate extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgBeginRedelegate.TYPE_URL,
+      typeUrl: MsgBeginRedelegate.typeUrl,
       value: MsgBeginRedelegate_pb.fromPartial(this.protoMsg),
     };
   }
 }
 
+export namespace MsgBeginRedelegate {
+  export const typeUrl: string = `/${protobufPackage}.MsgBeginRedelegate`;
+  export const Proto = MsgBeginRedelegate_pb;
+  export interface Proto extends MsgBeginRedelegate_pb {}
+}
+
 export class MsgUndelegate extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgUndelegate`;
   public protoMsg: MsgUndelegate_pb;
   constructor(msg: MsgUndelegate_pb) {
     super();
@@ -78,8 +97,14 @@ export class MsgUndelegate extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgUndelegate.TYPE_URL,
+      typeUrl: MsgUndelegate.typeUrl,
       value: MsgUndelegate_pb.fromPartial(this.protoMsg),
     };
   }
+}
+
+export namespace MsgUndelegate {
+  export const typeUrl: string = `/${protobufPackage}.MsgUndelegate`;
+  export const Proto = MsgUndelegate_pb;
+  export interface Proto extends MsgUndelegate_pb {}
 }

@@ -48,7 +48,6 @@ export declare namespace MsgSubmitProposal {
     }
 }
 export declare class MsgDeposit extends BaseMsg {
-    static TYPE_URL: string;
     protoMsg: MsgDeposit_pb;
     constructor(msg: MsgDeposit_pb);
     generateMessage(): EncodeObject;

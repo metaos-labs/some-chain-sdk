@@ -29,7 +29,6 @@ export namespace MsgSubmitProposal {
 }
 
 export class MsgDeposit extends BaseMsg {
-  public static TYPE_URL = `/${protobufPackage}.MsgDeposit`;
   public protoMsg: MsgDeposit_pb;
   constructor(msg: MsgDeposit_pb) {
     super();
@@ -37,7 +36,7 @@ export class MsgDeposit extends BaseMsg {
   }
   generateMessage(): EncodeObject {
     return {
-      typeUrl: MsgDeposit.TYPE_URL,
+      typeUrl: MsgDeposit.typeUrl,
       value: MsgDeposit_pb.fromPartial(this.protoMsg),
     };
   }

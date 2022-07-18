@@ -1930,12 +1930,14 @@ function APIClient(URL, chainId) {
   this.authAPI = void 0;
   this.swapAPI = void 0;
   this.txAPI = void 0;
+  this.tokenAPI = void 0;
   this.nodeUrl = void 0;
   this.nodeUrl = URL;
   this.apiRequester = new APIRequester(URL); // instantiate APIs
 
   this.bankAPI = new BankAPI(this.apiRequester);
   this.authAPI = new AuthAPI(this.apiRequester);
+  this.tokenAPI = new TokenAPI(this.apiRequester);
   this.swapAPI = new SwapAPI(this.apiRequester);
   this.txAPI = new TxAPI(this.apiRequester);
 };

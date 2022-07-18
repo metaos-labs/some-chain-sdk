@@ -830,6 +830,66 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
   return SwapAPI;
 }(BaseAPI);
 
+var TokenAPI = /*#__PURE__*/function (_BaseAPI) {
+  _inheritsLoose(TokenAPI, _BaseAPI);
+
+  function TokenAPI() {
+    return _BaseAPI.apply(this, arguments) || this;
+  }
+
+  var _proto = TokenAPI.prototype;
+
+  _proto.apiTokenMetadatasByDenom = /*#__PURE__*/function () {
+    var _apiTokenMetadatasByDenom = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(denom) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/token/metadatas/by_denom", {
+                denom: denom
+              }));
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function apiTokenMetadatasByDenom(_x) {
+      return _apiTokenMetadatasByDenom.apply(this, arguments);
+    }
+
+    return apiTokenMetadatasByDenom;
+  }();
+
+  _proto.apiTokenMetadatas = /*#__PURE__*/function () {
+    var _apiTokenMetadatas = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              return _context2.abrupt("return", this.request.get("/sophon-labs/sophon/token/metadatas"));
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    function apiTokenMetadatas() {
+      return _apiTokenMetadatas.apply(this, arguments);
+    }
+
+    return apiTokenMetadatas;
+  }();
+
+  return TokenAPI;
+}(BaseAPI);
+
 var TxAPI = /*#__PURE__*/function (_BaseAPI) {
   _inheritsLoose(TxAPI, _BaseAPI);
 
@@ -6457,6 +6517,7 @@ exports.SUPPORTED_CHAIN_IDS = SUPPORTED_CHAIN_IDS;
 exports.SwapAPI = SwapAPI;
 exports.TICK_SPACINGS = TICK_SPACINGS;
 exports.TickMath = TickMath;
+exports.TokenAPI = TokenAPI;
 exports.TransactionLooper = TransactionLooper;
 exports.TxAPI = TxAPI;
 exports.TxClient = TxClient;

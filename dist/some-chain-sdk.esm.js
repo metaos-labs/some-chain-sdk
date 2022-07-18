@@ -824,6 +824,66 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
   return SwapAPI;
 }(BaseAPI);
 
+var TokenAPI = /*#__PURE__*/function (_BaseAPI) {
+  _inheritsLoose(TokenAPI, _BaseAPI);
+
+  function TokenAPI() {
+    return _BaseAPI.apply(this, arguments) || this;
+  }
+
+  var _proto = TokenAPI.prototype;
+
+  _proto.apiTokenMetadatasByDenom = /*#__PURE__*/function () {
+    var _apiTokenMetadatasByDenom = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(denom) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/token/metadatas/by_denom", {
+                denom: denom
+              }));
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function apiTokenMetadatasByDenom(_x) {
+      return _apiTokenMetadatasByDenom.apply(this, arguments);
+    }
+
+    return apiTokenMetadatasByDenom;
+  }();
+
+  _proto.apiTokenMetadatas = /*#__PURE__*/function () {
+    var _apiTokenMetadatas = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              return _context2.abrupt("return", this.request.get("/sophon-labs/sophon/token/metadatas"));
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    function apiTokenMetadatas() {
+      return _apiTokenMetadatas.apply(this, arguments);
+    }
+
+    return apiTokenMetadatas;
+  }();
+
+  return TokenAPI;
+}(BaseAPI);
+
 var TxAPI = /*#__PURE__*/function (_BaseAPI) {
   _inheritsLoose(TxAPI, _BaseAPI);
 
@@ -6382,5 +6442,5 @@ function createSignerInfo(publicKey, sequence, mode) {
   return signerInfo;
 }
 
-export { APIClient, APIRequester, AVALANCHE, AVALANCHE_CHAIN_ID, AVALANCHE_CHAIN_NAME, AVALANCHE_NETWORK_ID, AVALANCHE_SYMBOL, AuthAPI, BASE_UNIT_TICK, BNB_SYMBOL, BSC, BSC_CHAIN_ID, BSC_CHAIN_ID_TEST, BSC_CHAIN_NAME, BSC_NETWORK_ID, BSC_NETWORK_TEST_ID, BankAPI, BaseAPI, BaseMsg, Bound, CHAIN_ETH, CHAIN_SOP, CONFIG_CHAIN_SOPHON, DEFAULT_PRECISION, DEFAULT_USER_PRECISION, ETH, ETH_CHAIN_ID, ETH_CHAIN_NAME, ETH_NETWORK_ID, ETH_SYMBOL, ETH_TEST_NETWORK_ID, FANTOM, FANTOM_CHAIN_ID, FANTOM_CHAIN_NAME, FANTOM_NETWORK_ID, FANTOM_SYMBOL, FEE_AMOUNT_DETAIL, Fee_Amount, HECO, HECO_CHAIN_ID, HECO_CHAIN_NAME, HECO_NETWORK_ID, HOO, HOO_CHAIN_ID, HOO_CHAIN_NAME, HOO_NETWORK_ID, HOO_SYMBOL, HT_SYMBOL, KCC, KCC_CHAIN_ID, KCC_CHAIN_NAME, KCC_NETWORK_ID, KCC_SYMBOL, LiquidityMath, MAX_PRECISION, MsgBeginRedelegate$1 as MsgBeginRedelegate, MsgCollect$1 as MsgCollect, MsgCollectReward$1 as MsgCollectReward, MsgCreatePool$1 as MsgCreatePool, MsgCreatePosition$1 as MsgCreatePosition, MsgCreateValidator$1 as MsgCreateValidator, MsgDecreaseLiquidity$1 as MsgDecreaseLiquidity, MsgDelegate$1 as MsgDelegate, MsgDeposit$1 as MsgDeposit, MsgEditValidator$1 as MsgEditValidator, MsgIncreaseLiquidity$1 as MsgIncreaseLiquidity, MsgSubmitProposal$1 as MsgSubmitProposal, MsgSwapExactIn$1 as MsgSwapExactIn, MsgSwapExactOut$1 as MsgSwapExactOut, MsgUndelegate$1 as MsgUndelegate, MsgVote$1 as MsgVote, MsgVoteWeighted$1 as MsgVoteWeighted, NETWORK_MAP, OEC, OEC_CHAIN_ID, OEC_CHAIN_NAME, OEC_NETWORK_ID, OKT_SYMBOL, ONE_DAY_TO_SECONDS, ONE_YEAR_TO_DAYS, POLYGON, POLYGON_CHAIN_ID, POLYGON_CHAIN_NAME, POLYGON_NETWORK_ID, POLYGON_SYMBOL, REG_DECIMAL, REG_DECIMAL_SIMPLE, REG_NUMBER, SIGN_DIRECT, SOPHON, SOPHON_SYMBOL, SOPHON_TEST_CHAIN_ID, SOPHON_TEST_CHAIN_NAME, SOPHON_TEST_NETWORK_ID, SUPPORTED_CHAIN_IDS, SwapAPI, Swap_Direction, TICK_SPACINGS, TickMath, Tip_Level, TransactionLooper, Transaction_Status, TxAPI, TxClient, XDAI, XDAI_CHAIN_ID, XDAI_CHAIN_NAME, XDAI_NETWORK_ID, XDAI_SYMBOL, ZERO, arrayToMap, checkInputNumber, createSigDoc, createTxBodyEncodeObject, decimalNumber, deepCopy, div, encrypt, findTokenByDenom, findTokenBySymbol, formatDiffTime, formatMoment, formatNumber, formatTime, formatUnixMoment, getPercentByFeeAmount, getPoolAddress, isEmptyAmount, isEqualTo, isGreaterThan, isLessThan, isNumeric, isPositive, longToNumber, minus, multipliedBy, objectToMap, percentage, plus, pow, pow18, powM18, shift, sortsBefore, to32, toAmountCeil, toAmountFee, toAmountFloor, toAmountString, toDecimalPlaces, toExactAmount, toPercent, toUsd };
+export { APIClient, APIRequester, AVALANCHE, AVALANCHE_CHAIN_ID, AVALANCHE_CHAIN_NAME, AVALANCHE_NETWORK_ID, AVALANCHE_SYMBOL, AuthAPI, BASE_UNIT_TICK, BNB_SYMBOL, BSC, BSC_CHAIN_ID, BSC_CHAIN_ID_TEST, BSC_CHAIN_NAME, BSC_NETWORK_ID, BSC_NETWORK_TEST_ID, BankAPI, BaseAPI, BaseMsg, Bound, CHAIN_ETH, CHAIN_SOP, CONFIG_CHAIN_SOPHON, DEFAULT_PRECISION, DEFAULT_USER_PRECISION, ETH, ETH_CHAIN_ID, ETH_CHAIN_NAME, ETH_NETWORK_ID, ETH_SYMBOL, ETH_TEST_NETWORK_ID, FANTOM, FANTOM_CHAIN_ID, FANTOM_CHAIN_NAME, FANTOM_NETWORK_ID, FANTOM_SYMBOL, FEE_AMOUNT_DETAIL, Fee_Amount, HECO, HECO_CHAIN_ID, HECO_CHAIN_NAME, HECO_NETWORK_ID, HOO, HOO_CHAIN_ID, HOO_CHAIN_NAME, HOO_NETWORK_ID, HOO_SYMBOL, HT_SYMBOL, KCC, KCC_CHAIN_ID, KCC_CHAIN_NAME, KCC_NETWORK_ID, KCC_SYMBOL, LiquidityMath, MAX_PRECISION, MsgBeginRedelegate$1 as MsgBeginRedelegate, MsgCollect$1 as MsgCollect, MsgCollectReward$1 as MsgCollectReward, MsgCreatePool$1 as MsgCreatePool, MsgCreatePosition$1 as MsgCreatePosition, MsgCreateValidator$1 as MsgCreateValidator, MsgDecreaseLiquidity$1 as MsgDecreaseLiquidity, MsgDelegate$1 as MsgDelegate, MsgDeposit$1 as MsgDeposit, MsgEditValidator$1 as MsgEditValidator, MsgIncreaseLiquidity$1 as MsgIncreaseLiquidity, MsgSubmitProposal$1 as MsgSubmitProposal, MsgSwapExactIn$1 as MsgSwapExactIn, MsgSwapExactOut$1 as MsgSwapExactOut, MsgUndelegate$1 as MsgUndelegate, MsgVote$1 as MsgVote, MsgVoteWeighted$1 as MsgVoteWeighted, NETWORK_MAP, OEC, OEC_CHAIN_ID, OEC_CHAIN_NAME, OEC_NETWORK_ID, OKT_SYMBOL, ONE_DAY_TO_SECONDS, ONE_YEAR_TO_DAYS, POLYGON, POLYGON_CHAIN_ID, POLYGON_CHAIN_NAME, POLYGON_NETWORK_ID, POLYGON_SYMBOL, REG_DECIMAL, REG_DECIMAL_SIMPLE, REG_NUMBER, SIGN_DIRECT, SOPHON, SOPHON_SYMBOL, SOPHON_TEST_CHAIN_ID, SOPHON_TEST_CHAIN_NAME, SOPHON_TEST_NETWORK_ID, SUPPORTED_CHAIN_IDS, SwapAPI, Swap_Direction, TICK_SPACINGS, TickMath, Tip_Level, TokenAPI, TransactionLooper, Transaction_Status, TxAPI, TxClient, XDAI, XDAI_CHAIN_ID, XDAI_CHAIN_NAME, XDAI_NETWORK_ID, XDAI_SYMBOL, ZERO, arrayToMap, checkInputNumber, createSigDoc, createTxBodyEncodeObject, decimalNumber, deepCopy, div, encrypt, findTokenByDenom, findTokenBySymbol, formatDiffTime, formatMoment, formatNumber, formatTime, formatUnixMoment, getPercentByFeeAmount, getPoolAddress, isEmptyAmount, isEqualTo, isGreaterThan, isLessThan, isNumeric, isPositive, longToNumber, minus, multipliedBy, objectToMap, percentage, plus, pow, pow18, powM18, shift, sortsBefore, to32, toAmountCeil, toAmountFee, toAmountFloor, toAmountString, toDecimalPlaces, toExactAmount, toPercent, toUsd };
 //# sourceMappingURL=some-chain-sdk.esm.js.map

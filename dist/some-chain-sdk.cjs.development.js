@@ -548,7 +548,7 @@ var BankAPI = /*#__PURE__*/function (_BaseAPI) {
           switch (_context.prev = _context.next) {
             case 0:
               return _context.abrupt("return", this.request.get("/cosmos/bank/v1beta1/balances/" + accountAddress + "/by_denom", {
-                denom: token.denom
+                denom: token.base
               }));
 
             case 1:
@@ -1030,81 +1030,6 @@ function encrypt(value, prefix, suffix) {
   }
 }
 
-var DEFAULT_TOKEN_LIST = [{
-  denom: "usop",
-  creator: "",
-  name: "Sophon",
-  symbol: "SOP",
-  totalSupply: "2000000000000000000000000000",
-  decimal: 18,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png"
-}, {
-  denom: "useth",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "Ethereum",
-  symbol: "ETH",
-  totalSupply: "2000000000000000000000000",
-  decimal: 18,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
-}, {
-  denom: "ustake",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "STAKE",
-  symbol: "STAKE",
-  totalSupply: "200000000000000000000000000",
-  decimal: 8,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/5601.png"
-}, {
-  denom: "ususdc",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "USDC",
-  symbol: "USDC",
-  totalSupply: "200000000000000000000000000",
-  decimal: 6,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
-}, {
-  denom: "token/token1/3",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "token1",
-  symbol: "token1",
-  totalSupply: "200000000000000000000000000",
-  decimal: 18,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/4195.png"
-}, {
-  denom: "token/token2/4",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "token2",
-  symbol: "token2",
-  totalSupply: "200000000000000000000000000",
-  decimal: 8,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/2280.png"
-}];
-
-function findTokenByDenom(tokenDenom) {
-  var tokens = DEFAULT_TOKEN_LIST;
-  var result = tokens.find(function (item) {
-    return item.denom === tokenDenom;
-  });
-
-  if (result) {
-    return result;
-  } else {
-    return DEFAULT_TOKEN_LIST[0];
-  }
-}
-function findTokenBySymbol(symbol) {
-  var tokens = DEFAULT_TOKEN_LIST;
-  var result = tokens.find(function (item) {
-    return item.symbol.toUpperCase() === symbol.toUpperCase();
-  });
-
-  if (result) {
-    return result;
-  } else {
-    return DEFAULT_TOKEN_LIST[0];
-  }
-}
-
 var ONE_DAY_TO_SECONDS = 86400;
 var ONE_YEAR_TO_DAYS = 365;
 
@@ -1546,7 +1471,7 @@ function arrayToMap(array, property) {
 }
 
 function sortsBefore(baseToken, quoteToken) {
-  return baseToken.denom.toLowerCase() < quoteToken.denom.toLowerCase();
+  return baseToken.base.toLowerCase() < quoteToken.base.toLowerCase();
 }
 
 //   return new Decimal(percent).div(100).mul(balance).toFixed(2);
@@ -1730,7 +1655,7 @@ var LiquidityMath = /*#__PURE__*/function () {
       var _value2 = this._getDiverForDeltaX(leftRangeValue, rightRangeValue);
 
       return {
-        amount0: toDecimalPlaces(_value1.mul(_value2), token0.decimal),
+        amount0: toDecimalPlaces(_value1.mul(_value2), token0.display_exponent),
         amount1: "0"
       };
     } else if (pc.greaterThan(rightRangeValue) === true) {
@@ -1738,7 +1663,7 @@ var LiquidityMath = /*#__PURE__*/function () {
 
       return {
         amount0: "0",
-        amount1: toDecimalPlaces(_value1.mul(_value), token1.decimal)
+        amount1: toDecimalPlaces(_value1.mul(_value), token1.display_exponent)
       };
     }
 
@@ -1747,8 +1672,8 @@ var LiquidityMath = /*#__PURE__*/function () {
     var deltaYDiver = this._getDiverForDeltaY(leftRangeValue, priceValue);
 
     return {
-      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.decimal),
-      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.decimal)
+      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.display_exponent),
+      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.display_exponent)
     };
   };
 
@@ -7142,8 +7067,6 @@ exports.decimalNumber = decimalNumber;
 exports.deepCopy = deepCopy;
 exports.div = div;
 exports.encrypt = encrypt;
-exports.findTokenByDenom = findTokenByDenom;
-exports.findTokenBySymbol = findTokenBySymbol;
 exports.formatDiffTime = formatDiffTime;
 exports.formatMoment = formatMoment;
 exports.formatNumber = formatNumber;

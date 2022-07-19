@@ -1,7 +1,6 @@
 export * from "./crypto";
 export * from "./deepCopy";
 export * from "./encrypt";
-export * from "./findToken";
 export * from "./formatCurrencyAmount";
 export * from "./formatMoment";
 export * from "./formatPrice";

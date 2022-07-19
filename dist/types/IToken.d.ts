@@ -1,7 +1,7 @@
 import { ILiquidityPosition, IPool, IPoolPrice, IV3Reward } from "./ICommon";
 export interface DenomUnit {
     denom: string;
-    exponent: number;
+    exponent?: number;
 }
 export interface IToken {
     description: string;

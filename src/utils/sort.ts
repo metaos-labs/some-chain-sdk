@@ -1,5 +1,5 @@
 import { IToken } from "../types";
 
 export function sortsBefore(baseToken: IToken, quoteToken: IToken) {
-  return baseToken.denom.toLowerCase() < quoteToken.denom.toLowerCase();
+  return baseToken.base.toLowerCase() < quoteToken.base.toLowerCase();
 }

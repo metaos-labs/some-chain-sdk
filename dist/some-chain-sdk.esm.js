@@ -542,7 +542,7 @@ var BankAPI = /*#__PURE__*/function (_BaseAPI) {
           switch (_context.prev = _context.next) {
             case 0:
               return _context.abrupt("return", this.request.get("/cosmos/bank/v1beta1/balances/" + accountAddress + "/by_denom", {
-                denom: token.denom
+                denom: token.base
               }));
 
             case 1:
@@ -1024,81 +1024,6 @@ function encrypt(value, prefix, suffix) {
   }
 }
 
-var DEFAULT_TOKEN_LIST = [{
-  denom: "usop",
-  creator: "",
-  name: "Sophon",
-  symbol: "SOP",
-  totalSupply: "2000000000000000000000000000",
-  decimal: 18,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png"
-}, {
-  denom: "useth",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "Ethereum",
-  symbol: "ETH",
-  totalSupply: "2000000000000000000000000",
-  decimal: 18,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
-}, {
-  denom: "ustake",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "STAKE",
-  symbol: "STAKE",
-  totalSupply: "200000000000000000000000000",
-  decimal: 8,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/5601.png"
-}, {
-  denom: "ususdc",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "USDC",
-  symbol: "USDC",
-  totalSupply: "200000000000000000000000000",
-  decimal: 6,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
-}, {
-  denom: "token/token1/3",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "token1",
-  symbol: "token1",
-  totalSupply: "200000000000000000000000000",
-  decimal: 18,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/4195.png"
-}, {
-  denom: "token/token2/4",
-  creator: "sop17gxqqequrm2rmehknpataddssugl4ef6auunuc",
-  name: "token2",
-  symbol: "token2",
-  totalSupply: "200000000000000000000000000",
-  decimal: 8,
-  logoURI: "https://s2.coinmarketcap.com/static/img/coins/64x64/2280.png"
-}];
-
-function findTokenByDenom(tokenDenom) {
-  var tokens = DEFAULT_TOKEN_LIST;
-  var result = tokens.find(function (item) {
-    return item.denom === tokenDenom;
-  });
-
-  if (result) {
-    return result;
-  } else {
-    return DEFAULT_TOKEN_LIST[0];
-  }
-}
-function findTokenBySymbol(symbol) {
-  var tokens = DEFAULT_TOKEN_LIST;
-  var result = tokens.find(function (item) {
-    return item.symbol.toUpperCase() === symbol.toUpperCase();
-  });
-
-  if (result) {
-    return result;
-  } else {
-    return DEFAULT_TOKEN_LIST[0];
-  }
-}
-
 var ONE_DAY_TO_SECONDS = 86400;
 var ONE_YEAR_TO_DAYS = 365;
 
@@ -1542,7 +1467,7 @@ function arrayToMap(array, property) {
 }
 
 function sortsBefore(baseToken, quoteToken) {
-  return baseToken.denom.toLowerCase() < quoteToken.denom.toLowerCase();
+  return baseToken.base.toLowerCase() < quoteToken.base.toLowerCase();
 }
 
 //   return new Decimal(percent).div(100).mul(balance).toFixed(2);
@@ -1734,7 +1659,7 @@ var LiquidityMath = /*#__PURE__*/function () {
       var _value2 = this._getDiverForDeltaX(leftRangeValue, rightRangeValue);
 
       return {
-        amount0: toDecimalPlaces(_value1.mul(_value2), token0.decimal),
+        amount0: toDecimalPlaces(_value1.mul(_value2), token0.display_exponent),
         amount1: "0"
       };
     } else if (pc.greaterThan(rightRangeValue) === true) {
@@ -1742,7 +1667,7 @@ var LiquidityMath = /*#__PURE__*/function () {
 
       return {
         amount0: "0",
-        amount1: toDecimalPlaces(_value1.mul(_value), token1.decimal)
+        amount1: toDecimalPlaces(_value1.mul(_value), token1.display_exponent)
       };
     }
 
@@ -1751,8 +1676,8 @@ var LiquidityMath = /*#__PURE__*/function () {
     var deltaYDiver = this._getDiverForDeltaY(leftRangeValue, priceValue);
 
     return {
-      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.decimal),
-      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.decimal)
+      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.display_exponent),
+      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.display_exponent)
     };
   };
 
@@ -7049,5 +6974,5 @@ function createSignerInfo(publicKey, sequence, mode) {
   return signerInfo;
 }
 
-export { APIClient, APIRequester, AVALANCHE, AVALANCHE_CHAIN_ID, AVALANCHE_CHAIN_NAME, AVALANCHE_NETWORK_ID, AVALANCHE_SYMBOL, AuthAPI, BASE_UNIT_TICK, BNB_SYMBOL, BSC, BSC_CHAIN_ID, BSC_CHAIN_ID_TEST, BSC_CHAIN_NAME, BSC_NETWORK_ID, BSC_NETWORK_TEST_ID, BankAPI, BaseAPI, BaseMsg, Bound, CHAIN_ETH, CHAIN_SOP, CONFIG_CHAIN_SOPHON, DEFAULT_PRECISION, DEFAULT_USER_PRECISION, ETH, ETH_CHAIN_ID, ETH_CHAIN_NAME, ETH_NETWORK_ID, ETH_SYMBOL, ETH_TEST_NETWORK_ID, FANTOM, FANTOM_CHAIN_ID, FANTOM_CHAIN_NAME, FANTOM_NETWORK_ID, FANTOM_SYMBOL, FEE_AMOUNT_DETAIL, Fee_Amount, HECO, HECO_CHAIN_ID, HECO_CHAIN_NAME, HECO_NETWORK_ID, HOO, HOO_CHAIN_ID, HOO_CHAIN_NAME, HOO_NETWORK_ID, HOO_SYMBOL, HT_SYMBOL, KCC, KCC_CHAIN_ID, KCC_CHAIN_NAME, KCC_NETWORK_ID, KCC_SYMBOL, LiquidityMath, MAX_PRECISION, MsgBeginRedelegate$1 as MsgBeginRedelegate, MsgCollect$1 as MsgCollect, MsgCollectRandSwapReward$1 as MsgCollectRandSwapReward, MsgCollectReward$1 as MsgCollectReward, MsgCreatePool$1 as MsgCreatePool, MsgCreatePosition$1 as MsgCreatePosition, MsgCreateRandSwapRewardConfig$1 as MsgCreateRandSwapRewardConfig, MsgCreateValidator$1 as MsgCreateValidator, MsgDecreaseLiquidity$1 as MsgDecreaseLiquidity, MsgDelegate$1 as MsgDelegate, MsgDeposit$1 as MsgDeposit, MsgEditValidator$1 as MsgEditValidator, MsgIncreaseLiquidity$1 as MsgIncreaseLiquidity, MsgSubmitProposal$1 as MsgSubmitProposal, MsgSwapExactIn$1 as MsgSwapExactIn, MsgSwapExactOut$1 as MsgSwapExactOut, MsgUndelegate$1 as MsgUndelegate, MsgVote$1 as MsgVote, MsgVoteWeighted$1 as MsgVoteWeighted, NETWORK_MAP, OEC, OEC_CHAIN_ID, OEC_CHAIN_NAME, OEC_NETWORK_ID, OKT_SYMBOL, ONE_DAY_TO_SECONDS, ONE_YEAR_TO_DAYS, POLYGON, POLYGON_CHAIN_ID, POLYGON_CHAIN_NAME, POLYGON_NETWORK_ID, POLYGON_SYMBOL, REG_DECIMAL, REG_DECIMAL_SIMPLE, REG_NUMBER, SIGN_DIRECT, SOPHON, SOPHON_SYMBOL, SOPHON_TEST_CHAIN_ID, SOPHON_TEST_CHAIN_NAME, SOPHON_TEST_NETWORK_ID, SUPPORTED_CHAIN_IDS, SwapAPI, Swap_Direction, TICK_SPACINGS, TickMath, Tip_Level, TokenAPI, TransactionLooper, Transaction_Status, TxAPI, TxClient, XDAI, XDAI_CHAIN_ID, XDAI_CHAIN_NAME, XDAI_NETWORK_ID, XDAI_SYMBOL, ZERO, arrayToMap, checkInputNumber, createSigDoc, createTxBodyEncodeObject, decimalNumber, deepCopy, div, encrypt, findTokenByDenom, findTokenBySymbol, formatDiffTime, formatMoment, formatNumber, formatTime, formatUnixMoment, getPercentByFeeAmount, getPoolAddress, isEmptyAmount, isEqualTo, isGreaterThan, isLessThan, isNumeric, isPositive, longToNumber, minus, multipliedBy, objectToMap, percentage, plus, pow, pow18, powM18, shift, sortsBefore, to32, toAmountCeil, toAmountFee, toAmountFloor, toAmountString, toDecimalPlaces, toExactAmount, toPercent, toUsd };
+export { APIClient, APIRequester, AVALANCHE, AVALANCHE_CHAIN_ID, AVALANCHE_CHAIN_NAME, AVALANCHE_NETWORK_ID, AVALANCHE_SYMBOL, AuthAPI, BASE_UNIT_TICK, BNB_SYMBOL, BSC, BSC_CHAIN_ID, BSC_CHAIN_ID_TEST, BSC_CHAIN_NAME, BSC_NETWORK_ID, BSC_NETWORK_TEST_ID, BankAPI, BaseAPI, BaseMsg, Bound, CHAIN_ETH, CHAIN_SOP, CONFIG_CHAIN_SOPHON, DEFAULT_PRECISION, DEFAULT_USER_PRECISION, ETH, ETH_CHAIN_ID, ETH_CHAIN_NAME, ETH_NETWORK_ID, ETH_SYMBOL, ETH_TEST_NETWORK_ID, FANTOM, FANTOM_CHAIN_ID, FANTOM_CHAIN_NAME, FANTOM_NETWORK_ID, FANTOM_SYMBOL, FEE_AMOUNT_DETAIL, Fee_Amount, HECO, HECO_CHAIN_ID, HECO_CHAIN_NAME, HECO_NETWORK_ID, HOO, HOO_CHAIN_ID, HOO_CHAIN_NAME, HOO_NETWORK_ID, HOO_SYMBOL, HT_SYMBOL, KCC, KCC_CHAIN_ID, KCC_CHAIN_NAME, KCC_NETWORK_ID, KCC_SYMBOL, LiquidityMath, MAX_PRECISION, MsgBeginRedelegate$1 as MsgBeginRedelegate, MsgCollect$1 as MsgCollect, MsgCollectRandSwapReward$1 as MsgCollectRandSwapReward, MsgCollectReward$1 as MsgCollectReward, MsgCreatePool$1 as MsgCreatePool, MsgCreatePosition$1 as MsgCreatePosition, MsgCreateRandSwapRewardConfig$1 as MsgCreateRandSwapRewardConfig, MsgCreateValidator$1 as MsgCreateValidator, MsgDecreaseLiquidity$1 as MsgDecreaseLiquidity, MsgDelegate$1 as MsgDelegate, MsgDeposit$1 as MsgDeposit, MsgEditValidator$1 as MsgEditValidator, MsgIncreaseLiquidity$1 as MsgIncreaseLiquidity, MsgSubmitProposal$1 as MsgSubmitProposal, MsgSwapExactIn$1 as MsgSwapExactIn, MsgSwapExactOut$1 as MsgSwapExactOut, MsgUndelegate$1 as MsgUndelegate, MsgVote$1 as MsgVote, MsgVoteWeighted$1 as MsgVoteWeighted, NETWORK_MAP, OEC, OEC_CHAIN_ID, OEC_CHAIN_NAME, OEC_NETWORK_ID, OKT_SYMBOL, ONE_DAY_TO_SECONDS, ONE_YEAR_TO_DAYS, POLYGON, POLYGON_CHAIN_ID, POLYGON_CHAIN_NAME, POLYGON_NETWORK_ID, POLYGON_SYMBOL, REG_DECIMAL, REG_DECIMAL_SIMPLE, REG_NUMBER, SIGN_DIRECT, SOPHON, SOPHON_SYMBOL, SOPHON_TEST_CHAIN_ID, SOPHON_TEST_CHAIN_NAME, SOPHON_TEST_NETWORK_ID, SUPPORTED_CHAIN_IDS, SwapAPI, Swap_Direction, TICK_SPACINGS, TickMath, Tip_Level, TokenAPI, TransactionLooper, Transaction_Status, TxAPI, TxClient, XDAI, XDAI_CHAIN_ID, XDAI_CHAIN_NAME, XDAI_NETWORK_ID, XDAI_SYMBOL, ZERO, arrayToMap, checkInputNumber, createSigDoc, createTxBodyEncodeObject, decimalNumber, deepCopy, div, encrypt, formatDiffTime, formatMoment, formatNumber, formatTime, formatUnixMoment, getPercentByFeeAmount, getPoolAddress, isEmptyAmount, isEqualTo, isGreaterThan, isLessThan, isNumeric, isPositive, longToNumber, minus, multipliedBy, objectToMap, percentage, plus, pow, pow18, powM18, shift, sortsBefore, to32, toAmountCeil, toAmountFee, toAmountFloor, toAmountString, toDecimalPlaces, toExactAmount, toPercent, toUsd };
 //# sourceMappingURL=some-chain-sdk.esm.js.map

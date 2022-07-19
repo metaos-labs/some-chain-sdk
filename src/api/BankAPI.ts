@@ -16,7 +16,7 @@ export class BankAPI extends BaseAPI {
     return this.request.get<IResBalances>(
       `/cosmos/bank/v1beta1/balances/${accountAddress}/by_denom`,
       {
-        denom: token.denom,
+        denom: token.base,
       }
     );
   }

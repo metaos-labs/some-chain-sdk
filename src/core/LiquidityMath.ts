@@ -163,21 +163,21 @@ export class LiquidityMath {
     if (pc.lessThan(leftRangeValue) === true) {
       const _value2 = this._getDiverForDeltaX(leftRangeValue, rightRangeValue);
       return {
-        amount0: toDecimalPlaces(_value1.mul(_value2), token0.decimal),
+        amount0: toDecimalPlaces(_value1.mul(_value2), token0.display_exponent),
         amount1: "0",
       };
     } else if (pc.greaterThan(rightRangeValue) === true) {
       const _value2 = this._getDiverForDeltaY(leftRangeValue, rightRangeValue);
       return {
         amount0: "0",
-        amount1: toDecimalPlaces(_value1.mul(_value2), token1.decimal),
+        amount1: toDecimalPlaces(_value1.mul(_value2), token1.display_exponent),
       };
     }
     const deltaXDiver = this._getDiverForDeltaX(priceValue, rightRangeValue);
     const deltaYDiver = this._getDiverForDeltaY(leftRangeValue, priceValue);
     return {
-      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.decimal),
-      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.decimal),
+      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.display_exponent),
+      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.display_exponent),
     };
   }
 }

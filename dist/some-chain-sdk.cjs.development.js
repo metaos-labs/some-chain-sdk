@@ -1111,12 +1111,17 @@ var ONE_YEAR_TO_DAYS = 365;
 var _FEE_AMOUNT_DETAIL;
 
 (function (Fee_Amount) {
+  Fee_Amount[Fee_Amount["LOWEST"] = 100] = "LOWEST";
   Fee_Amount[Fee_Amount["LOW"] = 500] = "LOW";
   Fee_Amount[Fee_Amount["MEDIUM"] = 3000] = "MEDIUM";
   Fee_Amount[Fee_Amount["HIGH"] = 10000] = "HIGH";
 })(exports.Fee_Amount || (exports.Fee_Amount = {}));
 
-var FEE_AMOUNT_DETAIL = (_FEE_AMOUNT_DETAIL = {}, _FEE_AMOUNT_DETAIL[exports.Fee_Amount.LOW] = {
+var FEE_AMOUNT_DETAIL = (_FEE_AMOUNT_DETAIL = {}, _FEE_AMOUNT_DETAIL[exports.Fee_Amount.LOWEST] = {
+  label: "0.01",
+  value: exports.Fee_Amount.LOWEST,
+  description: "Best for very stable pairs."
+}, _FEE_AMOUNT_DETAIL[exports.Fee_Amount.LOW] = {
   label: "0.05",
   value: exports.Fee_Amount.LOW,
   description: "Best for stable pairs."
@@ -1307,6 +1312,7 @@ var REG_DECIMAL_SIMPLE = /^\d*(\.\d*)?$/;
 var REG_DECIMAL = /*#__PURE__*/new RegExp("^0(\\.\\d{0," + DEFAULT_PRECISION + "})?$");
 
 var TICK_SPACINGS = {
+  100: 1,
   500: 10,
   3000: 60,
   10000: 200

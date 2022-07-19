@@ -1,4 +1,5 @@
 export enum Fee_Amount {
+  LOWEST = 100,
   LOW = 500,
   MEDIUM = 3000,
   HIGH = 10000,
@@ -8,6 +9,11 @@ export const FEE_AMOUNT_DETAIL: Record<
   Fee_Amount,
   { label: string; value: Fee_Amount; description: string }
 > = {
+  [Fee_Amount.LOWEST]: {
+    label: "0.01",
+    value: Fee_Amount.LOWEST,
+    description: "Best for very stable pairs.",
+  },
   [Fee_Amount.LOW]: {
     label: "0.05",
     value: Fee_Amount.LOW,

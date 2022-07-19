@@ -1,4 +1,5 @@
 export const TICK_SPACINGS = {
+  100: 1,
   500: 10,
   3000: 60,
   10000: 200,

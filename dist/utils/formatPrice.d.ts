@@ -1,1 +1,2 @@
-export declare function toUsd(value: string | undefined): string | number;
+import Decimal from "decimal.js";
+export declare function toUsd(value: Decimal.Value): string | number;

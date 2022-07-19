@@ -1,8 +1,9 @@
 import Decimal from "decimal.js";
 
-export function toUsd(value: string | undefined): string | number {
-  if (!value) {
-    return 0;
+export function toUsd(value: Decimal.Value): string | number {
+  try {
+    return "$" + new Decimal(value).toFixed(2);
+  } catch (e) {
+    return String(value || "-");
   }
-  return "$" + new Decimal(value).toFixed(2);
 }

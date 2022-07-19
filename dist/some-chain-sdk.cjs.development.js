@@ -1423,11 +1423,11 @@ var formatDiffTime = function formatDiffTime(time) {
 };
 
 function toUsd(value) {
-  if (!value) {
-    return 0;
+  try {
+    return "$" + new Decimal(value).toFixed(2);
+  } catch (e) {
+    return String(value || "-");
   }
-
-  return "$" + new Decimal(value).toFixed(2);
 }
 
 function getPoolAddress(denom0, denom1, fee) {

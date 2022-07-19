@@ -1,15 +1,19 @@
 import { ILiquidityPosition, IPool, IPoolPrice, IV3Reward } from "./ICommon";
-export interface IToken {
+export interface DenomUnit {
     denom: string;
-    creator: string;
+    exponent: number;
+    aliases: string[];
+}
+export interface IToken {
+    description: string;
+    denom_units: Array<DenomUnit>;
+    base: string;
+    display_exponent: number;
+    display: string;
     name: string;
     symbol: string;
-    totalSupply: string;
-    decimal: number;
-    logoURI: string;
-    selected?: boolean;
-    balance?: number;
-    lineData?: Array<number>;
+    total_supply: string;
+    logo_uri: string;
 }
 export interface ILiquidityTokenRender extends ILiquidityPosition {
     lpTokenName: string;

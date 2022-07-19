@@ -736,13 +736,19 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
 
   _proto.apiLiquidityRewardsByIds = /*#__PURE__*/function () {
     var _apiLiquidityRewardsByIds = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(tokenIds) {
+      var params;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              return _context5.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_position_by_ids?" + tokenIds.join("&")));
+              params = qs.stringify({
+                tokenIds: tokenIds
+              }, {
+                indices: false
+              });
+              return _context5.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_position_by_ids?" + params));
 
-            case 1:
+            case 2:
             case "end":
               return _context5.stop();
           }

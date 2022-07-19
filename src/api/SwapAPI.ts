@@ -68,8 +68,9 @@ export class SwapAPI extends BaseAPI {
   public async apiLiquidityRewardsByIds(
     tokenIds: Array<string>
   ): Promise<{ liquidity_positions: Array<ILiquidityPosition> }> {
+    const params = qs.stringify({ tokenIds }, { indices: false });
     return this.request.get<{ liquidity_positions: Array<ILiquidityPosition> }>(
-      `/sophon-labs/sophon/swap/liquidity_position_by_ids?${tokenIds.join("&")}`
+      `/sophon-labs/sophon/swap/liquidity_position_by_ids?${params}`
     );
   }
 

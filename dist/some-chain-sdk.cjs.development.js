@@ -647,7 +647,9 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pool_slot0_aggregations?" + addresses.join("&")));
+              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pool_slot0_aggregations", {
+                addresses: addresses
+              }));
 
             case 1:
             case "end":

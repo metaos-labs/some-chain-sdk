@@ -35,7 +35,10 @@ export class SwapAPI extends BaseAPI {
     addresses: Array<string>
   ): Promise<{ pool_slot0_aggregations: Array<IResPoolInfo> }> {
     return this.request.get<{ pool_slot0_aggregations: Array<IResPoolInfo> }>(
-      `/sophon-labs/sophon/swap/pool_slot0_aggregations?${addresses.join("&")}`
+      `/sophon-labs/sophon/swap/pool_slot0_aggregations`,
+      {
+        addresses
+      }
     );
   }
 

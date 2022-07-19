@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import qs from 'qs';
 import Decimal from 'decimal.js';
 import { Decimal as Decimal$1 } from '@cosmjs/math';
 import moment from 'moment';
@@ -637,15 +638,19 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
   /*#__PURE__*/
   function () {
     var _apiPoolListByAddresses = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(addresses) {
+      var params;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pool_slot0_aggregations", {
+              params = qs.stringify({
                 addresses: addresses
-              }));
+              }, {
+                indices: false
+              });
+              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pool_slot0_aggregations?" + params));
 
-            case 1:
+            case 2:
             case "end":
               return _context.stop();
           }

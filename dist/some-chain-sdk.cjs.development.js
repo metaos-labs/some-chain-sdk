@@ -5,6 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var Axios = _interopDefault(require('axios'));
+var qs = _interopDefault(require('qs'));
 var Decimal = _interopDefault(require('decimal.js'));
 var math = require('@cosmjs/math');
 var moment = _interopDefault(require('moment'));
@@ -643,15 +644,19 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
   /*#__PURE__*/
   function () {
     var _apiPoolListByAddresses = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(addresses) {
+      var params;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pool_slot0_aggregations", {
+              params = qs.stringify({
                 addresses: addresses
-              }));
+              }, {
+                indices: false
+              });
+              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pool_slot0_aggregations?" + params));
 
-            case 1:
+            case 2:
             case "end":
               return _context.stop();
           }

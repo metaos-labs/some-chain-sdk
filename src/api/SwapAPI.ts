@@ -1,5 +1,6 @@
 import { BaseAPI } from "./BaseAPI";
 import { ILiquidityPosition, IPool, IPoolPrice } from "../types";
+import qs from 'qs';
 
 export interface IResPoolInfo {
   pool: IPool;
@@ -34,11 +35,9 @@ export class SwapAPI extends BaseAPI {
   public async apiPoolListByAddresses(
     addresses: Array<string>
   ): Promise<{ pool_slot0_aggregations: Array<IResPoolInfo> }> {
+    const params = qs.stringify({ addresses }, { indices: false });
     return this.request.get<{ pool_slot0_aggregations: Array<IResPoolInfo> }>(
-      `/sophon-labs/sophon/swap/pool_slot0_aggregations`,
-      {
-        addresses
-      }
+      `/sophon-labs/sophon/swap/pool_slot0_aggregations?${params}`,
     );
   }
 

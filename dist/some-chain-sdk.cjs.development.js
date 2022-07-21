@@ -1355,7 +1355,7 @@ var formatDiffTime = function formatDiffTime(time) {
 
 function toUsd(value) {
   try {
-    return "$" + new Decimal(value).toFixed(2);
+    return "$" + new Decimal(value).toFixed(2, Decimal.ROUND_DOWN);
   } catch (e) {
     return String(value || "-");
   }

@@ -30,7 +30,7 @@ export function isEqualTo(value1: string, value2: string) {
 }
 
 export function pow18(value: string): string {
-  return new Decimal(value).mul(Math.pow(10, DEFAULT_PRECISION)).toString();
+  return new Decimal(value).mul(Math.pow(10, DEFAULT_PRECISION)).toFixed();
 }
 
 export function pow(
@@ -43,9 +43,9 @@ export function pow(
   }
   const _value = new Decimal(value).mul(Math.pow(10, precision));
   if (round === Decimal.ROUND_UP) {
-    return _value.ceil().toString();
+    return _value.ceil().toFixed();
   }
-  return _value.floor().toString();
+  return _value.floor().toFixed();
 }
 
 export function powM18(value: string | number) {
@@ -53,7 +53,7 @@ export function powM18(value: string | number) {
 }
 
 export function shift(value: string, precision: number = DEFAULT_PRECISION) {
-  return new Decimal(value).div(Math.pow(10, precision)).toString();
+  return new Decimal(value).div(Math.pow(10, precision)).toFixed();
 }
 
 export function isPositive(value: string | number) {

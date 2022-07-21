@@ -1208,7 +1208,7 @@ var CONFIG_CHAIN_SOPHON = {
   PREFIX: "sophon",
   COIN_TYPE: 118,
   COINGECKO_ID: "sophon",
-  DEFAULT_GAS: 1000000000,
+  DEFAULT_GAS: 150000,
   GAS_PRICE_STEP_LOW: 0.005,
   GAS_PRICE_STEP_AVERAGE: 0.025,
   GAS_PRICE_STEP_HIGH: 0.08,
@@ -1415,7 +1415,7 @@ function isEqualTo(value1, value2) {
   return new Decimal(value1).equals(value2);
 }
 function pow18(value) {
-  return new Decimal(value).mul(Math.pow(10, DEFAULT_PRECISION)).toString();
+  return new Decimal(value).mul(Math.pow(10, DEFAULT_PRECISION)).toFixed();
 }
 function pow(value, precision, round) {
   if (precision === void 0) {
@@ -1433,10 +1433,10 @@ function pow(value, precision, round) {
   var _value = new Decimal(value).mul(Math.pow(10, precision));
 
   if (round === Decimal.ROUND_UP) {
-    return _value.ceil().toString();
+    return _value.ceil().toFixed();
   }
 
-  return _value.floor().toString();
+  return _value.floor().toFixed();
 }
 function powM18(value) {
   return new Decimal(value).div(Math.pow(10, DEFAULT_PRECISION)).toString();
@@ -1446,7 +1446,7 @@ function shift(value, precision) {
     precision = DEFAULT_PRECISION;
   }
 
-  return new Decimal(value).div(Math.pow(10, precision)).toString();
+  return new Decimal(value).div(Math.pow(10, precision)).toFixed();
 }
 function isPositive(value) {
   if (!value) {

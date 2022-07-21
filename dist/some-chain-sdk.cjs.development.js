@@ -1474,19 +1474,17 @@ function sortsBefore(baseToken, quoteToken) {
   return baseToken.base.toLowerCase() < quoteToken.base.toLowerCase();
 }
 
-//   return new Decimal(percent).div(100).mul(balance).toFixed(2);
-// }
-
-function percentage(value) {
-  if (isNumeric(value)) {
-    return new Decimal(value).toFixed(2) + "%";
-  } else {
-    return value;
+function toPercent(value, hundred) {
+  if (hundred === void 0) {
+    hundred = true;
   }
-}
-function toPercent(value) {
+
   try {
-    return new Decimal(value).mul(100).toFixed(2) + "%";
+    if (hundred) {
+      return new Decimal(value).mul(100).toFixed(2) + "%";
+    } else {
+      return new Decimal(value).toFixed(2) + "%";
+    }
   } catch (e) {
     return value.toString();
   }
@@ -7084,7 +7082,6 @@ exports.longToNumber = longToNumber;
 exports.minus = minus;
 exports.multipliedBy = multipliedBy;
 exports.objectToMap = objectToMap;
-exports.percentage = percentage;
 exports.plus = plus;
 exports.pow = pow;
 exports.pow18 = pow18;

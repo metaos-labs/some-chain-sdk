@@ -5,7 +5,7 @@ export * from "./formatCurrencyAmount";
 export * from "./formatMoment";
 export * from "./formatPrice";
 export * from "./getPoolAddress";
-export * from "./getToPercent";
+export * from "./toPercentFee";
 export * from "./isNumberic";
 export * from "./mathUtil";
 export * from "./parseToMap";

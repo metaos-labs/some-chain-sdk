@@ -35,7 +35,6 @@ import {
   SignerInfo,
   ModeInfo,
   ModeInfo_Single,
-  TxBody,
   Fee,
   AuthInfo,
   SignDoc,

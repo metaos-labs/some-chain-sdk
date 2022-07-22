@@ -25,7 +25,8 @@ export declare class TxClient {
     registry: Registry;
     constructor(apiClient: APIClient, rpcUrl: string, signer: OfflineSigner, accountAddress: string);
     getSender(): Promise<ISender>;
-    sendTransaction(messages: BaseMsg | Array<BaseMsg>, memo?: string): Promise<import("@cosmjs/stargate").DeliverTxResponse>;
+    sendTransaction(messages: BaseMsg | Array<BaseMsg>, gasLimit?: number, memo?: string): Promise<import("@cosmjs/stargate").DeliverTxResponse>;
+    getEstimatedFee(messages: BaseMsg | Array<BaseMsg>, memo?: string): Promise<string>;
 }
 export declare function createTxBodyEncodeObject(messages: Array<BaseMsg>, memo: string): TxBodyEncodeObject;
 export declare function createSigDoc(bodyBytes: Uint8Array, authInfoBytes: Uint8Array, chainId: string, accountNumber: number): SignDoc;

@@ -1,10 +1,7 @@
-import { Keccak } from "sha3";
 import invariant from "tiny-invariant";
 import {APIClient} from "./APIClient";
-import { Buffer } from "buffer";
 import { CONFIG_CHAIN_SOPHON } from "../constants";
 import {
-  EncodeObject,
   GeneratedType,
   OfflineSigner,
   Registry,
@@ -46,7 +43,7 @@ import {
 } from "../proto/cosmos/tx/v1beta1/tx";
 import { SignMode } from "../proto/cosmos/tx/signing/v1beta1/signing";
 import { Coin } from "../proto/cosmos/base/v1beta1/coin";
-import { fromBase64 } from "@cosmjs/encoding";
+import { fromBase64, toBase64 } from "@cosmjs/encoding";
 
 export interface ISender {
   address: string;
@@ -55,7 +52,6 @@ export interface ISender {
   sequence: number;
 }
 
-// FIXME
 export interface TxGenerated {
   signDirect: {
     body: TxBodyEncodeObject;
@@ -65,11 +61,6 @@ export interface TxGenerated {
 }
 
 export const SIGN_DIRECT = SignMode.SIGN_MODE_DIRECT;
-
-// const defaultFee: StdFee = {
-//   amount: [],
-//   gas: CONFIG_CHAIN_SOPHON.DEFAULT_GAS,
-// };
 
 const defaultFee = {
   amount: "",
@@ -145,10 +136,8 @@ export class TxClient {
 
   public async sendTransaction(
     messages: BaseMsg | Array<BaseMsg>,
-    memo: string = ""
-    // fee: string,
-    // denom: string,
-    // gasLimit: number,
+    gasLimit?: number,
+    memo = "",
   ) {
     const sender = await this.getSender();
     // const pubKeyDecoded = Buffer.from(sender.pubkey, "base64");
@@ -160,24 +149,29 @@ export class TxClient {
       SIGN_DIRECT
     );
 
-    // 2. Fee
-    const feeMessage = createFee(
-      defaultFee.amount,
-      defaultFee.denom,
-      defaultFee.gas
-    );
+    // 2. authInfo
+    let authInfoDirect;
+    if (gasLimit) {
+      // 2. Fee
+      const feeMessage = createFee(
+        defaultFee.amount,
+        defaultFee.denom,
+        gasLimit
+      );
+      authInfoDirect = createAuthInfo(signInfoDirect, feeMessage);
+    } else {
+      authInfoDirect = AuthInfo.fromPartial({
+        signerInfos: [signInfoDirect],
+        fee:{}
+      });
+    }
 
-    // 3. authInfo
-    const authInfoDirect = createAuthInfo(signInfoDirect, feeMessage);
-
-    // console.log(AuthInfo.encode(authInfoDirect).finish());
-
-    // 4. txbody
+    // 3. txbody
     // const body = createBodyWithMultipleMessages(messages, memo);
     const _messages = messages instanceof Array ? messages : [messages];
     const body = createTxBodyEncodeObject(_messages, memo);
 
-    // 5. signDoc
+    // 4. signDoc
     const signDocDirect = createSigDoc(
       this.registry.encode(body),
       AuthInfo.encode(authInfoDirect).finish(),
@@ -185,6 +179,7 @@ export class TxClient {
       sender.accountNumber
     );
 
+    // 5. sign
     let walletClient;
     walletClient = await SigningStargateClient.connectWithSigner(
       this.rpcUrl,
@@ -210,31 +205,53 @@ export class TxClient {
     return walletClient.broadcastTx(txBytes);
   }
 
-  // public async signTransaction(
-  //   tx: TxGenerated,
-  //   broadcastMode: string = 'BROADCAST_MODE_BLOCK',
-  // ) {
-  //   const dataToSign = `0x${Buffer.from(
-  //     tx.signDirect.signBytes,
-  //     'base64',
-  //   ).toString('hex')}`
-  //
-  //   /* eslint-disable no-underscore-dangle */
-  //   const signatureRaw = wallet._signingKey().signDigest(dataToSign)
-  //   const splitedSignature = splitSignature(signatureRaw)
-  //   const signature = arrayify(concat([splitedSignature.r, splitedSignature.s]))
-  //
-  //   const signedTx = createTxRaw(
-  //     tx.signDirect.body.serializeBinary(),
-  //     tx.signDirect.authInfo.serializeBinary(),
-  //     [signature],
-  //   )
-  //   const body = `{ "tx_bytes": [${signedTx.message
-  //     .serializeBinary()
-  //     .toString()}], "mode": "${broadcastMode}" }`
-  //
-  //   return body
-  // }
+  public async getEstimatedFee(
+    messages: BaseMsg | Array<BaseMsg>,
+    memo: string = ""
+  ) {
+    const sender = await this.getSender();
+    // const pubKeyDecoded = Buffer.from(sender.pubkey, "base64");
+
+    // 1. SignDirect
+    const signInfoDirect = createSignerInfo(
+      sender.pubkey,
+      sender.sequence,
+      SIGN_DIRECT
+    );
+
+    // 2. authInfo
+    const authInfoDirect = AuthInfo.fromPartial({
+      signerInfos: [signInfoDirect],
+      fee:{}
+    });
+
+    // 3. txbody
+    // const body = createBodyWithMultipleMessages(messages, memo);
+    const _messages = messages instanceof Array ? messages : [messages];
+    const body = createTxBodyEncodeObject(_messages, memo);
+
+    // 4. signDoc
+    const signDocDirect = createSigDoc(
+      this.registry.encode(body),
+      AuthInfo.encode(authInfoDirect).finish(),
+      CONFIG_CHAIN_SOPHON.CHAIN_ID,
+      sender.accountNumber
+    );
+    console.log(signDocDirect);
+
+    const txRaw = TxRaw.fromPartial({
+      bodyBytes: signDocDirect.bodyBytes,
+      authInfoBytes: signDocDirect.authInfoBytes,
+      signatures: [new Uint8Array()],
+    });
+    const txBytes = TxRaw.encode(txRaw).finish();
+
+    const { gas_info: { gas_wanted, gas_used } } = await this.apiClient.txAPI.estimateGas(toBase64(txBytes));
+
+    console.log('gas_used: ' + gas_used);
+
+    return gas_used;
+  }
 }
 
 export function createTxBodyEncodeObject(

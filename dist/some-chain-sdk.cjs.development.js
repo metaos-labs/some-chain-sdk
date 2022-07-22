@@ -912,13 +912,15 @@ var TxAPI = /*#__PURE__*/function (_BaseAPI) {
 
   var _proto = TxAPI.prototype;
 
-  _proto.txInfo = /*#__PURE__*/function () {
-    var _txInfo = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(txHash) {
+  _proto.estimateGas = /*#__PURE__*/function () {
+    var _estimateGas = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(txBytes) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", this.request.get("/cosmos/tx/v1beta1/txs/" + txHash));
+              return _context.abrupt("return", this.request.post("/cosmos/tx/v1beta1/simulate", {
+                tx_bytes: txBytes
+              }));
 
             case 1:
             case "end":
@@ -928,11 +930,11 @@ var TxAPI = /*#__PURE__*/function (_BaseAPI) {
       }, _callee, this);
     }));
 
-    function txInfo(_x) {
-      return _txInfo.apply(this, arguments);
+    function estimateGas(_x) {
+      return _estimateGas.apply(this, arguments);
     }
 
-    return txInfo;
+    return estimateGas;
   }();
 
   _proto._broadcast = /*#__PURE__*/function () {
@@ -979,6 +981,29 @@ var TxAPI = /*#__PURE__*/function (_BaseAPI) {
     }
 
     return broadcast;
+  }();
+
+  _proto.txInfo = /*#__PURE__*/function () {
+    var _txInfo = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(txHash) {
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              return _context4.abrupt("return", this.request.get("/cosmos/tx/v1beta1/txs/" + txHash));
+
+            case 1:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, this);
+    }));
+
+    function txInfo(_x5) {
+      return _txInfo.apply(this, arguments);
+    }
+
+    return txInfo;
   }();
 
   return TxAPI;
@@ -1355,7 +1380,7 @@ var formatDiffTime = function formatDiffTime(time) {
 
 function toUsd(value) {
   try {
-    return "$" + new Decimal(value).toFixed(2, Decimal.ROUND_DOWN);
+    return "$" + new Decimal(value).toFixed(2);
   } catch (e) {
     return String(value || "-");
   }
@@ -6744,11 +6769,7 @@ function isSet$d(value) {
   return value !== null && value !== undefined;
 }
 
-var SIGN_DIRECT = SignMode.SIGN_MODE_DIRECT; // const defaultFee: StdFee = {
-//   amount: [],
-//   gas: CONFIG_CHAIN_SOPHON.DEFAULT_GAS,
-// };
-
+var SIGN_DIRECT = SignMode.SIGN_MODE_DIRECT;
 var defaultFee = {
   amount: "",
   denom: CONFIG_CHAIN_SOPHON.COIN_DENOM,
@@ -6838,11 +6859,8 @@ var TxClient = /*#__PURE__*/function () {
   }();
 
   _proto.sendTransaction = /*#__PURE__*/function () {
-    var _sendTransaction = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(messages, memo // fee: string,
-    // denom: string,
-    // gasLimit: number,
-    ) {
-      var sender, signInfoDirect, feeMessage, authInfoDirect, _messages, body, signDocDirect, walletClient, _yield$walletClient$s, signed, signature, txRaw, txBytes;
+    var _sendTransaction = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(messages, gasLimit, memo) {
+      var sender, signInfoDirect, authInfoDirect, feeMessage, _messages, body, signDocDirect, walletClient, _yield$walletClient$s, signed, signature, txRaw, txBytes;
 
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
@@ -6859,30 +6877,38 @@ var TxClient = /*#__PURE__*/function () {
               sender = _context2.sent;
               // const pubKeyDecoded = Buffer.from(sender.pubkey, "base64");
               // 1. SignDirect
-              signInfoDirect = createSignerInfo(sender.pubkey, sender.sequence, SIGN_DIRECT); // 2. Fee
+              signInfoDirect = createSignerInfo(sender.pubkey, sender.sequence, SIGN_DIRECT); // 2. authInfo
 
-              feeMessage = createFee(defaultFee.amount, defaultFee.denom, defaultFee.gas); // 3. authInfo
-
-              authInfoDirect = createAuthInfo(signInfoDirect, feeMessage); // console.log(AuthInfo.encode(authInfoDirect).finish());
-              // 4. txbody
+              if (gasLimit) {
+                // 2. Fee
+                feeMessage = createFee(defaultFee.amount, defaultFee.denom, gasLimit);
+                authInfoDirect = createAuthInfo(signInfoDirect, feeMessage);
+              } else {
+                authInfoDirect = AuthInfo.fromPartial({
+                  signerInfos: [signInfoDirect],
+                  fee: {}
+                });
+              } // 3. txbody
               // const body = createBodyWithMultipleMessages(messages, memo);
 
-              _messages = messages instanceof Array ? messages : [messages];
-              body = createTxBodyEncodeObject(_messages, memo); // 5. signDoc
 
-              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), CONFIG_CHAIN_SOPHON.CHAIN_ID, sender.accountNumber);
-              _context2.next = 12;
+              _messages = messages instanceof Array ? messages : [messages];
+              body = createTxBodyEncodeObject(_messages, memo); // 4. signDoc
+
+              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), CONFIG_CHAIN_SOPHON.CHAIN_ID, sender.accountNumber); // 5. sign
+
+              _context2.next = 11;
               return stargate.SigningStargateClient.connectWithSigner(this.rpcUrl, this.signer, {
                 registry: this.registry,
                 prefix: CONFIG_CHAIN_SOPHON.COIN_MINIMAL_DENOM.toLowerCase()
               });
 
-            case 12:
+            case 11:
               walletClient = _context2.sent;
-              _context2.next = 15;
+              _context2.next = 14;
               return walletClient.signer.signDirect(this.accountAddress, signDocDirect);
 
-            case 15:
+            case 14:
               _yield$walletClient$s = _context2.sent;
               signed = _yield$walletClient$s.signed;
               signature = _yield$walletClient$s.signature;
@@ -6894,7 +6920,7 @@ var TxClient = /*#__PURE__*/function () {
               txBytes = TxRaw.encode(txRaw).finish();
               return _context2.abrupt("return", walletClient.broadcastTx(txBytes));
 
-            case 21:
+            case 20:
             case "end":
               return _context2.stop();
           }
@@ -6902,11 +6928,74 @@ var TxClient = /*#__PURE__*/function () {
       }, _callee2, this);
     }));
 
-    function sendTransaction(_x, _x2) {
+    function sendTransaction(_x, _x2, _x3) {
       return _sendTransaction.apply(this, arguments);
     }
 
     return sendTransaction;
+  }();
+
+  _proto.getEstimatedFee = /*#__PURE__*/function () {
+    var _getEstimatedFee = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(messages, memo) {
+      var sender, signInfoDirect, authInfoDirect, _messages, body, signDocDirect, txRaw, txBytes, _yield$this$apiClient, _yield$this$apiClient2, gas_used;
+
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              if (memo === void 0) {
+                memo = "";
+              }
+
+              _context3.next = 3;
+              return this.getSender();
+
+            case 3:
+              sender = _context3.sent;
+              // const pubKeyDecoded = Buffer.from(sender.pubkey, "base64");
+              // 1. SignDirect
+              signInfoDirect = createSignerInfo(sender.pubkey, sender.sequence, SIGN_DIRECT); // 2. authInfo
+
+              authInfoDirect = AuthInfo.fromPartial({
+                signerInfos: [signInfoDirect],
+                fee: {}
+              }); // 3. txbody
+              // const body = createBodyWithMultipleMessages(messages, memo);
+
+              _messages = messages instanceof Array ? messages : [messages];
+              body = createTxBodyEncodeObject(_messages, memo); // 4. signDoc
+
+              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), CONFIG_CHAIN_SOPHON.CHAIN_ID, sender.accountNumber);
+              console.log(signDocDirect);
+              txRaw = TxRaw.fromPartial({
+                bodyBytes: signDocDirect.bodyBytes,
+                authInfoBytes: signDocDirect.authInfoBytes,
+                signatures: [new Uint8Array()]
+              });
+              txBytes = TxRaw.encode(txRaw).finish();
+              _context3.next = 14;
+              return this.apiClient.txAPI.estimateGas(encoding.toBase64(txBytes));
+
+            case 14:
+              _yield$this$apiClient = _context3.sent;
+              _yield$this$apiClient2 = _yield$this$apiClient.gas_info;
+              gas_used = _yield$this$apiClient2.gas_used;
+              console.log('gas_used: ' + gas_used);
+              return _context3.abrupt("return", gas_used);
+
+            case 20:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function getEstimatedFee(_x4, _x5) {
+      return _getEstimatedFee.apply(this, arguments);
+    }
+
+    return getEstimatedFee;
   }();
 
   return TxClient;

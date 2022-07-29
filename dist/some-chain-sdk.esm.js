@@ -1271,10 +1271,9 @@ function getPoolAddress(denom0, denom1, fee) {
     key = denom1 + "-" + denom0 + "-" + fee;
   } else {
     key = denom0 + "-" + denom1 + "-" + fee;
-  } // console.log('poolAddress: ' + Bech32.encode('sop', sha256(toUtf8(key)).slice(0, 20)));
+  }
 
-
-  return Bech32.encode("sop", sha256(toUtf8(key)).slice(0, 20));
+  return Bech32.encode("mtos", sha256(toUtf8(key)).slice(0, 20));
 }
 
 function getPercentByFeeAmount(fee) {

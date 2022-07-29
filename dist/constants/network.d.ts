@@ -19,6 +19,7 @@ export declare const NETWORK_DETAILS: {
             display_exponent: number;
             logo_uri: string;
         };
+        nodeUrl: string;
         rpcUrl: string;
         blockExplorerUrl: string;
     };
@@ -32,6 +33,7 @@ export declare const NETWORK_DETAILS: {
             display_exponent: number;
             logo_uri: string;
         };
+        nodeUrl: string;
         rpcUrl: string;
         blockExplorerUrl: string;
     };
@@ -45,6 +47,7 @@ export declare const NETWORK_DETAILS: {
             display_exponent: number;
             logo_uri: string;
         };
+        nodeUrl: string;
         rpcUrl: string;
         blockExplorerUrl: string;
     };

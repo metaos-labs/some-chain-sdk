@@ -37,7 +37,7 @@ export class SwapAPI extends BaseAPI {
   ): Promise<{ pool_slot0_aggregations: Array<IResPoolInfo> }> {
     const params = qs.stringify({ addresses }, { indices: false });
     return this.request.get<{ pool_slot0_aggregations: Array<IResPoolInfo> }>(
-      `/sophon-labs/sophon/swap/pool_slot0_aggregations?${params}`,
+      `/metaos-labs/metaos/swap/pool_slot0_aggregations?${params}`,
     );
   }
 
@@ -45,7 +45,7 @@ export class SwapAPI extends BaseAPI {
     address: string
   ): Promise<IResPoolMetadataNew> {
     return this.request.get<IResPoolMetadataNew>(
-      `/sophon-labs/sophon/swap/pools/${address}`
+      `/metaos-labs/metaos/swap/pools/${address}`
     );
   }
 
@@ -53,7 +53,7 @@ export class SwapAPI extends BaseAPI {
     address: string
   ): Promise<{ pool_slot0: IPoolPrice }> {
     return this.request.get<{ pool_slot0: IPoolPrice }>(
-      `/sophon-labs/sophon/swap/pools/${address}/slot0`
+      `/metaos-labs/metaos/swap/pools/${address}/slot0`
     );
   }
 
@@ -61,7 +61,7 @@ export class SwapAPI extends BaseAPI {
     tokenId: string
   ): Promise<{ liquidity_position: ILiquidityPosition }> {
     return this.request.get<{ liquidity_position: ILiquidityPosition }>(
-      `/sophon-labs/sophon/swap/liquidity_positions/${tokenId}`
+      `/metaos-labs/metaos/swap/liquidity_positions/${tokenId}`
     );
   }
 
@@ -70,19 +70,19 @@ export class SwapAPI extends BaseAPI {
   ): Promise<{ liquidity_positions: Array<ILiquidityPosition> }> {
     const params = qs.stringify({ tokenIds }, { indices: false });
     return this.request.get<{ liquidity_positions: Array<ILiquidityPosition> }>(
-      `/sophon-labs/sophon/swap/liquidity_position_by_ids?${params}`
+      `/metaos-labs/metaos/swap/liquidity_position_by_ids?${params}`
     );
   }
 
   public async apiTickImagePath(tokenId: string): Promise<{ uri: string }> {
     return this.request.get<{ uri: string }>(
-      `/sophon-labs/sophon/swap/liquidity_positions/${tokenId}/token_uri`
+      `/metaos-labs/metaos/swap/liquidity_positions/${tokenId}/token_uri`
     );
   }
 
   public async apiActiveFarmList(): Promise<IResFarmList> {
     return this.request.get<IResFarmList>(
-      `/sophon-labs/sophon/swap/core_pools`
+      `/metaos-labs/metaos/swap/core_pools`
     );
   }
 
@@ -91,7 +91,7 @@ export class SwapAPI extends BaseAPI {
     skip_zero_liquidity: boolean
   ): Promise<IResLiquidityPositionList> {
     return this.request.get<IResLiquidityPositionList>(
-      `/sophon-labs/sophon/swap/liquidity_positions_owner/${accountAddress}`,
+      `/metaos-labs/metaos/swap/liquidity_positions_owner/${accountAddress}`,
       {
         skip_zero_liquidity
       }

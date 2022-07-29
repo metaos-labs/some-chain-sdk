@@ -7,7 +7,7 @@ export class TokenAPI extends BaseAPI {
     denom: string
   ): Promise<Metadata> {
     return this.request.get<Metadata>(
-      `/sophon-labs/sophon/token/metadatas/by_denom`,
+      `/metaos-labs/metaos/token/metadatas/by_denom`,
       {
         denom
       }
@@ -16,7 +16,7 @@ export class TokenAPI extends BaseAPI {
 
   public async apiTokenMetadatas(): Promise<Array<Metadata>> {
     return this.request.get<Array<Metadata>>(
-      `/sophon-labs/sophon/token/metadatas`
+      `/metaos-labs/metaos/token/metadatas`
     );
   }
 

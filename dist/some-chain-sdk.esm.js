@@ -648,7 +648,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
               }, {
                 indices: false
               });
-              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pool_slot0_aggregations?" + params));
+              return _context.abrupt("return", this.request.get("/metaos-labs/metaos/swap/pool_slot0_aggregations?" + params));
 
             case 2:
             case "end":
@@ -671,7 +671,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pools/" + address));
+              return _context2.abrupt("return", this.request.get("/metaos-labs/metaos/swap/pools/" + address));
 
             case 1:
             case "end":
@@ -694,7 +694,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              return _context3.abrupt("return", this.request.get("/sophon-labs/sophon/swap/pools/" + address + "/slot0"));
+              return _context3.abrupt("return", this.request.get("/metaos-labs/metaos/swap/pools/" + address + "/slot0"));
 
             case 1:
             case "end":
@@ -717,7 +717,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              return _context4.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_positions/" + tokenId));
+              return _context4.abrupt("return", this.request.get("/metaos-labs/metaos/swap/liquidity_positions/" + tokenId));
 
             case 1:
             case "end":
@@ -746,7 +746,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
               }, {
                 indices: false
               });
-              return _context5.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_position_by_ids?" + params));
+              return _context5.abrupt("return", this.request.get("/metaos-labs/metaos/swap/liquidity_position_by_ids?" + params));
 
             case 2:
             case "end":
@@ -769,7 +769,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              return _context6.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_positions/" + tokenId + "/token_uri"));
+              return _context6.abrupt("return", this.request.get("/metaos-labs/metaos/swap/liquidity_positions/" + tokenId + "/token_uri"));
 
             case 1:
             case "end":
@@ -792,7 +792,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              return _context7.abrupt("return", this.request.get("/sophon-labs/sophon/swap/core_pools"));
+              return _context7.abrupt("return", this.request.get("/metaos-labs/metaos/swap/core_pools"));
 
             case 1:
             case "end":
@@ -815,7 +815,7 @@ var SwapAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              return _context8.abrupt("return", this.request.get("/sophon-labs/sophon/swap/liquidity_positions_owner/" + accountAddress, {
+              return _context8.abrupt("return", this.request.get("/metaos-labs/metaos/swap/liquidity_positions_owner/" + accountAddress, {
                 skip_zero_liquidity: skip_zero_liquidity
               }));
 
@@ -852,7 +852,7 @@ var TokenAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", this.request.get("/sophon-labs/sophon/token/metadatas/by_denom", {
+              return _context.abrupt("return", this.request.get("/metaos-labs/metaos/token/metadatas/by_denom", {
                 denom: denom
               }));
 
@@ -877,7 +877,7 @@ var TokenAPI = /*#__PURE__*/function (_BaseAPI) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt("return", this.request.get("/sophon-labs/sophon/token/metadatas"));
+              return _context2.abrupt("return", this.request.get("/metaos-labs/metaos/token/metadatas"));
 
             case 1:
             case "end":
@@ -1879,7 +1879,7 @@ function isSet(value) {
   return value !== null && value !== undefined;
 }
 
-var protobufPackage = "sophonlabs.sophon.swap";
+var protobufPackage = "metaoslabs.metaos.swap";
 
 function createBaseMsgCreatePool() {
   return {
@@ -4501,7 +4501,7 @@ if (util.Long !== Long) {
   configure();
 }
 
-var protobufPackage$2 = "sophonlabs.sophon.poolincentives";
+var protobufPackage$2 = "metaoslabs.metaos.poolincentives";
 
 function createBaseMsgCreateRandSwapRewardConfig() {
   return {
@@ -5889,6 +5889,20 @@ var SignMode;
    */
 
   SignMode[SignMode["SIGN_MODE_LEGACY_AMINO_JSON"] = 127] = "SIGN_MODE_LEGACY_AMINO_JSON";
+  /**
+   * SIGN_MODE_EIP_191 - SIGN_MODE_EIP_191 specifies the sign mode for EIP 191 signing on the Cosmos
+   * SDK. Ref: https://eips.ethereum.org/EIPS/eip-191
+   *
+   * Currently, SIGN_MODE_EIP_191 is registered as a SignMode enum variant,
+   * but is not implemented on the SDK by default. To enable EIP-191, you need
+   * to pass a custom `TxConfig` that has an implementation of
+   * `SignModeHandler` for EIP-191. The SDK may decide to fully support
+   * EIP-191 in the future.
+   *
+   * Since: cosmos-sdk 0.45.2
+   */
+
+  SignMode[SignMode["SIGN_MODE_EIP_191"] = 191] = "SIGN_MODE_EIP_191";
   SignMode[SignMode["UNRECOGNIZED"] = -1] = "UNRECOGNIZED";
 })(SignMode || (SignMode = {}));
 
@@ -5910,6 +5924,10 @@ function signModeFromJSON(object) {
     case "SIGN_MODE_LEGACY_AMINO_JSON":
       return SignMode.SIGN_MODE_LEGACY_AMINO_JSON;
 
+    case 191:
+    case "SIGN_MODE_EIP_191":
+      return SignMode.SIGN_MODE_EIP_191;
+
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -5929,6 +5947,9 @@ function signModeToJSON(object) {
 
     case SignMode.SIGN_MODE_LEGACY_AMINO_JSON:
       return "SIGN_MODE_LEGACY_AMINO_JSON";
+
+    case SignMode.SIGN_MODE_EIP_191:
+      return "SIGN_MODE_EIP_191";
 
     case SignMode.UNRECOGNIZED:
     default:

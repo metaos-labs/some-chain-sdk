@@ -21,7 +21,7 @@ export const NETWORK_DETAILS = {
       display_exponent: 18,
       logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png',
     },
-    rpcUrl: 'https://node.metaos.im',
+    rpcUrl: 'https://tendermint.metaos.im',
     blockExplorerUrl: 'https://scan.metaos.im',
   },
   [Chain_Id.Testnet]: {
@@ -34,7 +34,7 @@ export const NETWORK_DETAILS = {
       display_exponent: 18,
       logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png',
     },
-    rpcUrl: 'https://node.metaos.im',
+    rpcUrl: 'https://tendermint.metaos.im',
     blockExplorerUrl: 'https://scan.metaos.im',
   },
   [Chain_Id.Devnet]: {
@@ -47,7 +47,7 @@ export const NETWORK_DETAILS = {
       display_exponent: 18,
       logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png',
     },
-    rpcUrl: 'https://node.metaos.im',
+    rpcUrl: 'https://tendermint.metaos.im',
     blockExplorerUrl: 'https://scan.metaos.im',
   },
 }

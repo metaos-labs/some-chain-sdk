@@ -1102,7 +1102,7 @@ var NETWORK_DETAILS = (_NETWORK_DETAILS = {}, _NETWORK_DETAILS[Chain_Id.Mainnet]
     display_exponent: 18,
     logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png'
   },
-  rpcUrl: 'https://node.metaos.im',
+  rpcUrl: 'https://tendermint.metaos.im',
   blockExplorerUrl: 'https://scan.metaos.im'
 }, _NETWORK_DETAILS[Chain_Id.Testnet] = {
   chainId: 'metaos_99237-2',
@@ -1114,7 +1114,7 @@ var NETWORK_DETAILS = (_NETWORK_DETAILS = {}, _NETWORK_DETAILS[Chain_Id.Mainnet]
     display_exponent: 18,
     logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png'
   },
-  rpcUrl: 'https://node.metaos.im',
+  rpcUrl: 'https://tendermint.metaos.im',
   blockExplorerUrl: 'https://scan.metaos.im'
 }, _NETWORK_DETAILS[Chain_Id.Devnet] = {
   chainId: 'metaos_99237-3',
@@ -1126,7 +1126,7 @@ var NETWORK_DETAILS = (_NETWORK_DETAILS = {}, _NETWORK_DETAILS[Chain_Id.Mainnet]
     display_exponent: 18,
     logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png'
   },
-  rpcUrl: 'https://node.metaos.im',
+  rpcUrl: 'https://tendermint.metaos.im',
   blockExplorerUrl: 'https://scan.metaos.im'
 }, _NETWORK_DETAILS);
 

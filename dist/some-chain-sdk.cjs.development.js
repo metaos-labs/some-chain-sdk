@@ -1085,172 +1085,49 @@ var FEE_AMOUNT_DETAIL = (_FEE_AMOUNT_DETAIL = {}, _FEE_AMOUNT_DETAIL[exports.Fee
   description: "Best for exotic pairs."
 }, _FEE_AMOUNT_DETAIL);
 
-var _NETWORK_MAP;
+var _CHAIN_NAMES, _NETWORK_DETAILS;
 
-var ETH = "eth";
-var BSC = "bsc";
-var OEC = "oec";
-var HOO = "hoo";
-var XDAI = "xdai";
-var HECO = "heco";
-var POLYGON = "polygon";
-var FANTOM = "fantom";
-var KCC = "kcc";
-var AVALANCHE = "avalanche";
-var SOPHON = "sop";
-var ETH_CHAIN_NAME = "Ethereum";
-var BSC_CHAIN_NAME = "Binance Smart Chain";
-var OEC_CHAIN_NAME = "OKEx Chain";
-var HOO_CHAIN_NAME = "Hoo Smart Chain";
-var XDAI_CHAIN_NAME = "xDAI";
-var HECO_CHAIN_NAME = "Huobi ECO Chain";
-var POLYGON_CHAIN_NAME = "Polygon";
-var FANTOM_CHAIN_NAME = "Fantom";
-var KCC_CHAIN_NAME = "KCC";
-var AVALANCHE_CHAIN_NAME = "Avalanche";
-var SOPHON_TEST_CHAIN_NAME = "Sophon Dev";
-var ETH_NETWORK_ID = "1";
-var BSC_NETWORK_ID = "56";
-var BSC_NETWORK_TEST_ID = "97";
-var OEC_NETWORK_ID = "66";
-var HOO_NETWORK_ID = "70";
-var XDAI_NETWORK_ID = "100";
-var HECO_NETWORK_ID = "128";
-var POLYGON_NETWORK_ID = "137";
-var FANTOM_NETWORK_ID = "250";
-var KCC_NETWORK_ID = "321";
-var AVALANCHE_NETWORK_ID = "43114";
-var ETH_TEST_NETWORK_ID = "2117";
-var SOPHON_TEST_NETWORK_ID = "118";
-var ETH_CHAIN_ID = "0x1";
-var BSC_CHAIN_ID = "0x38";
-var BSC_CHAIN_ID_TEST = "0x61";
-var OEC_CHAIN_ID = "0x42";
-var HOO_CHAIN_ID = "0x46";
-var XDAI_CHAIN_ID = "0x64";
-var HECO_CHAIN_ID = "0x80";
-var POLYGON_CHAIN_ID = "0x89";
-var FANTOM_CHAIN_ID = "0xfa";
-var KCC_CHAIN_ID = "0x141";
-var AVALANCHE_CHAIN_ID = "0xa86a";
-var SOPHON_TEST_CHAIN_ID = "sophond_9000-1";
-var ETH_SYMBOL = "ETH";
-var BNB_SYMBOL = "BNB";
-var OKT_SYMBOL = "OKT";
-var HOO_SYMBOL = "HOO";
-var XDAI_SYMBOL = "XDAI";
-var HT_SYMBOL = "HT";
-var POLYGON_SYMBOL = "MATIC";
-var FANTOM_SYMBOL = "FTM";
-var KCC_SYMBOL = "KCS";
-var AVALANCHE_SYMBOL = "AVAX";
-var SOPHON_SYMBOL = "SOP";
-var SUPPORTED_CHAIN_IDS = [ETH_NETWORK_ID, SOPHON_TEST_NETWORK_ID];
-var NETWORK_MAP = (_NETWORK_MAP = {}, _NETWORK_MAP[ETH_NETWORK_ID] = {
-  networkId: ETH_NETWORK_ID,
-  chainId: ETH_CHAIN_ID,
-  chainName: ETH_CHAIN_NAME,
-  providerType: ETH,
-  ticker: ETH_SYMBOL
-}, _NETWORK_MAP[BSC_NETWORK_ID] = {
-  networkId: BSC_NETWORK_ID,
-  chainId: BSC_CHAIN_ID,
-  chainName: BSC_CHAIN_NAME,
-  providerType: BSC,
-  ticker: BNB_SYMBOL
-}, _NETWORK_MAP[BSC_NETWORK_TEST_ID] = {
-  networkId: BSC_NETWORK_TEST_ID,
-  chainId: BSC_CHAIN_ID_TEST,
-  chainName: BSC_CHAIN_NAME,
-  providerType: BSC,
-  ticker: BNB_SYMBOL
-}, _NETWORK_MAP[OEC_NETWORK_ID] = {
-  networkId: OEC_NETWORK_ID,
-  chainId: OEC_CHAIN_ID,
-  chainName: OEC_CHAIN_NAME,
-  providerType: OEC,
-  ticker: OKT_SYMBOL
-}, _NETWORK_MAP[HOO_NETWORK_ID] = {
-  networkId: HOO_NETWORK_ID,
-  chainId: HOO_CHAIN_ID,
-  chainName: HOO_CHAIN_NAME,
-  providerType: HOO,
-  ticker: HOO_SYMBOL
-}, _NETWORK_MAP[XDAI_NETWORK_ID] = {
-  networkId: XDAI_NETWORK_ID,
-  chainId: XDAI_CHAIN_ID,
-  chainName: XDAI_CHAIN_NAME,
-  providerType: XDAI,
-  ticker: XDAI_SYMBOL
-}, _NETWORK_MAP[HECO_NETWORK_ID] = {
-  networkId: HECO_NETWORK_ID,
-  chainId: HECO_CHAIN_ID,
-  chainName: HECO_CHAIN_NAME,
-  providerType: HECO,
-  ticker: HT_SYMBOL
-}, _NETWORK_MAP[POLYGON_NETWORK_ID] = {
-  networkId: POLYGON_NETWORK_ID,
-  chainId: POLYGON_CHAIN_ID,
-  chainName: POLYGON_CHAIN_NAME,
-  providerType: POLYGON,
-  ticker: POLYGON_SYMBOL
-}, _NETWORK_MAP[FANTOM_NETWORK_ID] = {
-  networkId: FANTOM_NETWORK_ID,
-  chainId: FANTOM_CHAIN_ID,
-  chainName: FANTOM_CHAIN_NAME,
-  providerType: FANTOM,
-  ticker: FANTOM_SYMBOL
-}, _NETWORK_MAP[KCC_NETWORK_ID] = {
-  networkId: KCC_NETWORK_ID,
-  chainId: KCC_CHAIN_ID,
-  chainName: KCC_CHAIN_NAME,
-  providerType: KCC,
-  ticker: KCC_SYMBOL
-}, _NETWORK_MAP[AVALANCHE_NETWORK_ID] = {
-  networkId: AVALANCHE_NETWORK_ID,
-  chainId: AVALANCHE_CHAIN_ID,
-  chainName: AVALANCHE_CHAIN_NAME,
-  providerType: AVALANCHE,
-  ticker: AVALANCHE_SYMBOL
-}, _NETWORK_MAP[SOPHON_TEST_NETWORK_ID] = {
-  networkId: SOPHON_TEST_NETWORK_ID,
-  chainId: SOPHON_TEST_CHAIN_ID,
-  chainName: SOPHON_TEST_CHAIN_NAME,
-  providerType: SOPHON,
-  ticker: SOPHON_SYMBOL
-}, _NETWORK_MAP);
-var CONFIG_CHAIN_SOPHON = {
-  RPC_URL: "",
-  REST_URL: "",
-  EXPLORER_URL: "https://explorer.evmos.org",
-  NETWORK_NAME: "Sophon TestNet",
-  NETWORK_TYPE: "testnet",
-  CHAIN_ID: "sophon_99237-1",
-  CHAIN_NAME: "Sophon Dev",
-  COIN_DENOM: "usop",
-  COIN_MINIMAL_DENOM: "SOP",
-  COIN_DECIMALS: 18,
-  PREFIX: "sophon",
-  COIN_TYPE: 118,
-  COINGECKO_ID: "sophon",
-  DEFAULT_GAS: 2000000,
-  GAS_PRICE_STEP_LOW: 0.005,
-  GAS_PRICE_STEP_AVERAGE: 0.025,
-  GAS_PRICE_STEP_HIGH: 0.08,
-  FEATURES: ["stargate", "ibc-transfer", "sophon"]
-};
-var CHAIN_ETH = {
-  chainId: "0x1",
-  name: "Ethereum",
-  logoURI: "https://assets.trustwalletapp.com/blockchains/smartchain/assets/0x2170Ed0880ac9A755fd29B2688956BD959F933F8/logo.png",
-  symbol: "ETH"
-};
-var CHAIN_SOP = {
-  chainId: "sophon",
-  name: "Sophon",
-  logoURI: "https://assets.trustwalletapp.com/blockchains/smartchain/assets/0xC9849E6fdB743d08fAeE3E34dd2D1bc69EA11a51/logo.png",
-  symbol: "sop"
-};
+(function (Chain_Id) {
+  Chain_Id["Mainnet"] = "metaos_99237-1";
+  Chain_Id["Testnet"] = "metaos_99237-2";
+  Chain_Id["Devnet"] = "metaos_99237-3";
+})(exports.Chain_Id || (exports.Chain_Id = {}));
+
+var CHAIN_NAMES = (_CHAIN_NAMES = {}, _CHAIN_NAMES[exports.Chain_Id.Mainnet] = 'Mainnet', _CHAIN_NAMES[exports.Chain_Id.Testnet] = 'Testnet', _CHAIN_NAMES[exports.Chain_Id.Devnet] = 'Devnet', _CHAIN_NAMES);
+var NETWORK_DETAILS = (_NETWORK_DETAILS = {}, _NETWORK_DETAILS[exports.Chain_Id.Mainnet] = {
+  chainId: 'metaos_99237-1',
+  chainName: 'Metaos Mainnet',
+  nativeCurrency: {
+    base: 'umtos',
+    name: 'MetaOS',
+    symbol: 'MTOS',
+    decimals: 18
+  },
+  rpcUrl: 'https://node.metaos.im',
+  blockExplorerUrl: 'https://scan.metaos.im'
+}, _NETWORK_DETAILS[exports.Chain_Id.Testnet] = {
+  chainId: 'metaos_99237-2',
+  chainName: 'Metaos Mainnet',
+  nativeCurrency: {
+    base: 'umtos',
+    name: 'MetaOS',
+    symbol: 'MTOS',
+    decimals: 18
+  },
+  rpcUrl: 'https://node.metaos.im',
+  blockExplorerUrl: 'https://scan.metaos.im'
+}, _NETWORK_DETAILS[exports.Chain_Id.Devnet] = {
+  chainId: 'metaos_99237-3',
+  chainName: 'Metaos Mainnet',
+  nativeCurrency: {
+    base: 'umtos',
+    name: 'MetaOS',
+    symbol: 'MTOS',
+    decimals: 18
+  },
+  rpcUrl: 'https://node.metaos.im',
+  blockExplorerUrl: 'https://scan.metaos.im'
+}, _NETWORK_DETAILS);
 
 var ZERO = "0";
 
@@ -6770,21 +6647,18 @@ function isSet$d(value) {
 }
 
 var SIGN_DIRECT = SignMode.SIGN_MODE_DIRECT;
-var defaultFee = {
-  amount: "",
-  denom: CONFIG_CHAIN_SOPHON.COIN_DENOM,
-  gas: CONFIG_CHAIN_SOPHON.DEFAULT_GAS
-};
 var TxClient = /*#__PURE__*/function () {
   // public walletClient: SigningStargateClient | null = null;
   // public sender: ISender | null = null;
-  function TxClient(apiClient, rpcUrl, signer, accountAddress) {
+  function TxClient(chainId, apiClient, rpcUrl, signer, accountAddress) {
+    this.chainId = void 0;
     this.apiClient = void 0;
     this.rpcUrl = void 0;
     this.accountAddress = void 0;
     this.signer = void 0;
     this.registry = void 0;
     !!!signer ?  invariant(false, "wallet is required!")  : void 0;
+    this.chainId = chainId;
     this.apiClient = apiClient;
     this.rpcUrl = rpcUrl;
     this.signer = signer;
@@ -6881,7 +6755,7 @@ var TxClient = /*#__PURE__*/function () {
 
               if (gasLimit) {
                 // 2. Fee
-                feeMessage = createFee(defaultFee.amount, defaultFee.denom, gasLimit);
+                feeMessage = createFee('', NETWORK_DETAILS[this.chainId].nativeCurrency.base, gasLimit);
                 authInfoDirect = createAuthInfo(signInfoDirect, feeMessage);
               } else {
                 authInfoDirect = AuthInfo.fromPartial({
@@ -6895,12 +6769,12 @@ var TxClient = /*#__PURE__*/function () {
               _messages = messages instanceof Array ? messages : [messages];
               body = createTxBodyEncodeObject(_messages, memo); // 4. signDoc
 
-              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), CONFIG_CHAIN_SOPHON.CHAIN_ID, sender.accountNumber); // 5. sign
+              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), this.chainId, sender.accountNumber); // 5. sign
 
               _context2.next = 11;
               return stargate.SigningStargateClient.connectWithSigner(this.rpcUrl, this.signer, {
                 registry: this.registry,
-                prefix: CONFIG_CHAIN_SOPHON.COIN_MINIMAL_DENOM.toLowerCase()
+                prefix: NETWORK_DETAILS[this.chainId].nativeCurrency.symbol.toLowerCase()
               });
 
             case 11:
@@ -6965,7 +6839,7 @@ var TxClient = /*#__PURE__*/function () {
               _messages = messages instanceof Array ? messages : [messages];
               body = createTxBodyEncodeObject(_messages, memo); // 4. signDoc
 
-              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), CONFIG_CHAIN_SOPHON.CHAIN_ID, sender.accountNumber);
+              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), this.chainId, sender.accountNumber);
               console.log(signDocDirect);
               txRaw = TxRaw.fromPartial({
                 bodyBytes: signDocDirect.bodyBytes,
@@ -7059,80 +6933,24 @@ function createSignerInfo(publicKey, sequence, mode) {
 
 exports.APIClient = APIClient;
 exports.APIRequester = APIRequester;
-exports.AVALANCHE = AVALANCHE;
-exports.AVALANCHE_CHAIN_ID = AVALANCHE_CHAIN_ID;
-exports.AVALANCHE_CHAIN_NAME = AVALANCHE_CHAIN_NAME;
-exports.AVALANCHE_NETWORK_ID = AVALANCHE_NETWORK_ID;
-exports.AVALANCHE_SYMBOL = AVALANCHE_SYMBOL;
 exports.AuthAPI = AuthAPI;
 exports.BASE_UNIT_TICK = BASE_UNIT_TICK;
-exports.BNB_SYMBOL = BNB_SYMBOL;
-exports.BSC = BSC;
-exports.BSC_CHAIN_ID = BSC_CHAIN_ID;
-exports.BSC_CHAIN_ID_TEST = BSC_CHAIN_ID_TEST;
-exports.BSC_CHAIN_NAME = BSC_CHAIN_NAME;
-exports.BSC_NETWORK_ID = BSC_NETWORK_ID;
-exports.BSC_NETWORK_TEST_ID = BSC_NETWORK_TEST_ID;
 exports.BankAPI = BankAPI;
 exports.BaseAPI = BaseAPI;
 exports.BaseMsg = BaseMsg;
-exports.CHAIN_ETH = CHAIN_ETH;
-exports.CHAIN_SOP = CHAIN_SOP;
-exports.CONFIG_CHAIN_SOPHON = CONFIG_CHAIN_SOPHON;
+exports.CHAIN_NAMES = CHAIN_NAMES;
 exports.DEFAULT_PRECISION = DEFAULT_PRECISION;
 exports.DEFAULT_USER_PRECISION = DEFAULT_USER_PRECISION;
-exports.ETH = ETH;
-exports.ETH_CHAIN_ID = ETH_CHAIN_ID;
-exports.ETH_CHAIN_NAME = ETH_CHAIN_NAME;
-exports.ETH_NETWORK_ID = ETH_NETWORK_ID;
-exports.ETH_SYMBOL = ETH_SYMBOL;
-exports.ETH_TEST_NETWORK_ID = ETH_TEST_NETWORK_ID;
-exports.FANTOM = FANTOM;
-exports.FANTOM_CHAIN_ID = FANTOM_CHAIN_ID;
-exports.FANTOM_CHAIN_NAME = FANTOM_CHAIN_NAME;
-exports.FANTOM_NETWORK_ID = FANTOM_NETWORK_ID;
-exports.FANTOM_SYMBOL = FANTOM_SYMBOL;
 exports.FEE_AMOUNT_DETAIL = FEE_AMOUNT_DETAIL;
-exports.HECO = HECO;
-exports.HECO_CHAIN_ID = HECO_CHAIN_ID;
-exports.HECO_CHAIN_NAME = HECO_CHAIN_NAME;
-exports.HECO_NETWORK_ID = HECO_NETWORK_ID;
-exports.HOO = HOO;
-exports.HOO_CHAIN_ID = HOO_CHAIN_ID;
-exports.HOO_CHAIN_NAME = HOO_CHAIN_NAME;
-exports.HOO_NETWORK_ID = HOO_NETWORK_ID;
-exports.HOO_SYMBOL = HOO_SYMBOL;
-exports.HT_SYMBOL = HT_SYMBOL;
-exports.KCC = KCC;
-exports.KCC_CHAIN_ID = KCC_CHAIN_ID;
-exports.KCC_CHAIN_NAME = KCC_CHAIN_NAME;
-exports.KCC_NETWORK_ID = KCC_NETWORK_ID;
-exports.KCC_SYMBOL = KCC_SYMBOL;
 exports.LiquidityMath = LiquidityMath;
 exports.MAX_PRECISION = MAX_PRECISION;
-exports.NETWORK_MAP = NETWORK_MAP;
-exports.OEC = OEC;
-exports.OEC_CHAIN_ID = OEC_CHAIN_ID;
-exports.OEC_CHAIN_NAME = OEC_CHAIN_NAME;
-exports.OEC_NETWORK_ID = OEC_NETWORK_ID;
-exports.OKT_SYMBOL = OKT_SYMBOL;
+exports.NETWORK_DETAILS = NETWORK_DETAILS;
 exports.ONE_DAY_TO_SECONDS = ONE_DAY_TO_SECONDS;
 exports.ONE_YEAR_TO_DAYS = ONE_YEAR_TO_DAYS;
-exports.POLYGON = POLYGON;
-exports.POLYGON_CHAIN_ID = POLYGON_CHAIN_ID;
-exports.POLYGON_CHAIN_NAME = POLYGON_CHAIN_NAME;
-exports.POLYGON_NETWORK_ID = POLYGON_NETWORK_ID;
-exports.POLYGON_SYMBOL = POLYGON_SYMBOL;
 exports.REG_DECIMAL = REG_DECIMAL;
 exports.REG_DECIMAL_SIMPLE = REG_DECIMAL_SIMPLE;
 exports.REG_NUMBER = REG_NUMBER;
 exports.SIGN_DIRECT = SIGN_DIRECT;
-exports.SOPHON = SOPHON;
-exports.SOPHON_SYMBOL = SOPHON_SYMBOL;
-exports.SOPHON_TEST_CHAIN_ID = SOPHON_TEST_CHAIN_ID;
-exports.SOPHON_TEST_CHAIN_NAME = SOPHON_TEST_CHAIN_NAME;
-exports.SOPHON_TEST_NETWORK_ID = SOPHON_TEST_NETWORK_ID;
-exports.SUPPORTED_CHAIN_IDS = SUPPORTED_CHAIN_IDS;
 exports.SwapAPI = SwapAPI;
 exports.TICK_SPACINGS = TICK_SPACINGS;
 exports.TickMath = TickMath;
@@ -7140,11 +6958,6 @@ exports.TokenAPI = TokenAPI;
 exports.TransactionLooper = TransactionLooper;
 exports.TxAPI = TxAPI;
 exports.TxClient = TxClient;
-exports.XDAI = XDAI;
-exports.XDAI_CHAIN_ID = XDAI_CHAIN_ID;
-exports.XDAI_CHAIN_NAME = XDAI_CHAIN_NAME;
-exports.XDAI_NETWORK_ID = XDAI_NETWORK_ID;
-exports.XDAI_SYMBOL = XDAI_SYMBOL;
 exports.ZERO = ZERO;
 exports.arrayToMap = arrayToMap;
 exports.checkInputNumber = checkInputNumber;

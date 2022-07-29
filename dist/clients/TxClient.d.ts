@@ -3,6 +3,7 @@ import { OfflineSigner, Registry, TxBodyEncodeObject } from "@cosmjs/proto-signi
 import { BaseMsg } from "../msgs";
 import { AuthInfo, SignDoc } from "../proto/cosmos/tx/v1beta1/tx";
 import { SignMode } from "../proto/cosmos/tx/signing/v1beta1/signing";
+import { Chain_Id } from "../constants";
 export interface ISender {
     address: string;
     pubkey: Uint8Array;
@@ -18,12 +19,13 @@ export interface TxGenerated {
 }
 export declare const SIGN_DIRECT = SignMode.SIGN_MODE_DIRECT;
 export declare class TxClient {
+    chainId: Chain_Id;
     apiClient: APIClient;
     rpcUrl: string;
     accountAddress: string;
     signer: OfflineSigner;
     registry: Registry;
-    constructor(apiClient: APIClient, rpcUrl: string, signer: OfflineSigner, accountAddress: string);
+    constructor(chainId: Chain_Id, apiClient: APIClient, rpcUrl: string, signer: OfflineSigner, accountAddress: string);
     getSender(): Promise<ISender>;
     sendTransaction(messages: BaseMsg | Array<BaseMsg>, gasLimit?: number, memo?: string): Promise<import("@cosmjs/stargate").DeliverTxResponse>;
     getEstimatedFee(messages: BaseMsg | Array<BaseMsg>, memo?: string): Promise<string>;

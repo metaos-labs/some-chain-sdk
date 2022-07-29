@@ -1,6 +1,5 @@
 import invariant from "tiny-invariant";
 import {APIClient} from "./APIClient";
-import { CONFIG_CHAIN_SOPHON } from "../constants";
 import {
   GeneratedType,
   OfflineSigner,
@@ -43,6 +42,7 @@ import {
 import { SignMode } from "../proto/cosmos/tx/signing/v1beta1/signing";
 import { Coin } from "../proto/cosmos/base/v1beta1/coin";
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
+import {Chain_Id, CHAIN_NAMES, NETWORK_DETAILS} from "../constants";
 
 export interface ISender {
   address: string;
@@ -61,13 +61,8 @@ export interface TxGenerated {
 
 export const SIGN_DIRECT = SignMode.SIGN_MODE_DIRECT;
 
-const defaultFee = {
-  amount: "",
-  denom: CONFIG_CHAIN_SOPHON.COIN_DENOM,
-  gas: CONFIG_CHAIN_SOPHON.DEFAULT_GAS as number,
-};
-
 export class TxClient {
+  public chainId: Chain_Id;
   public apiClient: APIClient;
   public rpcUrl: string;
   public accountAddress: string;
@@ -78,13 +73,15 @@ export class TxClient {
   // public sender: ISender | null = null;
 
   constructor(
+    chainId: Chain_Id,
     apiClient: APIClient,
     rpcUrl: string,
     signer: OfflineSigner,
-    accountAddress: string
+    accountAddress: string,
   ) {
     invariant(!!signer, "wallet is required!");
 
+    this.chainId = chainId;
     this.apiClient = apiClient;
     this.rpcUrl = rpcUrl;
     this.signer = signer;
@@ -153,8 +150,8 @@ export class TxClient {
     if (gasLimit) {
       // 2. Fee
       const feeMessage = createFee(
-        defaultFee.amount,
-        defaultFee.denom,
+        '',
+        NETWORK_DETAILS[this.chainId].nativeCurrency.base,
         gasLimit
       );
       authInfoDirect = createAuthInfo(signInfoDirect, feeMessage);
@@ -174,7 +171,7 @@ export class TxClient {
     const signDocDirect = createSigDoc(
       this.registry.encode(body),
       AuthInfo.encode(authInfoDirect).finish(),
-      CONFIG_CHAIN_SOPHON.CHAIN_ID,
+      this.chainId,
       sender.accountNumber
     );
 
@@ -185,7 +182,7 @@ export class TxClient {
       this.signer,
       {
         registry: this.registry,
-        prefix: CONFIG_CHAIN_SOPHON.COIN_MINIMAL_DENOM.toLowerCase(),
+        prefix: NETWORK_DETAILS[this.chainId].nativeCurrency.symbol.toLowerCase(),
       }
     );
     // @ts-ignore
@@ -233,7 +230,7 @@ export class TxClient {
     const signDocDirect = createSigDoc(
       this.registry.encode(body),
       AuthInfo.encode(authInfoDirect).finish(),
-      CONFIG_CHAIN_SOPHON.CHAIN_ID,
+      this.chainId,
       sender.accountNumber
     );
     console.log(signDocDirect);

@@ -1,4 +1,5 @@
 import { APIRequester, TokenAPI, TxAPI, BankAPI, AuthAPI, SwapAPI } from "../api";
+import { Chain_Id } from "../constants";
 export declare class APIClient {
     apiRequester: APIRequester;
     bankAPI: BankAPI;
@@ -7,5 +8,5 @@ export declare class APIClient {
     txAPI: TxAPI;
     tokenAPI: TokenAPI;
     nodeUrl: string;
-    constructor(URL: string, chainId?: string);
+    constructor(URL: string, chainId?: Chain_Id);
 }

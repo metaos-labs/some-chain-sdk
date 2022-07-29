@@ -6,7 +6,7 @@ import {
   AuthAPI,
   SwapAPI
 } from "../api";
-import { CONFIG_CHAIN_SOPHON } from "../constants";
+import {Chain_Id} from "../constants";
 
 export class APIClient {
   public apiRequester: APIRequester;
@@ -19,7 +19,7 @@ export class APIClient {
   public tokenAPI: TokenAPI;
   public nodeUrl: string;
 
-  constructor(URL: string, chainId: string = CONFIG_CHAIN_SOPHON.CHAIN_ID) {
+  constructor(URL: string, chainId: Chain_Id = Chain_Id.Mainnet) {
     this.nodeUrl = URL;
     this.apiRequester = new APIRequester(URL);
 

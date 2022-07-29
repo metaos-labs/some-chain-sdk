@@ -1099,7 +1099,8 @@ var NETWORK_DETAILS = (_NETWORK_DETAILS = {}, _NETWORK_DETAILS[Chain_Id.Mainnet]
     base: 'umtos',
     name: 'MetaOS',
     symbol: 'MTOS',
-    decimals: 18
+    display_exponent: 18,
+    logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png'
   },
   rpcUrl: 'https://node.metaos.im',
   blockExplorerUrl: 'https://scan.metaos.im'
@@ -1110,7 +1111,8 @@ var NETWORK_DETAILS = (_NETWORK_DETAILS = {}, _NETWORK_DETAILS[Chain_Id.Mainnet]
     base: 'umtos',
     name: 'MetaOS',
     symbol: 'MTOS',
-    decimals: 18
+    display_exponent: 18,
+    logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png'
   },
   rpcUrl: 'https://node.metaos.im',
   blockExplorerUrl: 'https://scan.metaos.im'
@@ -1121,7 +1123,8 @@ var NETWORK_DETAILS = (_NETWORK_DETAILS = {}, _NETWORK_DETAILS[Chain_Id.Mainnet]
     base: 'umtos',
     name: 'MetaOS',
     symbol: 'MTOS',
-    decimals: 18
+    display_exponent: 18,
+    logo_uri: 'https://s2.coinmarketcap.com/static/img/coins/64x64/2025.png'
   },
   rpcUrl: 'https://node.metaos.im',
   blockExplorerUrl: 'https://scan.metaos.im'

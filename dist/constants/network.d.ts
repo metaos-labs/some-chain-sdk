@@ -16,7 +16,8 @@ export declare const NETWORK_DETAILS: {
             base: string;
             name: string;
             symbol: string;
-            decimals: number;
+            display_exponent: number;
+            logo_uri: string;
         };
         rpcUrl: string;
         blockExplorerUrl: string;
@@ -28,7 +29,8 @@ export declare const NETWORK_DETAILS: {
             base: string;
             name: string;
             symbol: string;
-            decimals: number;
+            display_exponent: number;
+            logo_uri: string;
         };
         rpcUrl: string;
         blockExplorerUrl: string;
@@ -40,7 +42,8 @@ export declare const NETWORK_DETAILS: {
             base: string;
             name: string;
             symbol: string;
-            decimals: number;
+            display_exponent: number;
+            logo_uri: string;
         };
         rpcUrl: string;
         blockExplorerUrl: string;

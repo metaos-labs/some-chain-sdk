@@ -4,14 +4,15 @@ export interface DenomUnit {
     exponent?: number;
 }
 export interface IToken {
-    description: string;
-    denom_units: Array<DenomUnit>;
+    chainId?: string;
+    description?: string;
+    denom_units?: Array<DenomUnit>;
     base: string;
     display_exponent: number;
-    display: string;
+    display?: string;
     name: string;
     symbol: string;
-    total_supply: string;
+    total_supply?: string;
     logo_uri: string;
 }
 export interface ILiquidityTokenRender extends ILiquidityPosition {

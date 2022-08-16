@@ -1,7 +1,12 @@
 import { BaseAPI } from "./BaseAPI";
 import { Metadata } from "../proto/cosmos/bank/v1beta1/bank";
-import { QueryGetMetadataResponse } from "../proto/token/query";
+import { MetadataExt } from "../proto/token/token";
+export interface QueryMetadataResponse {
+    metadata: Metadata;
+    metadataExt?: MetadataExt;
+    supply: string;
+}
 export declare class TokenAPI extends BaseAPI {
-    apiTokenMetadatasByDenom(denom: string): Promise<QueryGetMetadataResponse>;
+    apiTokenMetadatasByDenom(denom: string): Promise<QueryMetadataResponse>;
     apiTokenMetadatas(): Promise<Array<Metadata>>;
 }

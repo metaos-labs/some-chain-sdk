@@ -9,4 +9,5 @@ export interface IResBalances {
 export declare class BankAPI extends BaseAPI {
     apiTokenBalance(token: IToken, accountAddress: string): Promise<IResBalances>;
     apiAccountBalance(accountAddress: string): Promise<IResBalances>;
+    apiDenomMetadata(denom: string): Promise<IToken>;
 }

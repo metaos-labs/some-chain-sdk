@@ -28,4 +28,12 @@ export class BankAPI extends BaseAPI {
       `/cosmos/bank/v1beta1/balances/${accountAddress}`
     );
   }
+
+  public async apiDenomMetadata(
+    denom: string
+  ): Promise<IToken> {
+    return this.request.get<IToken>(
+      `/cosmos/bank/v1beta1/denom_metadata/${denom}`
+    );
+  }
 }

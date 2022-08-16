@@ -589,6 +589,29 @@ var BankAPI = /*#__PURE__*/function (_BaseAPI) {
     return apiAccountBalance;
   }();
 
+  _proto.apiDenomMetadata = /*#__PURE__*/function () {
+    var _apiDenomMetadata = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(denom) {
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", this.request.get("/cosmos/bank/v1beta1/denom_metadata/" + denom));
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function apiDenomMetadata(_x4) {
+      return _apiDenomMetadata.apply(this, arguments);
+    }
+
+    return apiDenomMetadata;
+  }();
+
   return BankAPI;
 }(BaseAPI);
 

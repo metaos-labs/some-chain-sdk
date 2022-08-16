@@ -1,14 +1,28 @@
 import { BaseAPI } from "./BaseAPI";
-import { Metadata } from "../proto/cosmos/bank/v1beta1/bank";
+import {DenomUnit, Metadata} from "../proto/cosmos/bank/v1beta1/bank";
 import { QueryGetMetadataResponse } from "../proto/token/query";
 import {MetadataExt} from "../proto/token/token";
+
+export interface IMetadata extends Metadata{
+  denom_units: DenomUnit[];
+}
+
+export interface IMetadataExt extends MetadataExt{
+  max_supply: string;
+}
+
+interface QueryMetadataResponse {
+  metadata?: IMetadata;
+  metadata_ext?: IMetadataExt;
+  supply: string;
+}
 
 export class TokenAPI extends BaseAPI {
 
   public async apiTokenMetadatasByDenom(
     denom: string
-  ): Promise<QueryGetMetadataResponse> {
-    return this.request.get<QueryGetMetadataResponse>(
+  ): Promise<QueryMetadataResponse> {
+    return this.request.get<QueryMetadataResponse>(
       `/metaos-labs/metaos/token/metadatas/by_denom`,
       {
         denom

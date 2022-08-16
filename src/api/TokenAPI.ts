@@ -1,12 +1,13 @@
 import { BaseAPI } from "./BaseAPI";
 import { Metadata } from "../proto/cosmos/bank/v1beta1/bank";
+import { QueryGetMetadataResponse } from "../proto/token/query";
 
 export class TokenAPI extends BaseAPI {
 
   public async apiTokenMetadatasByDenom(
     denom: string
-  ): Promise<Metadata> {
-    return this.request.get<Metadata>(
+  ): Promise<QueryGetMetadataResponse> {
+    return this.request.get<QueryGetMetadataResponse>(
       `/metaos-labs/metaos/token/metadatas/by_denom`,
       {
         denom

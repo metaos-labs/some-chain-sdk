@@ -1585,19 +1585,19 @@ var LiquidityMath = /*#__PURE__*/function () {
 
     var _value1 = new Decimal(liquidity);
 
-    if (pc.lessThan(leftRangeValue) === true) {
+    if (pc.lessThan(leftRangeValue)) {
       var _value2 = this._getDiverForDeltaX(leftRangeValue, rightRangeValue);
 
       return {
-        amount0: toDecimalPlaces(_value1.mul(_value2), token0.display_exponent),
+        amount0: _value1.mul(_value2),
         amount1: "0"
       };
-    } else if (pc.greaterThan(rightRangeValue) === true) {
+    } else if (pc.greaterThan(rightRangeValue)) {
       var _value = this._getDiverForDeltaY(leftRangeValue, rightRangeValue);
 
       return {
         amount0: "0",
-        amount1: toDecimalPlaces(_value1.mul(_value), token1.display_exponent)
+        amount1: _value1.mul(_value)
       };
     }
 
@@ -1606,8 +1606,8 @@ var LiquidityMath = /*#__PURE__*/function () {
     var deltaYDiver = this._getDiverForDeltaY(leftRangeValue, priceValue);
 
     return {
-      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.display_exponent),
-      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.display_exponent)
+      amount0: _value1.mul(deltaXDiver),
+      amount1: _value1.mul(deltaYDiver)
     };
   };
 

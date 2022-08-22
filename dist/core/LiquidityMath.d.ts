@@ -17,8 +17,8 @@ export declare class LiquidityMath {
     static getAmount0FromAmount1(leftRangeValue: number, // pa
     rightRangeValue: number, // pb
     priceValue: number, amount1: string, token1: IToken): string;
-    static getAmountByLiquidity(leftRangeValue: number | string, rightRangeValue: number | string, priceValue: number | string, liquidity: string, token0: IToken, token1: IToken): {
-        amount0: string;
-        amount1: string;
+    static getAmountByLiquidity(leftRangeValue: Decimal.Value, rightRangeValue: Decimal.Value, priceValue: Decimal.Value, liquidity: string, token0: IToken, token1: IToken): {
+        amount0: Decimal.Value;
+        amount1: Decimal.Value;
     };
 }

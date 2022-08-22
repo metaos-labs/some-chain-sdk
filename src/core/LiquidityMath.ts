@@ -60,8 +60,8 @@ export class LiquidityMath {
   }
 
   private static _getDiverForDeltaX(
-    lower: number | string,
-    upper: number | string
+    lower: Decimal.Value,
+    upper: Decimal.Value
   ): Decimal {
     const _value1 = new Decimal(1).div(Decimal.sqrt(lower));
     const _value2 = new Decimal(1).div(Decimal.sqrt(upper));
@@ -69,8 +69,8 @@ export class LiquidityMath {
   }
 
   private static _getDiverForDeltaY(
-    lower: number | string,
-    upper: number | string
+    lower: Decimal.Value,
+    upper: Decimal.Value
   ) {
     return Decimal.sub(Decimal.sqrt(upper), Decimal.sqrt(lower));
   }
@@ -149,35 +149,35 @@ export class LiquidityMath {
   }
 
   public static getAmountByLiquidity(
-    leftRangeValue: number | string,
-    rightRangeValue: number | string,
-    priceValue: number | string,
+    leftRangeValue: Decimal.Value,
+    rightRangeValue: Decimal.Value,
+    priceValue: Decimal.Value,
     liquidity: string,
     token0: IToken,
     token1: IToken
-  ): { amount0: string; amount1: string } {
+  ): { amount0: Decimal.Value; amount1: Decimal.Value } {
     const pc = new Decimal(priceValue);
 
     const _value1 = new Decimal(liquidity);
 
-    if (pc.lessThan(leftRangeValue) === true) {
+    if (pc.lessThan(leftRangeValue)) {
       const _value2 = this._getDiverForDeltaX(leftRangeValue, rightRangeValue);
       return {
-        amount0: toDecimalPlaces(_value1.mul(_value2), token0.display_exponent),
+        amount0: _value1.mul(_value2),
         amount1: "0",
       };
-    } else if (pc.greaterThan(rightRangeValue) === true) {
+    } else if (pc.greaterThan(rightRangeValue)) {
       const _value2 = this._getDiverForDeltaY(leftRangeValue, rightRangeValue);
       return {
         amount0: "0",
-        amount1: toDecimalPlaces(_value1.mul(_value2), token1.display_exponent),
+        amount1: _value1.mul(_value2),
       };
     }
     const deltaXDiver = this._getDiverForDeltaX(priceValue, rightRangeValue);
     const deltaYDiver = this._getDiverForDeltaY(leftRangeValue, priceValue);
     return {
-      amount0: toDecimalPlaces(_value1.mul(deltaXDiver), token0.display_exponent),
-      amount1: toDecimalPlaces(_value1.mul(deltaYDiver), token1.display_exponent),
+      amount0: _value1.mul(deltaXDiver),
+      amount1: _value1.mul(deltaYDiver)
     };
   }
 }

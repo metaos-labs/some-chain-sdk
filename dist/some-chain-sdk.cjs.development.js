@@ -1504,9 +1504,9 @@ var LiquidityMath = /*#__PURE__*/function () {
   priceValue, amount0) {
     var pc = new Decimal(priceValue);
 
-    if (pc.lessThan(leftRangeValue) === true) {
+    if (pc.lessThan(leftRangeValue)) {
       return this.getRightSideLiquidity(leftRangeValue, rightRangeValue, priceValue, amount0);
-    } else if (pc.greaterThan(rightRangeValue) === true) {
+    } else if (pc.greaterThan(rightRangeValue)) {
       return this.getLeftSideLiquidity(leftRangeValue, rightRangeValue, priceValue, amount0);
     }
 
@@ -1537,9 +1537,9 @@ var LiquidityMath = /*#__PURE__*/function () {
   priceValue, amount1) {
     var pc = new Decimal(priceValue);
 
-    if (pc.lessThan(leftRangeValue) === true) {
+    if (pc.lessThan(leftRangeValue)) {
       return this.getRightSideLiquidity(leftRangeValue, rightRangeValue, priceValue, amount1);
-    } else if (pc.greaterThan(rightRangeValue) === true) {
+    } else if (pc.greaterThan(rightRangeValue)) {
       return this.getLeftSideLiquidity(leftRangeValue, rightRangeValue, priceValue, amount1);
     }
 

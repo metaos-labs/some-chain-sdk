@@ -37,14 +37,14 @@ export class LiquidityMath {
     amount0: string
   ): Decimal {
     const pc = new Decimal(priceValue);
-    if (pc.lessThan(leftRangeValue) === true) {
+    if (pc.lessThan(leftRangeValue)) {
       return this.getRightSideLiquidity(
         leftRangeValue,
         rightRangeValue,
         priceValue,
         amount0
       );
-    } else if (pc.greaterThan(rightRangeValue) === true) {
+    } else if (pc.greaterThan(rightRangeValue)) {
       return this.getLeftSideLiquidity(
         leftRangeValue,
         rightRangeValue,
@@ -83,14 +83,14 @@ export class LiquidityMath {
   ): Decimal {
     const pc = new Decimal(priceValue);
 
-    if (pc.lessThan(leftRangeValue) === true) {
+    if (pc.lessThan(leftRangeValue)) {
       return this.getRightSideLiquidity(
         leftRangeValue,
         rightRangeValue,
         priceValue,
         amount1
       );
-    } else if (pc.greaterThan(rightRangeValue) === true) {
+    } else if (pc.greaterThan(rightRangeValue)) {
       return this.getLeftSideLiquidity(
         leftRangeValue,
         rightRangeValue,

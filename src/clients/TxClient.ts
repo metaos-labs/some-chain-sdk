@@ -233,7 +233,7 @@ export class TxClient {
       this.chainId,
       sender.accountNumber
     );
-    console.log(signDocDirect);
+    // console.log(signDocDirect);
 
     const txRaw = TxRaw.fromPartial({
       bodyBytes: signDocDirect.bodyBytes,
@@ -244,7 +244,7 @@ export class TxClient {
 
     const { gas_info: { gas_wanted, gas_used } } = await this.apiClient.txAPI.estimateGas(toBase64(txBytes));
 
-    console.log('gas_used: ' + gas_used);
+    // console.log('gas_used: ' + gas_used);
 
     return gas_used;
   }

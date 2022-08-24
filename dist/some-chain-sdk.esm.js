@@ -1557,8 +1557,7 @@ var LiquidityMath = /*#__PURE__*/function () {
   LiquidityMath.getAmount1FromAmount0 = function getAmount1FromAmount0(leftRangeValue, // pa
   rightRangeValue, // pb
   priceValue, amount0, token0) {
-    var liquidity = this.getLiquidityFromAmount0(leftRangeValue, rightRangeValue, priceValue, amount0);
-    console.log("liquidity: " + liquidity);
+    var liquidity = this.getLiquidityFromAmount0(leftRangeValue, rightRangeValue, priceValue, amount0); // console.log("liquidity: " + liquidity);
 
     var _value1 = new Decimal(liquidity);
 
@@ -1570,8 +1569,7 @@ var LiquidityMath = /*#__PURE__*/function () {
   LiquidityMath.getAmount0FromAmount1 = function getAmount0FromAmount1(leftRangeValue, // pa
   rightRangeValue, // pb
   priceValue, amount1, token1) {
-    var liquidity = this.getLiquidityFromAmount1(leftRangeValue, rightRangeValue, priceValue, amount1);
-    console.log("liquidity: " + liquidity);
+    var liquidity = this.getLiquidityFromAmount1(leftRangeValue, rightRangeValue, priceValue, amount1); // console.log("liquidity: " + liquidity);
 
     var _value1 = new Decimal(liquidity);
 
@@ -1689,7 +1687,7 @@ var TickMath = /*#__PURE__*/function () {
     var result = this.getPriceByTick(nearestTick); // console.log('getPriceByTick: ' + result);
     // console.log('==========');
 
-    return toAmountString(result);
+    return result;
   };
 
   TickMath.getPriceBySqrtPrice = function getPriceBySqrtPrice(sqrtPrice) {
@@ -1731,10 +1729,10 @@ var TickMath = /*#__PURE__*/function () {
       } else {
         tickLower = TickMath.getNearestTickByPrice(fee, new Decimal(1).div(rightRange).toString());
       }
-    }
+    } // console.log("tickLower: " + tickLower);
+    // console.log("tickUpper: " + tickUpper);
 
-    console.log("tickLower: " + tickLower);
-    console.log("tickUpper: " + tickUpper);
+
     return {
       tickLower: tickLower,
       tickUpper: tickUpper
@@ -6894,25 +6892,24 @@ var TxClient = /*#__PURE__*/function () {
               _messages = messages instanceof Array ? messages : [messages];
               body = createTxBodyEncodeObject(_messages, memo); // 4. signDoc
 
-              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), this.chainId, sender.accountNumber);
-              console.log(signDocDirect);
+              signDocDirect = createSigDoc(this.registry.encode(body), AuthInfo.encode(authInfoDirect).finish(), this.chainId, sender.accountNumber); // console.log(signDocDirect);
+
               txRaw = TxRaw.fromPartial({
                 bodyBytes: signDocDirect.bodyBytes,
                 authInfoBytes: signDocDirect.authInfoBytes,
                 signatures: [new Uint8Array()]
               });
               txBytes = TxRaw.encode(txRaw).finish();
-              _context3.next = 14;
+              _context3.next = 13;
               return this.apiClient.txAPI.estimateGas(toBase64(txBytes));
 
-            case 14:
+            case 13:
               _yield$this$apiClient = _context3.sent;
               _yield$this$apiClient2 = _yield$this$apiClient.gas_info;
               gas_used = _yield$this$apiClient2.gas_used;
-              console.log('gas_used: ' + gas_used);
               return _context3.abrupt("return", gas_used);
 
-            case 20:
+            case 18:
             case "end":
               return _context3.stop();
           }

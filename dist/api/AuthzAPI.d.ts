@@ -1,6 +1,6 @@
 import { BaseAPI } from "./BaseAPI";
 import { PaginationOptions } from "./APIRequester";
-import { Pagination } from "sophon-sdk";
+import { Pagination } from "./APIRequester";
 export interface IResGrants {
     "grants": [{
         "authorization": {

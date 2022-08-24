@@ -7,11 +7,11 @@ const bank = new BankAPI(c);
 describe('BankAPI', () => {
   describe('balance', () => {
     it('account exists', async () => {
-      await bank.balance('terra1ax7xtll5v6u6vdnymxa4k4648w80zhkggl0u24');
+      await bank.apiAccountBalance('terra1ax7xtll5v6u6vdnymxa4k4648w80zhkggl0u24');
     });
 
     it('invalid account', async () => {
-      await expect(bank.balance('1234')).rejects.toThrow();
+      await expect(bank.apiAccountBalance('1234')).rejects.toThrow();
     });
   });
 });

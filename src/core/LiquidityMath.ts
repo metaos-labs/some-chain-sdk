@@ -71,7 +71,7 @@ export class LiquidityMath {
   private static _getDiverForDeltaY(
     lower: Decimal.Value,
     upper: Decimal.Value
-  ) {
+  ): Decimal {
     return Decimal.sub(Decimal.sqrt(upper), Decimal.sqrt(lower));
   }
 
@@ -120,7 +120,7 @@ export class LiquidityMath {
       priceValue,
       amount0
     );
-    console.log("liquidity: " + liquidity);
+    // console.log("liquidity: " + liquidity);
 
     const _value1 = new Decimal(liquidity);
     const _value2 = this._getDiverForDeltaY(leftRangeValue, priceValue);
@@ -141,7 +141,7 @@ export class LiquidityMath {
       amount1
     );
 
-    console.log("liquidity: " + liquidity);
+    // console.log("liquidity: " + liquidity);
 
     const _value1 = new Decimal(liquidity);
     const _value2 = this._getDiverForDeltaX(priceValue, rightRangeValue);

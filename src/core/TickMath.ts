@@ -2,7 +2,7 @@ import invariant from "tiny-invariant";
 import Decimal from "decimal.js";
 import { Fee_Amount, TICK_SPACINGS, BASE_UNIT_TICK } from "../constants";
 import { IToken } from "../types";
-import { sortsBefore, toAmountString } from "../utils";
+import { sortsBefore } from "../utils";
 
 export class TickMath {
   public static INVALID_TICK = -99999999;
@@ -97,7 +97,7 @@ export class TickMath {
     const result = this.getPriceByTick(nearestTick);
     // console.log('getPriceByTick: ' + result);
     // console.log('==========');
-    return toAmountString(result);
+    return result;
   }
 
   public static getPriceBySqrtPrice(sqrtPrice: string): string {
@@ -153,8 +153,8 @@ export class TickMath {
         );
       }
     }
-    console.log("tickLower: " + tickLower);
-    console.log("tickUpper: " + tickUpper);
+    // console.log("tickLower: " + tickLower);
+    // console.log("tickUpper: " + tickUpper);
     return {
       tickLower,
       tickUpper,
